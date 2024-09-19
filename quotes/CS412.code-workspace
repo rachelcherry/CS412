@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "CS412",
+			"path": "../../Desktop - Rachel’s MacBook Pro (2)/CS412"
+		},
+		{
+			"name": "django",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}
