@@ -7,7 +7,7 @@ from . import views #
 
 #create a list of URLs for this app:
 
-urlpatterns = {
+urlpatterns = [
     path(r'', views.home, name="home"), # give name that matches the function name; This is our first URL; 
 
-}
+]

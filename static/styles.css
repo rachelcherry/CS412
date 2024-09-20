@@ -1,78 +1,102 @@
-/* These styles are for the overall table, but the rows and columns will be styled further down in the document*/
-table {
-  border-collapse: collapse;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  border-color: navy;
-  margin: 10px
-}
-
-td {
-  border: 1px solid black;
-  border-color: navy;
-  border-style: dotted;
-}
-
-th {
-  border: 1px solid black;
-  border-color: navy;
-  border-collapse: collapse;
-}
-
-img {
-  height: 400px;
-  width: 400px;
-}
-
-/* This is a class tag that specifies dimensions for the specific images in the hobbies section */
-.interests {
-  height: 300px;
-  width: 300px;
-}
-
 body {
-  background-color: lightslategray;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
 }
 
-div {
-  padding: 5px;
-  text-align: center;
+/* Navigation bar styling */
+nav {
+  background-color: #333;
+  padding: 1rem;
 }
 
-p {
-  padding: 5px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: rgb(79, 57, 79);
-  margin: 10px;
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
 }
 
-h3 {
-  text-align: center;
-  color: rgb(79, 57, 79);
+nav ul li {
+  display: inline;
 }
 
-a {
-  text-align: center;
-  color: rgb(79, 57, 79);
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 1.1rem;
 }
 
+nav ul li a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+/* Headings */
 h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
   text-align: center;
-  color: navy;
-  /* Creates a gradiant/ombre effect */
-  background-image: linear-gradient(rgb(79, 57, 79), white);
-  font-size: 50px;
-
 }
 
 h2 {
-  color: navy;
+  font-size: 2rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+/* Paragraphs */
+p {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+/* Unordered list */
+ul {
+  margin-bottom: 20px;
+  padding-left: 40px;
+}
+
+ul li {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  margin: 20px auto;
+}
+
+/* Links */
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
   text-decoration: underline;
 }
 
-/* This is a class tag for information about me so that it only centers this specific text */
-
-.info {
+/* Footer */
+footer {
+  background-color: #333;
+  color: white;
   text-align: center;
+  padding: 1rem 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
