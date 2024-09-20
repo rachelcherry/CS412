@@ -6,10 +6,9 @@ from . import views #
 
 #create a list of URLs for this app:
 
-urlpatterns = {
-    path(r'', views.quotes, name="quotes"), # give name that matches the function name; This is our first URL; 
-    path("quote/", views.quotes, name="quotes"),  # URL for the quote page
-    path("about/", views.about, name="about"),  # URL for the about page
-    path("show_all/", views.show_all, name="show_all"),
-
-}
+urlpatterns = [
+    path(r'', views.quotes, name="quotes"),  # Root URL, matches views.quotes
+    path('quotes/', views.quotes, name="quotes"),  # URL for the quote page
+    path('about/', views.about, name="about"),  # URL for the about page
+    path('show_all/', views.show_all, name="show_all"),  # URL for show_all page
+]

@@ -1,11 +1,8 @@
-<html>
-  <head>
-    <title>Random Quotes!</title>
-    <link rel="stylesheet" href="/static/styles.css" />
-  </head>
-  <body>
+{% extends 'quotes/base.html' %}
+{% block content %}
     <h1>Michelle Obama Quote of the Day</h1>
-    <img src="{{michelle_picture}}" />
+    <img src="{{ michelle_img }}" />
+    <p>{{michelle_img}}</p>
     <p>{{michelle_quote}}</p>
-  </body>
+{% endblock %}
 </html>
