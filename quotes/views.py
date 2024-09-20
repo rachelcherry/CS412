@@ -37,10 +37,6 @@ def show_all(request):
     '''A function to respond to the /quotes URL.
     ''' #doc string
 
-    #create some text:
-    img = []
-    for i in range(len(photo_list)):
-      img.append(photo_list[i])
 
     context = {
         'current_time': time.ctime(),

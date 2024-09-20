@@ -80,15 +80,6 @@ img {
   margin: 20px auto;
 }
 
-/* Links */
-a {
-  color: #0066cc;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
 
 /* Footer */
 footer {
