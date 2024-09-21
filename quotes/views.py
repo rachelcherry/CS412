@@ -15,7 +15,7 @@ photo_list = [
     ]
 # Create your views here.
 def quotes(request):
-    template_name = "quotes/quotes.html"
+    template_name = "quotes/quote.html"
     # '''A function to respond to the /quotes URL.
     # ''' #doc string
 
