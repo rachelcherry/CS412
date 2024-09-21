@@ -9,9 +9,10 @@
     <body>
         <header>
             <nav>
-                <ul>
-                    <li><a href="{% url 'quotes' %}">Home</a></li>
-                    <li><a href="{% url 'about' %}">About</a></li>
+                <ul class="pages">
+                    <li><a class="atags" href="{% url 'quotes' %}">Home</a></li>
+                    <li><a class="atags" href="{% url 'about' %}">About</a></li>
+                    <li><a class="atags" href="{% url 'show_all' %}">Show All</a></li>
                 </ul>
             </nav>
         </header>
@@ -20,7 +21,6 @@
         {% block content %}
         {% endblock content %}
 
-        <hr>
         <footer>
             This page was generated at {{ current_time }}.
         </footer>
