@@ -1,15 +1,17 @@
+<!--Inherits the base template-->
 {% extends 'quotes/base.html' %}
 {% block content %}
 <h1>Quotes By Michelle Obama</h1>
 <ul>
+    <!--Loops through the michelle_quotes list in views.py and shows them in a list-->
     {% for quote in michelle_quotes %}
-        <li>{{ quote }}</li>
+        <li class="loopQuote"> {{ quote }}</li>
     {% endfor %}
+    <!--Loops through michelle_imgs in views.py and assigns the image to the source -->
     <h1>Images of Michelle Obama</h1>
     {% for img in michelle_imgs %}
         <img src="{{img}}" />
     {% endfor %}
-    
     {% endblock %}
 
     </html>

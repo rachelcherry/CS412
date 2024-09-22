@@ -1,3 +1,4 @@
+<!--Base template for other templates-->
 {% load static %}
 <html>
     <head>
@@ -8,7 +9,9 @@
 
     <body>
         <header>
+            <!--Creates a nav bar for the links-->
             <nav>
+                <!--Unordered list called pages so it can be styles correctly in the nav bar-->
                 <ul class="pages">
                     <li><a class="atags" href="{% url 'quotes' %}">Home</a></li>
                     <li><a class="atags" href="{% url 'about' %}">About</a></li>
@@ -20,7 +23,7 @@
         <!-- Content block where child templates insert content -->
         {% block content %}
         {% endblock content %}
-
+<!--Generates the time the website was generated-->
         <footer>
             This page was generated at {{ current_time }}.
         </footer>

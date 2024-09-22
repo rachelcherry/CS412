@@ -1,14 +1,13 @@
+/*Styling page for quotes application*/
+
 body {
   font-family:Georgia, 'Times New Roman', Times, serif;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
   background-color: lightgrey;
-  color: #333;
+  color: darkslategrey;
 }
 
 nav {
-  background-color: #333;
+  background-color: darkslategrey;
   padding: 10px;
 }
 
@@ -35,47 +34,47 @@ nav {
 
 h1 {
   font-size: 2.5rem;
-  color: #333;
+  color: darkslategrey;
   margin-bottom: 20px;
   text-align: center;
 }
 
 h2 {
   font-size: 2rem;
-  color: #666;
+  color: rgb(151, 149, 149);
   margin-bottom: 15px;
 }
 
 p {
   font-size: 1.1rem;
-  color: #444;
+  color: rgb(74, 74, 74);
   margin-bottom: 20px;
   padding: 0 20px;
 }
 
 ul {
-  margin-bottom: 20px;
-  padding-left: 40px;
+  text-align: center;
+  list-style-type: none;
 }
 
-
+.loopQuote{
+  margin-bottom: 30px;
+  font-size: 18px;
+}
 
 img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
-  
+  width:800px;
 }
-
 
 footer {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  width: 100%;
-  background-color: #333;
+  background-color: darkslategrey;
   color: white;
   text-align: center;
   padding: 10px;
