@@ -1,0 +1,19 @@
+<!--Base template for other templates-->
+{% load static %}
+<html>
+    <head>
+        <title>Form Data</title>
+        <!-- Linking to the CSS file in the static folder -->
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+
+    <body>
+
+        <!-- Content block where child templates insert content -->
+        {% block content %}
+        {% endblock content %}
+<!--Generates the time the website was generated-->
+        <footer>
+        </footer>
+    </body>
+</html>

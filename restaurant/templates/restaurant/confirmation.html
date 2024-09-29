@@ -1,0 +1,54 @@
+<!--formdata/templates/confirmation.html-->
+{% extends 'formdata/base.html' %}
+{% block content %}
+<div>
+    <h1>Hi, {{name}}! Thank you for your order!</h1>
+    <h2> Your information:</h2>
+    <!--Conditional statements to check if the user checked these checkboxes or input a value into the textboxes-->
+    <!--If they did, show the information-->
+    {% if name %}
+    <p>Name: {{ name }}</p>
+    {% endif %}
+    {% if email %}
+    <p>Email: {{ email }}</p>
+    {% endif %}
+    {% if number %}
+    <p>Phone Number: {{ number }}</p>
+    {% endif %}
+    <h2>Your Order:</h2>
+    {% if main_course1 %}
+    <p>{{ main_course1 }}</p>
+    {% endif %}
+    {% if main_course2 %}
+    <p>{{ main_course2 }}</p>
+    {% endif %}
+    {% if main_course3 %}
+    <p>{{ main_course3 }}</p>
+    {% endif %}
+    {% if additions1 %}
+    <div class="newAdd">{{ additions1 }}</div>
+    {% endif %}
+    {% if additions2 %}
+    <div class="newAdd">{{ additions2 }}</div>
+    {% endif %}
+    {% if additions3 %}
+    <div class="newAdd">{{ additions3 }}</div>
+    {% endif %}
+    {% if main_course4 %}
+    <p>{{ main_course4 }}</p>
+    {% endif %}
+    {% if special %}
+    <p>{{special}}</p>
+    {% endif %}
+    {% if special_instructions %}
+    <p>Special Instructions: {{special_instructions}}</p>
+    {% endif %}
+    <!--Show the total price and the time it will be ready-->
+    <p class="total">Total: ${{total}}</p>
+    <h3>Your order will be ready at {{time}}</h3>
+    </p>
+
+
+</div>
+
+{% endblock %}

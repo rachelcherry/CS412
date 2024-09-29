@@ -22,5 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("hw/", include("hw.urls")), # new path to direct django to this directory
-    path("", include("quotes.urls")),
+    path("quotes/", include("quotes.urls")),
+    path("formdata/", include("formdata.urls")),
+    path("restaurant/", include("restaurant.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
