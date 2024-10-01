@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 import random
-import datetime
 import time
-
+import datetime
 
 
 special_list = ["Pita and Hummus $10", "Shrimp Kebab $10", "Brussel Sprouts $10"]
@@ -46,9 +45,10 @@ def submit(request):
         add3 = request.POST.get('Additions3') 
         special = request.POST.get('DailySpecial')  
         # getting the time and then adding a random numnber between 30 and 60 
-        current_time = datetime.datetime.now()
+        current_time = time.time()
         add = random.randint(30, 60)
-        ready_time = current_time + datetime.timedelta(minutes=add)
+        timing = current_time + (add*60)
+        ready = datetime.datetime.fromtimestamp(timing)
     #checking if the user clicked on each main course item
     # if they did, add its price to the total price 
         if maincourse1:
@@ -71,7 +71,7 @@ def submit(request):
             'name': name,
             'email': email,
             'number': number,
-            'time': ready_time,
+            'time': ready,
             'main_course1': maincourse1,
             'main_course2': maincourse2,
             'main_course3': maincourse3,
