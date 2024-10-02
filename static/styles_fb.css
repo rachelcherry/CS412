@@ -1,0 +1,82 @@
+
+/*Styling page for quotes application*/
+
+body {
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    background-color: lightblue;
+    color: rgb(65, 89, 106);
+  }
+  
+  nav {
+    background-color: rgb(9, 79, 130);
+    padding: 10px;
+  }
+  
+  .quote{
+    text-align: center;
+    font-size: 20px;
+  }
+  
+  .pages {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  
+  .atags{
+    color: white;
+    text-decoration: none;
+    padding-right: 40px;
+    font-size: 20px;
+  }
+  
+  
+  h1 {
+    font-size: 40px;
+    color: rgb(8, 106, 176);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 30px;
+    color: rgb(8, 84, 138);
+    margin-bottom: 15px;
+  }
+  
+  p {
+    font-size: 16px;
+    color: rgb(65, 89, 106);
+    margin-bottom: 20px;
+    padding: 0 20px;
+  }
+  
+  ul {
+    text-align: center;
+    list-style-type: none;
+  }
+  
+  .loopQuote{
+    margin-bottom: 30px;
+    font-size: 18px;
+  }
+  
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:800px;
+  }
+  
+  footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(9, 79, 130);
+    color: white;
+    text-align: center;
+    padding: 10px;
+  }
