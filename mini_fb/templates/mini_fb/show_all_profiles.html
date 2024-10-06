@@ -4,21 +4,25 @@
 {% block content %}
 <html>
 <body>
-<h1>Showing all profiles</h1>
+<h1>Facebook Profiles</h1>
 
 <main class="grid-container"> <!--was <div>-->
+<table>
 {% for p in profiles %} 
+<tr>
 <profile>
     <div>
+    <img src="{{p.image_url}}">
     <h2>{{p.first_name}} {{p.last_name}}</h2>
     <h3>{{p.email}}</h3>
     <h4>{{p.city}}</h4>
-    <img src="{{p.image_url}}">
+    
 </div>
 </profile> <!--was a div-->
+</tr>
 
 {% endfor %} 
-
+</table>
 </main>
 </body>
 </html>
