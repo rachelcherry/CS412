@@ -1,28 +1,26 @@
-<!--blog/templates/blog/show_all.html-->
+<!--mini_fb/templates/mini_fb/show_all.html template to display the profiles-->
+<!-- Rachel Cherry -->
+<!-- rcherry@bu.edu -->
 {% extends 'mini_fb/base.html' %}
 
 {% block content %}
 <html>
 <body>
-<h1>Facebook Profiles</h1>
 
 <main class="grid-container"> <!--was <div>-->
-<table>
 {% for p in profiles %} 
-<tr>
-<profile>
-    <div>
+<profile> <!--was a div-->
+    <div class="profile_info">
     <img src="{{p.image_url}}">
     <h2>{{p.first_name}} {{p.last_name}}</h2>
     <h3>{{p.email}}</h3>
-    <h4>{{p.city}}</h4>
+    <h3>{{p.city}}</h3>
     
 </div>
 </profile> <!--was a div-->
-</tr>
+
 
 {% endfor %} 
-</table>
 </main>
 </body>
 </html>

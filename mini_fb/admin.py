@@ -1,3 +1,5 @@
+#Rachel Cherry
+#rcherry@bu.edu
 from django.contrib import admin
 
 # Register your models here.

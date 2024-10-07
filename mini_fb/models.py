@@ -1,3 +1,6 @@
+# Rachel Cherry
+# rcherry@bu.edu
+
 from django.db import models
 #define data models (objects) for use in the blog application
 # Create your models here.
