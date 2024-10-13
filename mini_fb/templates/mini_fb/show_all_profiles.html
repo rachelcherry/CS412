@@ -11,8 +11,9 @@
 {% for p in profiles %} 
 <profile> <!--was a div-->
     <div class="profile_info">
-    <img src="{{p.image_url}}">
-    <h2>{{p.first_name}} {{p.last_name}}</h2>
+    <a href="{% url 'profile' p.pk %}">  <img src="{{p.image_url}}"></a>
+    <a href="{% url 'profile' p.pk %}"> <h2>{{p.first_name}} {{p.last_name}}</h2></a>
+
     <h3>{{p.email}}</h3>
     <h3>{{p.city}}</h3>
     

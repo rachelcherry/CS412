@@ -9,16 +9,16 @@
     
 
     <body>
-        <!-- <header> -->
+       <header> 
             <!--Creates a nav bar for the links-->
-            <!-- <nav> -->
+            <nav> 
                 <!--Unordered list called pages so it can be styles correctly in the nav bar-->
-                <!-- <ul class="pages">
-                    <li><a class="atags" href="{% url 'main' %}">Home Page</a></li>
-                    <li><a class="atags" href="{% url 'order' %}">Order Here</a></li>
-                </ul> -->
-            <!-- </nav>
-        </header> -->
+                <ul class="pages">
+                    <li><a class="atags" href="{% url 'show_all' %}">Show All</a></li>
+                    <li><a class="atags" href="{% url 'random' %}">Random</a></li>
+                </ul>
+            </nav>
+        </header>
 
         <!-- Content block where templates get insert content -->
         {% block content %}

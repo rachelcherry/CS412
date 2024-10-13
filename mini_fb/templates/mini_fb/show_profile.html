@@ -1,0 +1,30 @@
+<!--blog/templates/blog/article.html-->
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<html>
+<body>
+    {% if profile.get_status_messages %}
+    {% for p in profile.get_status_messages %}
+        <div>Status Message: {{p.message}}</div>
+        <div>Created or saved at: {{p.timestamp}}</div>
+    {% endfor %}
+{% else %}
+    <div>No status message</div>
+{% endif %}
+<h1>{{profile.first_name}} {{profile.last_name}}</h1>
+<main class="grid-container"> <!--was <div>-->
+<profile class="featured">
+    <div>
+    <img src="{{profile.image_url}}">
+    <h3>Location: {{profile.city}}</h3>
+    <h3>Contact: {{profile.email}}</h3>
+
+</div>
+</profile> <!--was a div-->
+
+
+</main>
+</body>
+</html>
+{% endblock %}

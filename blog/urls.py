@@ -9,5 +9,8 @@ from . import views #
 
 urlpatterns = [
     #path(r'', views.home, name="home"), # give name that matches the function name; This is our first URL; 
-    path(r'', views.ShowAllView.as_view(), name="home")
+    path(r'', views.ShowRandomArticle.as_view(), name="random"),
+    path(r'show_all', views.ShowAllView.as_view(), name="show_all"),
+    path(r'article/<int:pk>', views.ArticleView.as_view(), name="article"),
+    path('article/<int:pk>/create_comment', views.CreateCommentView.as_view(), name='create_comment'), ### NEW
 ]

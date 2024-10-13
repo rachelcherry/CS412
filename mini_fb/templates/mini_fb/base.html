@@ -1,4 +1,6 @@
 <!--Base template for other templates-->
+<!-- Rachel Cherry -->
+<!-- rcherry@bu.edu -->
 {% load static %}
 <html>
     <head>
@@ -14,7 +16,10 @@
             <!--Creates a nav bar-->
             <nav>
                 <h1>Mini Facebook</h1>
-     
+                <ul class="pages">
+                    <a class="atags" href="{% url 'show_all_profiles' %}">Home Page </a>
+                </ul>
+                
             </nav>
         </header>
       

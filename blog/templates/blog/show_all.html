@@ -9,13 +9,16 @@
 <main class="grid-container"> <!--was <div>-->
 {% for a in articles %} 
 <article>
+    <a href="{% url 'article' a.pk %}"> <!-- nickname for page that should show its own article-->
+
+        <img src="{{a.image_url}}">
     <div>
     <h2>
-        {{a.title}} </h2>
+        <a href="{% url 'article' a.pk %}"> {{a.title}}</a>
+        </h2>
         <h3>{{a.author}} at {{a.published}}</h3>
-   
     <p>{{a.text}}</p>
-    <img src="{{a.image_url}}">
+
 </div>
     </article> <!--was a div-->
 
