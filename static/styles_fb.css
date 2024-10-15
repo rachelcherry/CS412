@@ -4,7 +4,9 @@
 body { 
   background-color: #d5ddddd1;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin-bottom: 50px;
 }
+
 
 
 h1 {
@@ -12,7 +14,7 @@ h1 {
 }
 
 p {
-  color: #828b82;
+  font-size: 18px;
 }
 
 header {
@@ -40,6 +42,22 @@ profile h4{
   padding-bottom: 20px;
 }
 
+ul li {
+  display: inline;
+}
+
+ul li a {
+  margin-right: 15px; 
+  text-decoration: none;
+}
+
+a {
+  margin-right: 15px; 
+  text-decoration: underline;
+  font-size: 18px;
+  color: black;
+}
+
 nav{
   text-align: center;
   font-size: 40px;
@@ -47,13 +65,21 @@ nav{
 
 profile{
   display: block;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   background: #ffffff;
   display: block;
   margin-left: auto;
   margin-right: auto;
   width:800px;
 }
+.status {
+  padding: 20px;
+  text-align: center;
+}
+.status h2 {
+  color: rgb(9, 79, 130);
+}
+
 .profile_info{
   align-items: center;
   padding-bottom: 10px;
@@ -80,4 +106,14 @@ footer {
   color: white;
   text-align: center;
   padding: 10px;
+}
+
+input[type='submit']{
+  font-size: 18px;
+}
+button{
+  font-size: 18px; 
+}
+.status_message{
+  color: rgb(9, 79, 130)
 }

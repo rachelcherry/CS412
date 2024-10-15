@@ -1,0 +1,33 @@
+{% extends 'mini_fb/base.html' %}
+{% block content %}
+<h2>Add a Profile</h2>
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {% for field in form %}
+        <tr>
+            <th>{{ field.label }}: </th>
+            <td>{{ field }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td>
+                <a href="{% url 'show_all_profiles' %}"> <button type="button">Cancel</button> </a>
+           
+               
+            </td>
+            <td>
+                <input type="submit" value="Add Profile!">
+      
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+               
+              
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

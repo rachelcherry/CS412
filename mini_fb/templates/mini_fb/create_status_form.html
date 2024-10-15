@@ -1,0 +1,30 @@
+{% extends 'mini_fb/base.html' %}
+{% block content %}
+<h2 class="status_message">Add a Status Message for {{profile.first_name}} {{profile.last_name}}</h2>
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {% for field in form %}
+        <tr>
+            <th>{{ field.label }}:</th>
+            <td>{{ field }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td>
+                <a href="{% url 'profile' profile.pk %}"> <button type="button">Cancel</button></a>
+                   
+                <input type="submit" value="Add a Status Message!">
+                
+            </td>
+        </tr>
+        <tr>
+            
+            
+                </a>
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}
