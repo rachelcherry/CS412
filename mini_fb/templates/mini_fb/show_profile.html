@@ -20,11 +20,16 @@
             {% for p in profile.get_status_messages %}
                     <p>Message: {{ p.message }}</p>
                     <p>Created at: {{ p.timestamp }}</p>
+                    {% for img in p.get_images %}
+                    <img src='{{img.image_file.url}}' alt='{{img.image_file.url}}'>
+                    {% endfor %}
             {% endfor %}
         </ul>
     {% else %}
         <p>No status messages.</p>
     {% endif %}
+
+
     <a class="atags" href="{% url 'create_status' profile.pk%}"><h3>Create New Status Message</h3></a>
     </div>
 </main>

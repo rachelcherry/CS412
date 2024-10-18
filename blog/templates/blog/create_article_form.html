@@ -1,0 +1,42 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<h2>Add an article</h2>
+<form method = 'POST' enctype="multipart/form-data">
+<!-- talk about CSRF -->
+{% csrf_token %}
+<!-- customized table version here -->
+    <table>
+    {% for field in form %}
+    <tr>
+        <th>{{field.name}}</th>
+        <td>{{field}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td></td>
+        <td>
+            <input type='submit' name = 'Create Article!' value= 'Create Article!'>
+        </td>
+        {% csrf_token %}
+
+    </form>
+    
+        <td>
+        <form action="{% url 'show_all' %}">
+            <input type="submit" name="Cancel" value="Cancel">
+        </td>
+    </tr>
+    </table>
+
+  
+</form>
+</td>
+
+</tr>
+</table>
+
+
+
+
+</form>
+{% endblock %}
