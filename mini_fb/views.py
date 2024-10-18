@@ -74,6 +74,13 @@ class CreateStatusMessageView(CreateView):
             # print(article)
             # form.instance is the new comment object
             form.instance.profile = profile
+            sm = form.save()
+            files = self.request.FILES.getlist('files')
+            for i in range(len(files)):
+                image_object = Image()
+                image_object.image_file = files[i]
+                image_object.status_message = sm
+                image_object.save()
             return super().form_valid(form)
         def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
             '''build the template context data -- a dict of key-value pairs'''
