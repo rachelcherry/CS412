@@ -3,7 +3,6 @@
 <h2 class="status_message">Add a Status Message for {{profile.first_name}} {{profile.last_name}}</h2>
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <input id="button-image" type="file" name = "files" multiple />
     <table>
         {% for field in form %}
         <tr>
@@ -11,20 +10,18 @@
             <td>{{ field }}</td>
         </tr>
         {% endfor %}
+        
         <tr>
-            <td></td>
-            <td>
-                <a href="{% url 'profile' profile.pk %}"> <button type="button">Cancel</button></a>
-                   
-               
-                <input type="submit" value="Add Status Message!">
-                
+            <th>Choose Files:</th>
+            <td style="text-align: center;">
+                <input id="button-image" type="file" name="files" multiple />
             </td>
         </tr>
+        
         <tr>
-            
-            
-                </a>
+            <td>
+                <a href="{% url 'profile' profile.pk %}"><button type="button">Cancel</button></a>
+                <input type="submit" value="Add Status Message!">
             </td>
         </tr>
     </table>

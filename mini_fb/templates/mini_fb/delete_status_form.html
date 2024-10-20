@@ -1,0 +1,30 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<html>
+<body>
+
+<main class="grid-container">
+
+<profile>
+    <br>
+    <h2>Do you want to Delete this Status Message?</h2>
+    <p>{{ status_message.message }}</p>
+    <p>{{ status_message.timestamp }}</p>
+
+    <div style="display: flex; gap: 450px;">
+        <form method="GET" action="{% url 'profile' profile.pk %}">
+            <button type="submit">Cancel</button>
+        </form>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Delete Message!">
+        </form>
+    </div>
+
+</profile>
+
+</main>
+</body>
+</html>
+{% endblock %}

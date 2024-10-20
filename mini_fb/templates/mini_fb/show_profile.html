@@ -13,24 +13,40 @@
     <h3>Contact: {{profile.email}}</h3>
 
 </div>
+<div style="display: column; justify-content: center;">
+    <br>
+<a class="atags" href="{% url 'update_profile' profile.pk%}"><h3>Update Profile</h3></a>
+<a class="atags" href="{% url 'create_status' profile.pk%}"><h3>Create New Status Message</h3></a>
+</div>
+
+
+
 </profile> <!--was a div-->
 <div class="status">
     <h2>Status Messages</h2>
     {% if profile.get_status_messages %}
-            {% for p in profile.get_status_messages %}
-                    <p>Message: {{ p.message }}</p>
-                    <p>Created at: {{ p.timestamp }}</p>
+    {% for p in profile.get_status_messages %}
+        <div>
+      
+            <p>Message: {{ p.message }}</p>
+            <p>Created at: {{ p.timestamp }}</p>
+            <a class="atags" href="{% url 'delete_status' p.pk %}">Delete Status</a>
+            <a class="atags" href="{% url 'update_status' p.pk %}">Update Status</a>
+            <br>
+                {% if p.get_images %}
+                <div class="image-container">
                     {% for img in p.get_images %}
-                    <img src='{{img.image_file.url}}' alt='{{img.image_file.url}}'>
+                        <img src='{{ img.image_file.url }}' alt='{{ img.image_file.url }}' class="size-image">
                     {% endfor %}
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No status messages.</p>
-    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No status messages.</p>
+{% endif %}
 
 
-    <a class="atags" href="{% url 'create_status' profile.pk%}"><h3>Create New Status Message</h3></a>
     </div>
 </main>
 </body>

@@ -117,3 +117,37 @@ button{
 .status_message{
   color: rgb(9, 79, 130)
 }
+.delete_class {
+  text-align: center;
+  padding: 20px; 
+  
+}
+
+/* Button styles */
+button, input[type="submit"] {
+  background-color: rgb(9, 79, 130);
+  color: white; /* Text color */
+  padding: 10px 15px; 
+  margin: 20px; /* Space between buttons */
+}
+
+
+
+.image-container {
+  display: flex;
+  justify-content: center; 
+  margin-top: 20px;
+}
+
+.size-image {
+  width: 200px; 
+  height: 200px; 
+  object-fit: cover;
+  align-items: center;
+}
+td{
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+
+}

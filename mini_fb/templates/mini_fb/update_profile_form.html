@@ -1,0 +1,40 @@
+<!--mini_fb/templates/mini_fb/show_all.html template to display the profiles-->
+<!-- Rachel Cherry -->
+<!-- rcherry@bu.edu -->
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<html>
+<body>
+
+<main class="grid-container"> <!--was <div>-->
+
+<profile> <!--was a div-->
+<form method="POST" >
+{% csrf_token %}
+<table>
+{% for field in form %}
+<tr>
+    <th>{{ field.label }}: </th>
+    <td>{{ field }}</td>
+</tr>
+{% endfor %}
+</table>
+    <a href="{% url 'profile' profile.pk %}"> <button type="button">Cancel</button></a>
+
+    <input type="submit" value="Update Profile!">
+
+
+
+
+
+
+
+</form>
+
+</profile> <!--was a div-->
+
+</main>
+</body>
+</html>
+{% endblock %}

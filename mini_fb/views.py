@@ -31,7 +31,7 @@ from django.views.generic.edit import CreateView
 from .form import *
 from django.views.generic import ListView, DetailView #generic view that grabs all the object of that type and send it to a template for rendering
 import random
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 class ShowAllProfilesView(ListView):
     '''A view to show all Profiles'''
 
@@ -93,3 +93,45 @@ class CreateStatusMessageView(CreateView):
 
             context['profile'] = profile
             return context
+class UpdateProfileView(UpdateView):
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = 'mini_fb/update_profile_form.html'
+    def get_success_url(self):
+        '''Return the URL to redirect to after successfully submitting form.'''
+        return reverse('profile', kwargs={'pk': self.object.pk})
+
+class DeleteStatusMessageView(DeleteView):
+    model = StatusMessage
+    context_object_name = 'status_message'
+    template_name = 'mini_fb/delete_status_form.html'
+
+    def get_success_url(self):
+        '''Return the URL to redirect to after successfully submitting form.'''
+        return reverse('profile', kwargs={'pk': self.object.profile.pk})
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        '''Build the template context data -- a dict of key-value pairs'''
+        context = super().get_context_data(**kwargs)
+        # Fetch the status message using get_object_or_404
+        status_message = StatusMessage.objects.get(pk=self.kwargs['pk'])
+        context['status_message'] = status_message
+        context['profile'] = status_message.profile
+        return context
+class UpdateStatusMessageView(UpdateView):
+    model = StatusMessage
+    form_class = UpdateStatusForm
+    context_object_name = 'status_message'
+    template_name = 'mini_fb/update_status_form.html'
+
+    def get_success_url(self):
+        '''Return the URL to redirect to after successfully submitting the form.'''
+        return reverse('profile', kwargs={'pk': self.object.profile.pk})
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        '''Build the template context data -- a dict of key-value pairs'''
+        context = super().get_context_data(**kwargs)
+        # Fetch the status message using get_object_or_404
+        status_message = self.object  # You can use self.object directly
+        context['profile'] = status_message.profile
+        return context
