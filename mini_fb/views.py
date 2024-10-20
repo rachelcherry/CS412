@@ -15,7 +15,6 @@ from typing import Any
 from .models import *
 from django import forms
 from django.views.generic.edit import CreateView
-from .form import *
 from django.views.generic import ListView, DetailView #generic view that grabs all the object of that type and send it to a template for rendering
 import random
 from django.views.generic import ListView, DetailView, CreateView
@@ -28,7 +27,7 @@ from typing import Any
 from .models import *
 from django import forms
 from django.views.generic.edit import CreateView
-from .form import *
+from .forms import *
 from django.views.generic import ListView, DetailView #generic view that grabs all the object of that type and send it to a template for rendering
 import random
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
