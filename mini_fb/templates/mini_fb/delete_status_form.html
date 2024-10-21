@@ -1,3 +1,6 @@
+<!-- Rachel Cherry -->
+<!-- rcherry@bu.edu -->
+
 {% extends 'mini_fb/base.html' %}
 
 {% block content %}
@@ -12,7 +15,7 @@
     <p>{{ status_message.message }}</p>
     <p>{{ status_message.timestamp }}</p>
 
-    <div class="delete-message">
+    <div class="del-message">
         <form method="GET" action="{% url 'profile' profile.pk %}">
             <button type="submit">Cancel</button>
         </form>

@@ -1,3 +1,6 @@
+# Rachel Cherry
+# rcherry@bu.edu
+
 from django import forms
 from .models import Profile, StatusMessage
 
@@ -15,11 +18,11 @@ class CreateStatusMessageForm(forms.ModelForm):
             fields = ['message'] 
 class UpdateProfileForm(forms.ModelForm):
     class Meta:
-        '''Associate this form with a Model, specify which fields to create'''
+        '''Associate this form with a Model, specify which fields '''
         model = Profile
         fields = ['city', 'email', 'image_url']
 class UpdateStatusForm(forms.ModelForm):
     class Meta:
-        '''Associate this form with a Model, specify which fields to create'''
+        '''Associate this form with a Model, specify which fields'''
         model = StatusMessage
         fields = ['message']

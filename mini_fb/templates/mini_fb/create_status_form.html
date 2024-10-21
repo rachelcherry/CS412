@@ -1,29 +1,37 @@
+<!-- Rachel Cherry -->
+<!-- rcherry@bu.edu -->
+
 {% extends 'mini_fb/base.html' %}
 {% block content %}
-<h2 class="status_message">Add a Status Message for {{profile.first_name}} {{profile.last_name}}</h2>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <table>
-        {% for field in form %}
-        <tr>
-            <th>{{ field.label }}:</th>
-            <td>{{ field }}</td>
-        </tr>
-        {% endfor %}
-        
-        <tr>
-            <th>Choose Files:</th>
-            <td style="text-align: center;">
-                <input id="button-image" type="file" name="files" multiple />
-            </td>
-        </tr>
-        
-        <tr>
-            <td>
-                <a href="{% url 'profile' profile.pk %}"><button type="button">Cancel</button></a>
-                <input type="submit" value="Add Status Message!">
-            </td>
-        </tr>
-    </table>
-</form>
+<div class="status-message-div">
+    <h2 class="status_message">Add a Status Message for {{profile.first_name}} {{profile.last_name}}</h2>
+    <form method="POST" enctype="multipart/form-data" class="status-form">
+        {% csrf_token %}
+        <table class="status-message-table">
+            {% for field in form %}
+            <tr>
+                <th>{{ field.label }}:</th>
+                <td>{{ field }}</td>
+            </tr>
+            {% endfor %}
+            
+            <tr>
+                <th>Choose Files:</th>
+                <td style="text-align: center;">
+                    <input id="button-image" type="file" name="files" multiple />
+                </td>
+            </tr>
+            
+            <tr class="status-message-buttons">
+                <td>
+                    <div class="delete-message">
+                    <a href="{% url 'profile' profile.pk %}"><button type="button">Cancel</button></a>
+                    <input type="submit" value="Add Status Message!">
+                </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
 {% endblock %}

@@ -1,3 +1,6 @@
+# Rachel Cherry
+# rcherry@bu.edu
+
 <!--blog/templates/blog/article.html-->
 {% extends 'mini_fb/base.html' %}
 
@@ -13,11 +16,12 @@
     <h3>Contact: {{profile.email}}</h3>
 
 </div>
-<div style="display: column; justify-content: center;">
+
     <br>
-<a class="aprofile" href="{% url 'update_profile' profile.pk%}"><h3>Update Profile</h3></a>
-<a class="aprofile" href="{% url 'create_status' profile.pk%}"><h3>Create New Status Message</h3></a>
-</div>
+    <div class="buttons-updating">
+<a class="button-update" href="{% url 'update_profile' profile.pk%}"><h3>Update Profile</h3></a>
+<a class="button-update" href="{% url 'create_status' profile.pk%}"><h3>Create New Status Message</h3></a>
+</div></div>
 <br>
 
 
@@ -39,9 +43,8 @@
                 </div>
                 <br>
             {% endif %}
-        
-            <a class="atags" href="{% url 'delete_status' p.pk %}">Delete Status</a>
-            <a class="atags" href="{% url 'update_status' p.pk %}">Update Status</a>
+            <a class="atag-button" href="{% url 'delete_status' p.pk %}">Delete</a>
+            <a class="atag-button" href="{% url 'update_status' p.pk %}">Update</a>
             <br>
         </div>
     {% endfor %}

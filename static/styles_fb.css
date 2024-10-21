@@ -128,7 +128,6 @@ button, input[type="submit"] {
 }
 
 
-
 .image-status {
   display: flex;
   gap: 20px;
@@ -171,15 +170,62 @@ td{
   gap: 230px;
 
 }
+.del-message{
 
+  display: flex; 
+  gap: 270px;
+
+}
+.status-form { 
+  display: flex;
+}
+.status-message-div { 
+  margin:0 auto;
+}
+.status-message-buttons { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.status-message-table { 
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
 .delete-message{
   display: flex; 
-  gap: 280px;
+  gap: 100px;
 
 }
 
 .aprofile{
   margin-right: 15px; 
   color: rgb(9, 79, 130);
+}
+.update-delete{
+  background-color: rgb(9, 79, 130); 
+}
 
+.atag-button {
+  padding: 5px 10px;
+  color: white;
+  background-color: rgb(9, 79, 130);
+  text-decoration: none;
+  text-align: center;
+  
+}
+
+.button-update {
+  padding: 5 10px;
+  font-size: 12px;
+  color: white;
+  background-color: rgb(9, 79, 130);
+  text-decoration: none; 
+  text-align: center;
+  width: 220px;
+}
+
+.buttons-updating {
+  display: flex;
+  justify-content: space-around; 
 }
