@@ -129,8 +129,9 @@ button, input[type="submit"] {
 
 
 
-.image-container {
+.image-status {
   display: flex;
+  gap: 20px;
   justify-content: center; 
   margin-top: 20px;
 }
@@ -174,5 +175,11 @@ td{
 .delete-message{
   display: flex; 
   gap: 280px;
+
+}
+
+.aprofile{
+  margin-right: 15px; 
+  color: rgb(9, 79, 130);
 
 }

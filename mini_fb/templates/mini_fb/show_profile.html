@@ -15,10 +15,10 @@
 </div>
 <div style="display: column; justify-content: center;">
     <br>
-<a class="atags" href="{% url 'update_profile' profile.pk%}"><h3>Update Profile</h3></a>
-<a class="atags" href="{% url 'create_status' profile.pk%}"><h3>Create New Status Message</h3></a>
+<a class="aprofile" href="{% url 'update_profile' profile.pk%}"><h3>Update Profile</h3></a>
+<a class="aprofile" href="{% url 'create_status' profile.pk%}"><h3>Create New Status Message</h3></a>
 </div>
-
+<br>
 
 
 </profile> <!--was a div-->
@@ -32,7 +32,7 @@
             <p>Created at: {{ p.timestamp }}</p>
         
                 {% if p.get_images %}
-                <div class="image-container">
+                <div class="image-status">
                     {% for img in p.get_images %}
                         <img src='{{ img.image_file.url }}' alt='{{ img.image_file.url }}' class="size-image">
                     {% endfor %}
