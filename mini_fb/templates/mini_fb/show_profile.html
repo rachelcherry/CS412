@@ -37,8 +37,9 @@
                         <img src='{{ img.image_file.url }}' alt='{{ img.image_file.url }}' class="size-image">
                     {% endfor %}
                 </div>
+                <br>
             {% endif %}
-            <br>
+        
             <a class="atags" href="{% url 'delete_status' p.pk %}">Delete Status</a>
             <a class="atags" href="{% url 'update_status' p.pk %}">Update Status</a>
             <br>
