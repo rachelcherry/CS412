@@ -12,7 +12,7 @@
     <p>{{ status_message.message }}</p>
     <p>{{ status_message.timestamp }}</p>
 
-    <div style="display: flex; gap: 450px;">
+    <div class="delete-message">
         <form method="GET" action="{% url 'profile' profile.pk %}">
             <button type="submit">Cancel</button>
         </form>
