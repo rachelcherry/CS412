@@ -7,7 +7,7 @@
 <main class="grid-container"> <!--was <div>-->
 <profile class="featured">
     <div>
-    <img src="{{profile.image_url}}">
+    <img class="profile-pic-ind" src="{{profile.image_url}}" >
     <h2>{{profile.first_name}} {{profile.last_name}}</h2>
     <h3>Location: {{profile.city}}</h3>
     <h3>Contact: {{profile.email}}</h3>
@@ -28,11 +28,9 @@
     {% for p in profile.get_status_messages %}
         <div>
       
-            <p>Message: {{ p.message }}</p>
+            <p><strong>Message: {{p.message}}</strong></p>
             <p>Created at: {{ p.timestamp }}</p>
-            <a class="atags" href="{% url 'delete_status' p.pk %}">Delete Status</a>
-            <a class="atags" href="{% url 'update_status' p.pk %}">Update Status</a>
-            <br>
+        
                 {% if p.get_images %}
                 <div class="image-container">
                     {% for img in p.get_images %}
@@ -40,6 +38,10 @@
                     {% endfor %}
                 </div>
             {% endif %}
+            <br>
+            <a class="atags" href="{% url 'delete_status' p.pk %}">Delete Status</a>
+            <a class="atags" href="{% url 'update_status' p.pk %}">Update Status</a>
+            <br>
         </div>
     {% endfor %}
 {% else %}

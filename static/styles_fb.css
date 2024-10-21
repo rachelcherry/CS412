@@ -123,12 +123,11 @@ button{
   
 }
 
-/* Button styles */
 button, input[type="submit"] {
   background-color: rgb(9, 79, 130);
-  color: white; /* Text color */
+  color: white; 
   padding: 10px 15px; 
-  margin: 20px; /* Space between buttons */
+  margin: 20px; 
 }
 
 
@@ -150,4 +149,27 @@ td{
   justify-content: space-between;
   text-align: center;
 
+}
+.profile-pic {
+  width: 400px;
+  height: 400px; 
+  object-fit: cover;
+  align-content: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-pic-ind{
+  width: 100px;
+  height: auto; 
+  object-fit: cover;
+  align-content: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+hr{
+  width: 700px;
 }
