@@ -13,10 +13,16 @@ class Profile(models.Model):
         '''Return string representation of this Profile.'''
         return f"{self.first_name} {self.last_name}"
     def get_status_messages(self):
+        '''Return status_messages of this Profile.'''
+
         status_messages = StatusMessage.objects.filter(profile=self).order_by('timestamp')
         return status_messages
     def get_absolute_url(self):
+        '''Return get_absolute_url of this Profile.'''
         return reverse('profile', kwargs={'pk': self.pk})
+    def get_friends(self):
+        '''Return friends of this Profile.'''
+        return list(Friend.objects.filter(profile1=self)) | list(Friend.objects.filter(profile2=self))
 
 
 class StatusMessage(models.Model):
@@ -37,4 +43,11 @@ class Image(models.Model):
     status_message = models.ForeignKey(StatusMessage, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now=True)
 
+
+class Friend(models.Model):
+    anniversary = models.DateTimeField(auto_now=True)
+    profile1 = models.ForeignKey(Profile, related_name="profile1", on_delete=models.CASCADE)
+    profile2 = models.ForeignKey(Profile, related_name="profile2", on_delete=models.CASCADE)
+    def __str__(self):
+        return f"{self.profile1} & {self.profile2}"
 
