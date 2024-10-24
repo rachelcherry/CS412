@@ -25,6 +25,31 @@
 
 
 </profile> <!--was a div-->
+<div style="text-align: center;">
+<h2>Friends of {{profile.first_name}} {{profile.last_name}}</h2>
+{% if profile.get_friends %}
+    {% for friend in profile.get_friends %}
+        <div>
+            <profile>
+            {% if friend.profile1 != profile %}
+            <img style="  object-fit: cover;width:300px; height: 300px;"src="{{friend.profile1.image_url}}">
+            <br>
+            {{friend.profile1}}
+            {% endif %}
+        </profile>
+        <profile>
+            {% if friend.profile2 != profile %}
+            <img style="  object-fit: cover;width:300px; height: 300px;" src="{{friend.profile2.image_url}}">
+                <br>
+            {{friend.profile2}}
+            {% endif %}
+        </profile>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No friends to display.</p>
+{% endif %}
+</div>
 <div class="status">
     <h2>Status Messages</h2>
     {% if profile.get_status_messages %}

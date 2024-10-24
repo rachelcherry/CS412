@@ -67,7 +67,7 @@ profile{
   background: #ffffff;
   margin-left: auto;
   margin-right: auto;
-  width:600px;
+  width: fit-content; 
 }
 .status {
   padding: 20px;

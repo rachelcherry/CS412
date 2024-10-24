@@ -22,9 +22,8 @@ class Profile(models.Model):
         return reverse('profile', kwargs={'pk': self.pk})
     def get_friends(self):
         '''Return friends of this Profile.'''
-        return list(Friend.objects.filter(profile1=self)) | list(Friend.objects.filter(profile2=self))
-
-
+        return list(Friend.objects.filter(profile1=self)) + list(Friend.objects.filter(profile2=self))
+ 
 class StatusMessage(models.Model):
     timestamp = models.DateTimeField(auto_now=True)
     message = models.TextField(blank=False)
@@ -50,4 +49,6 @@ class Friend(models.Model):
     profile2 = models.ForeignKey(Profile, related_name="profile2", on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.profile1} & {self.profile2}"
+
+    
 
