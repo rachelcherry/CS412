@@ -3,7 +3,6 @@
 
 {% extends 'mini_fb/base.html' %}
 {% block content %}
-
 <div class="status-message-div">
     <h2 class="status_message">Add a Status Message for {{profile.first_name}} {{profile.last_name}}</h2>
     <form method="POST" enctype="multipart/form-data" class="status-form">
@@ -15,23 +14,20 @@
                 <td>{{ field }}</td>
             </tr>
             {% endfor %}
-            
             <tr>
                 <th>Choose Files:</th>
-                <td style="text-align: center;">
-                    <input id="button-image" type="file" name="files" multiple />
+             <td class="files-style">
+                  <input type="file" name="files" multiple />
                 </td>
             </tr>
-            
             <tr class="status-message-buttons">
                 <td>
                     <div class="delete-message">
                     <a href="{% url 'profile' profile.pk %}"><button type="button">Cancel</button></a>
                     <input type="submit" value="Add Status Message!">
                 </div>
-                </td>
-            </tr>
-        </table>
+        </td></tr>
+ </table>
     </form>
 </div>
 

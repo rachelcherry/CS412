@@ -183,6 +183,19 @@ td{
   display: flex;
 }
 
+.status-message-div { 
+  margin:0 auto;
+}
+.status-message-buttons { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.status-message-table { 
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
 .status-h2{
   font-size: 30px;
   color: rgb(9, 79, 130);
@@ -211,7 +224,9 @@ td{
   text-align: center;
   
 }
-
+.files-style{
+  font-size: 18px;;
+}
 .button-update {
   padding: 5 10px;
   font-size: 12px;
