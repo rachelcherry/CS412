@@ -7,10 +7,11 @@ from django.shortcuts import render
 # Create your views here.
 # description: the logic to ahndle URL requests 
 from django.urls import reverse
-
+from django.shortcuts import redirect
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 import time
+from django.views.generic import View
 from typing import Any
 from .models import *
 from django import forms
@@ -39,6 +40,7 @@ class ShowAllProfilesView(ListView):
     context_object_name = 'profiles'
     
 class ShowProfilePageView(DetailView):
+    '''A view to show a Profile'''
     model = Profile
     template_name = 'mini_fb/show_profile.html'
     context_object_name = 'profile'
@@ -75,7 +77,7 @@ class CreateStatusMessageView(CreateView):
             form.instance.profile = profile
             sm = form.save()
             files = self.request.FILES.getlist('files')
-            for i in range(len(files)):
+            for i in range(len(files)): 
                 image_object = Image()
                 image_object.image_file = files[i]
                 image_object.status_message = sm
@@ -93,6 +95,7 @@ class CreateStatusMessageView(CreateView):
             context['profile'] = profile
             return context
 class UpdateProfileView(UpdateView):
+    '''A view to update a profile'''
     model = Profile
     form_class = UpdateProfileForm
     template_name = 'mini_fb/update_profile_form.html'
@@ -101,6 +104,7 @@ class UpdateProfileView(UpdateView):
         return reverse('profile', kwargs={'pk': self.object.pk})
 
 class DeleteStatusMessageView(DeleteView):
+    '''A view to de;ete a profile'''
     model = StatusMessage
     context_object_name = 'status_message'
     template_name = 'mini_fb/delete_status_form.html'
@@ -112,12 +116,12 @@ class DeleteStatusMessageView(DeleteView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         '''Build the template context data -- a dict of key-value pairs'''
         context = super().get_context_data(**kwargs)
-        # Fetch the status message using get_object_or_404
         status_message = StatusMessage.objects.get(pk=self.kwargs['pk'])
         context['status_message'] = status_message
         context['profile'] = status_message.profile
         return context
 class UpdateStatusMessageView(UpdateView):
+    '''A view to update a status message'''
     model = StatusMessage
     form_class = UpdateStatusForm
     context_object_name = 'status_message'
@@ -130,7 +134,23 @@ class UpdateStatusMessageView(UpdateView):
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         '''Build the template context data -- a dict of key-value pairs'''
         context = super().get_context_data(**kwargs)
-        # Fetch the status message using get_object_or_404
-        status_message = self.object  # You can use self.object directly
+        status_message = self.object 
         context['profile'] = status_message.profile
         return context
+class CreateFriendView(View):
+    '''A view to create a friend'''
+    def dispatch(self, request, *args, **kwargs):
+        profile1 = Profile.objects.get(pk=self.kwargs['pk'])
+        profile2 = Profile.objects.get(pk=self.kwargs['other_pk'])
+        Profile.add_friend(profile1, profile2)
+        return redirect('profile', pk=self.kwargs['pk'])
+class ShowFriendSuggestionsView(DetailView):
+    '''A view to show a friend suggestion'''
+    model = Profile
+    template_name = 'mini_fb/friend_suggestions.html'
+    context_object_name = 'profile'
+class ShowNewsFeedView(DetailView):
+    '''A view to show a news feed'''
+    model = Profile
+    template_name = 'mini_fb/news_feed.html'
+    context_object_name = 'profile'

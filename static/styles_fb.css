@@ -45,14 +45,14 @@ ul li {
 }
 
 ul li a {
-  margin-right: 15px; 
   text-decoration: none;
 }
 
 a {
   margin-right: 15px; 
+  text-align: center;
   text-decoration: underline;
-  font-size: 18px;
+  font-size: 20px;
   color: black;
 }
 
@@ -67,15 +67,13 @@ profile{
   background: #ffffff;
   margin-left: auto;
   margin-right: auto;
-  width: fit-content; 
+  width: fit-content;
+  max-width: 600px; 
 }
 .status {
-  padding: 20px;
   text-align: center;
 }
-.status h2 {
-  color: rgb(9, 79, 130);
-}
+
 
 .profile_info{
   align-items: center;
@@ -179,19 +177,13 @@ td{
 .status-form { 
   display: flex;
 }
-.status-message-div { 
-  margin:0 auto;
+
+.status-h2{
+  font-size: 30px;
+  color: rgb(9, 79, 130);
+  text-align: center;
 }
-.status-message-buttons { 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.status-message-table { 
-  display: flex;
-  justify-items: center;
-  align-items: center;
-}
+
 .delete-message{
   display: flex; 
   gap: 100px;
@@ -222,10 +214,113 @@ td{
   background-color: rgb(9, 79, 130);
   text-decoration: none; 
   text-align: center;
-  width: 220px;
+  width: 200px;
 }
 
 .buttons-updating {
   display: flex;
   justify-content: space-around; 
+}
+
+.friend-img{
+  width: 300px;
+  height:300px;
+  display: block;
+   object-fit: cover;
+
+
+}
+
+.friends{
+  display: block;
+  margin-bottom: 40px;
+  background: #ffffff;
+  margin: 0;
+  padding: 0;
+  width: fit-content;
+  max-width: 300px; 
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+ 
+}
+
+
+.friend-style{
+  display: flex;
+  gap: 10px; 
+  justify-content: center;
+}
+
+.friends-h2{
+  font-size: 30px;
+  color: rgb(9, 79, 130);
+  text-align: center;
+}
+
+.news{
+  text-align: center;
+}
+
+.news-h2{
+  font-size: 40px;
+  color: rgb(9, 79, 130);
+}
+
+.prof-return{
+  padding: 5 10px;
+  font-size: 20px;
+  color: white;
+  background-color: rgb(9, 79, 130);
+  text-decoration: none; 
+  text-align: center;
+}
+.news-h3{
+  display: block;
+  font-size: 30px;
+  color: rgb(9, 79, 130);
+}
+
+.feed-pic{
+  border-radius: 50%;
+  width: 70px;
+  height:70px;
+  object-fit: cover;
+}
+
+hr{
+  width: 80%;
+}
+.friend-sug{
+  padding: 5 10px;
+  font-size: 20px;
+  color: white;
+  background-color: rgb(9, 79, 130);
+  text-decoration: none; 
+  text-align: center;
+
+}
+
+.sug-style{
+  display: flex;
+  gap: 5px; 
+  justify-content: center;
+  text-align: center;
+}
+
+.sug-img{
+  width: 250px;
+  height:250px;
+  display: block;
+   object-fit: cover;
+}
+
+.sug-h2{
+  font-size: 35px;
+  color: rgb(9, 79, 130);
+
+}
+.friend-tags{
+  text-decoration: none;
+  color: rgb(9, 79, 130);
 }

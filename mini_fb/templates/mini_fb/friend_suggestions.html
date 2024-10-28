@@ -1,0 +1,35 @@
+{% extends 'mini_fb/base.html' %}
+
+
+{% block content %}
+
+  <h2 class="sug-h2">Friend Suggestions for {{ profile.first_name }} {{profile.last_name}}</h2>
+  <br>
+<a class="prof-return" href="{% url 'profile' profile.pk%}">Back to {{profile.first_name}}'s Profile</a>
+<div></div>
+<br>
+  {% if profile.get_friend_suggestions %}
+      {% for which in profile.get_friend_suggestions %}
+      <div class="sug-style">
+      <ul>
+        <li>
+          <div class="friends">
+            <a href="{% url 'profile' which.pk %}"> 
+        <img class="sug-img" src="{{which.image_url}}">
+        </a>
+        <br>
+        {{which.first_name}} {{which.last_name}}
+        <br>
+
+    </div>
+    <a class="friend-sug" href="{% url 'add_friend' profile.pk which.pk  %}">Add {{which.first_name}} as a Friend!</a>
+
+
+        </li>
+      </ul>
+      {% endfor %}
+</div>
+  {% else %}
+    <p>No friend suggestions for {{profile.first_name}}</p>
+  {% endif %}
+{% endblock %}
