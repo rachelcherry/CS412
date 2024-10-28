@@ -26,7 +26,12 @@ header {
 profile img, profile.featured img {
   width: 100%;
 }
-profile p, profile h2 {
+profile p {
+
+  text-align: center;
+
+}
+profile h2 {
   color: rgb(9, 79, 130);
   text-align: center;
 

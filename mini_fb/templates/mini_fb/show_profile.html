@@ -22,9 +22,9 @@
 
     <br>
     <div class="buttons-updating">
-<a class="button-update" href="{% url 'update_profile' profile.pk%}"><h3>Update Profile</h3></a>
-<a class="button-update" href="{% url 'create_status' profile.pk%}"><h3>Create New Status Message</h3></a>
-<a class="button-update" href="{% url 'friend_suggestion' profile.pk%}"><h3>Friend Suggestions</h3></a>
+<a class="button-update" href="{% url 'update_profile' profile.pk%}"><h3>Update the Profile for {{profile.first_name}}</h3></a>
+<a class="button-update" href="{% url 'create_status' profile.pk%}"><h3>Create New Status Message for {{profile.first_name}}</h3></a>
+<a class="button-update" href="{% url 'friend_suggestion' profile.pk%}"><h3>Friend Suggestions for {{profile.first_name}}</h3></a>
 </div></div>
 <br>
 

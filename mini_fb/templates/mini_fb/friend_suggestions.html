@@ -22,6 +22,8 @@
         <br>
 
     </div>
+    <br>
+    <div></div>
     <a class="friend-sug" href="{% url 'add_friend' profile.pk which.pk  %}">Add {{which.first_name}} as a Friend!</a>
 
 
@@ -30,6 +32,6 @@
       {% endfor %}
 </div>
   {% else %}
-    <p>No friend suggestions for {{profile.first_name}}</p>
+    <p>{{profile.first_name}} has no friend suggestions</p>
   {% endif %}
 {% endblock %}
