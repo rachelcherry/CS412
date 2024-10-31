@@ -5,6 +5,10 @@
         <title>Form Data</title>
         <!-- Linking to the CSS file in the static folder -->
         <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <p>
+
+            Logged in: {{request.user}}
+        </p>
     </head>
 
     <body>

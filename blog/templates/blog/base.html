@@ -16,9 +16,23 @@
                 <ul class="pages">
                     <li><a class="atags" href="{% url 'show_all' %}">Show All</a></li>
                     <li><a class="atags" href="{% url 'random' %}">Random</a></li>
+                    {% if request.user.is_authenticated %}
                     <li><a class="atags" href="{% url 'create_article' %}">Create Article</a></li>
+                    <form method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <input type="submit" value="Logout">
+
+                    </form>
+                    {% else %}
+                    <li><a class="atags" href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
                 </ul>
             </nav>
+            {% if request.user.is_authenticated %}
+            <p>Logged in: {{request.user}}</p>
+            {% else %}
+            Not logged in 
+            {% endif %}
         </header>
 
         <!-- Content block where templates get insert content -->

@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<h2>Register for Account</h2>
+<!--a very basic authentication form-->
+
+<form method="POST" action="{% url 'register' %}">
+
+{% csrf_token %}
+<table>
+{{form.as_table}}
+</table>
+<input type="submit" name="register" value="Register">
+</form>
+{% endblock %}

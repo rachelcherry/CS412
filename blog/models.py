@@ -1,9 +1,11 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 #define data models (objects) for use in the blog application
 # Create your models here.
 class Article(models.Model):
     '''Encapsulate the idea of a Article by some author.'''
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     # data attributes of a Article:
     title = models.TextField(blank=False)
     author = models.TextField(blank=False, default='Unknown Author')

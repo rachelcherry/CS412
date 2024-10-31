@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 # Define data models (objects) for use in the blog application
 class Profile(models.Model):
     '''Encapsulate the data for a Facebook profile.'''
@@ -8,6 +9,8 @@ class Profile(models.Model):
     city = models.TextField(blank=False)
     email = models.TextField(blank=False)
     image_url = models.URLField(blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
     def __str__(self):
         '''Return string representation of this Profile.'''

@@ -8,7 +8,10 @@
 <body>
 <main class="grid-container"> <!--was <div>-->
    
-
+{% if auth_for_profile %}
+{% else %}
+<strong>Please login to modify or view {{profile.first_name}}'s Profile</strong>
+{% endif %}
 <profile class="featured">
     
     <div>
@@ -22,9 +25,13 @@
 
     <br>
     <div class="buttons-updating">
+        {% if auth_for_profile %}
 <a class="button-update" href="{% url 'update_profile' profile.pk%}"><h3>Update the Profile for {{profile.first_name}}</h3></a>
 <a class="button-update" href="{% url 'create_status' profile.pk%}"><h3>Create New Status Message for {{profile.first_name}}</h3></a>
+{% endif %}
 <a class="button-update" href="{% url 'friend_suggestion' profile.pk%}"><h3>Friend Suggestions for {{profile.first_name}}</h3></a>
+
+
 </div></div>
 <br>
 
@@ -79,8 +86,13 @@
                 </div>
                 <br>
             {% endif %}
+            {% if auth_for_profile %}
             <a class="atag-button" href="{% url 'delete_status' p.pk %}">Delete</a>
             <a class="atag-button" href="{% url 'update_status' p.pk %}">Update</a>
+              
+                {% else %}
+                <p>Please login to update or delete status messages</p>
+                {% endif %}
             <br>
         </div>
     {% endfor %}

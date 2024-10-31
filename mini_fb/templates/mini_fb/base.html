@@ -20,22 +20,38 @@
                     <li>
                     <a class="atags" href="{% url 'show_all_profiles' %}">Home Page </a>
                     </li>
+                    {% if request.user.is_authenticated %}
                     {% if profile %}
+                    {% if auth_for_profile %}
                     <li>
                         <a class="atags" href="{% url 'news_feed' profile.pk%}">{{profile.first_name}}'s News Feed</a>
                         </li>
-                        {% else %}
-                   
-
+                    {% endif %}
+                    {% else %}
                     <li>
                     <a class="atags" href="{% url 'create_profile' %}">Create New Profile</a>
                     </li>
                     {% endif %}
+                    {% else %}
+                    <li><a class="atags" href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+
+                    <!-- <form method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <input type="submit" value="Logout"> -->
+
+                    <!-- </form> -->
+           
 
 
                 </ul>
                 
             </nav>
+            {% if request.user.is_authenticated %}
+            <p>Logged in: {{request.user}}</p>
+            {% else %}
+            Not logged in 
+            {% endif %}
         </header>
       
 
