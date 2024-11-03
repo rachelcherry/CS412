@@ -16,23 +16,31 @@
             <!--Creates a nav bar-->
             <nav>
                 <h1>Mini Facebook</h1>
+        
+             
+    
                 <ul class="pages">
                     <li>
                     <a class="atags" href="{% url 'show_all_profiles' %}">Home Page </a>
                     </li>
                     {% if request.user.is_authenticated %}
+               
+                <li>
+                    <a class="atags" href="{% url 'profile' user.profile.pk %}">View Your Own Profile</a>
+                </li>
+    
                     {% if profile %}
                     {% if auth_for_profile %}
                     <li>
-                        <a class="atags" href="{% url 'news_feed' profile.pk%}">{{profile.first_name}}'s News Feed</a>
+                        <a class="atags" href="{% url 'news_feed' %}">{{profile.first_name}}'s News Feed</a>
                         </li>
+                    {% endif %}
+              
                     {% endif %}
                     {% else %}
                     <li>
-                    <a class="atags" href="{% url 'create_profile' %}">Create New Profile</a>
-                    </li>
-                    {% endif %}
-                    {% else %}
+                        <a class="atags" href="{% url 'create_profile' %}">Create New Profile</a>
+                        </li>
                     <li><a class="atags" href="{% url 'login' %}">Login</a></li>
                     {% endif %}
 
@@ -47,11 +55,17 @@
                 </ul>
                 
             </nav>
-            {% if request.user.is_authenticated %}
-            <p>Logged in: {{request.user}}</p>
-            {% else %}
-            Not logged in 
-            {% endif %}
+            <div class="logout-section" style="text-align:center">
+                {% if request.user.is_authenticated %}
+                    <p>Logged in: {{ request.user }}</p>
+                    <form method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <input type="submit" value="Logout">
+                    </form>
+                {% else %}
+                    <p>Not logged in</p>
+                {% endif %}
+            </div>
         </header>
       
 

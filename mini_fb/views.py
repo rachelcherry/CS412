@@ -3,13 +3,14 @@
 # views file to render the profiles
 
 from django.shortcuts import render
-
+from django.contrib.auth import login
 # Create your views here.
 # description: the logic to ahndle URL requests 
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
+from django.contrib.auth.forms import UserCreationForm
 import time
 from django.views.generic import View
 from typing import Any
@@ -46,42 +47,59 @@ class ShowProfilePageView(DetailView):
     template_name = 'mini_fb/show_profile.html'
     context_object_name = 'profile'
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
-        '''build the template context data -- a dict of key-value pairs'''
-
-        # get the super class version of context data
         context = super().get_context_data(**kwargs)
+        profile = context['profile'] 
 
-        # Check if the current authenticated user is the owner of the profile
-        if self.request.user.is_authenticated and self.request.user == context['profile'].user: 
-            auth_for_profile = True
+        if self.request.user.is_authenticated:
+            if self.request.user == profile.user:
+                auth_for_profile = True
+            else:
+                auth_for_profile = False
         else:
-            auth_for_profile = False
+            auth_for_profile = None
+
         context['auth_for_profile'] = auth_for_profile
         return context
 
-
-class CreateProfileView(LoginRequiredMixin, CreateView):
+    
+class CreateProfileView(CreateView):
     '''A view to create a new profile and save it to the database.'''
     form_class = CreateProfileForm 
     template_name = "mini_fb/create_profile_form.html"
+
     def get_login_url(self) -> str:
-        '''return the URL required for login'''
+        '''Return the URL required for login.'''
         return reverse('login')
+
     def get_success_url(self) -> str:
-        '''Return the URL to redirect to after successfully submitting form.'''
+        '''Return the URL to redirect to after successfully submitting the form.'''
         return self.object.get_absolute_url()
 
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['user_creation'] = UserCreationForm() 
+        return context
 
-class CreateStatusMessageView(LoginRequiredMixin, CreateView):
+    def form_valid(self, form):
+        '''Handle form submission'''
+        user_form = UserCreationForm(self.request.POST) 
+        if user_form.is_valid():
+            user = user_form.save()  
+            profile = form.instance 
+            profile.user = user 
+            profile.save()
+            login(self.request, user) 
+        return super().form_valid(form)  
+
+
+class CreateStatusMessageView(CreateView):
         form_class = CreateStatusMessageForm
         template_name = "mini_fb/create_status_form.html"
         ## show how the reverse function uses the urls.py to find the URL pattern
-        def get_login_url(self) -> str:
-            '''return the URL required for login'''
-            return reverse('login')
         def get_success_url(self) -> str:
             '''Return the URL to redirect to after successfully submitting form.'''
-            return reverse('profile', kwargs=self.kwargs)
+            profile = Profile.objects.get(user=self.request.user)
+            return reverse('profile', kwargs={'pk': profile.pk})
             ## note: this is not ideal, because we are redirected to the main page.
         def form_valid(self, form):
             '''
@@ -92,7 +110,7 @@ class CreateStatusMessageView(LoginRequiredMixin, CreateView):
             print(f'CreateStatusMessageView.form.valid(): form={form.cleaned_data}')
             print(f'CreateStatusMessageView.form_valid(): self.kwargs={self.kwargs}')
             # find the article with the PK from the url 
-            profile = Profile.objects.get(pk=self.kwargs['pk'])
+            profile = Profile.objects.get(user=self.request.user)
             # print(article)
             # form.instance is the new comment object
             form.instance.profile = profile
@@ -106,36 +124,29 @@ class CreateStatusMessageView(LoginRequiredMixin, CreateView):
             return super().form_valid(form)
         def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
             '''build the template context data -- a dict of key-value pairs'''
-
-            # get the super class version of context data
             context = super().get_context_data(**kwargs)
-            # add the article to the context data 
-    
-
-            profile = Profile.objects.get(pk=self.kwargs['pk'])
-
+            profile = Profile.objects.get(user=self.request.user)
             context['profile'] = profile
             return context
-class UpdateProfileView(LoginRequiredMixin, UpdateView):
+        def get_object(self):
+            return Profile.objects.get(user=self.request.user)
+
+class UpdateProfileView(UpdateView):
     '''A view to update a profile'''
     model = Profile
     form_class = UpdateProfileForm
     template_name = 'mini_fb/update_profile_form.html'
-    def get_login_url(self) -> str:
-        '''return the URL required for login'''
-        return reverse('login')
+
     def get_success_url(self):
         '''Return the URL to redirect to after successfully submitting form.'''
         return reverse('profile', kwargs={'pk': self.object.pk})
-
-class DeleteStatusMessageView(LoginRequiredMixin, DeleteView):
+    def get_object(self):
+        return Profile.objects.get(user=self.request.user)
+class DeleteStatusMessageView(DeleteView):
     '''A view to de;ete a profile'''
     model = StatusMessage
     context_object_name = 'status_message'
     template_name = 'mini_fb/delete_status_form.html'
-    def get_login_url(self) -> str:
-        '''return the URL required for login'''
-        return reverse('login')
 
     def get_success_url(self):
         '''Return the URL to redirect to after successfully submitting form.'''
@@ -148,7 +159,7 @@ class DeleteStatusMessageView(LoginRequiredMixin, DeleteView):
         context['status_message'] = status_message
         context['profile'] = status_message.profile
         return context
-class UpdateStatusMessageView(LoginRequiredMixin, UpdateView):
+class UpdateStatusMessageView(UpdateView):
     '''A view to update a status message'''
     model = StatusMessage
     form_class = UpdateStatusForm
@@ -165,23 +176,26 @@ class UpdateStatusMessageView(LoginRequiredMixin, UpdateView):
         status_message = self.object 
         context['profile'] = status_message.profile
         return context
-class CreateFriendView(LoginRequiredMixin, View):
+class CreateFriendView(View):
     '''A view to create a friend'''
-    def get_login_url(self) -> str:
-        '''return the URL required for login'''
-        return reverse('login')
     def dispatch(self, request, *args, **kwargs):
-        profile1 = Profile.objects.get(pk=self.kwargs['pk'])
+        profile1 = Profile.objects.get(user=self.request.user)
         profile2 = Profile.objects.get(pk=self.kwargs['other_pk'])
         Profile.add_friend(profile1, profile2)
-        return redirect('profile', pk=self.kwargs['pk'])
+        return redirect('profile', pk=profile1.pk)
+    def get_object(self):
+        return Profile.objects.get(user=self.request.user)
 class ShowFriendSuggestionsView(DetailView):
     '''A view to show a friend suggestion'''
     model = Profile
     template_name = 'mini_fb/friend_suggestions.html'
     context_object_name = 'profile'
+    def get_object(self):
+        return Profile.objects.get(user=self.request.user)
 class ShowNewsFeedView(DetailView):
     '''A view to show a news feed'''
     model = Profile
     template_name = 'mini_fb/news_feed.html'
     context_object_name = 'profile'
+    def get_object(self):
+        return Profile.objects.get(user=self.request.user)

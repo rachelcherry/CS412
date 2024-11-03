@@ -21,6 +21,7 @@ header {
   max-width: 1200px;
   margin: 40px auto;
   border-bottom: 1px solid #bbc7c7;
+  display: inline-block;
 }
 
 profile img, profile.featured img {
@@ -340,4 +341,7 @@ hr{
 .friend-tags{
   text-decoration: none;
   color: rgb(9, 79, 130);
+}
+.logout-page{
+  text-align: center;
 }

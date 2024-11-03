@@ -10,7 +10,8 @@
    
 {% if auth_for_profile %}
 {% else %}
-<strong>Please login to modify or view {{profile.first_name}}'s Profile</strong>
+<h2 style=" text-align: center;">Please login to modify or view {{profile.first_name}}'s Profile</h2>
+<br>
 {% endif %}
 <profile class="featured">
     
@@ -26,11 +27,11 @@
     <br>
     <div class="buttons-updating">
         {% if auth_for_profile %}
-<a class="button-update" href="{% url 'update_profile' profile.pk%}"><h3>Update the Profile for {{profile.first_name}}</h3></a>
-<a class="button-update" href="{% url 'create_status' profile.pk%}"><h3>Create New Status Message for {{profile.first_name}}</h3></a>
-{% endif %}
-<a class="button-update" href="{% url 'friend_suggestion' profile.pk%}"><h3>Friend Suggestions for {{profile.first_name}}</h3></a>
+<a class="button-update" href="{% url 'update_profile' %}"><h3>Update the Profile for {{profile.first_name}}</h3></a>
+<a class="button-update" href="{% url 'create_status' %}"><h3>Create New Status Message for {{profile.first_name}}</h3></a>
 
+<a class="button-update" href="{% url 'friend_suggestion' %}"><h3>Friend Suggestions for {{profile.first_name}}</h3></a>
+{% endif %}
 
 </div></div>
 <br>
@@ -91,7 +92,7 @@
             <a class="atag-button" href="{% url 'update_status' p.pk %}">Update</a>
               
                 {% else %}
-                <p>Please login to update or delete status messages</p>
+                <h2>Login to update or delete status messages</h2>
                 {% endif %}
             <br>
         </div>
