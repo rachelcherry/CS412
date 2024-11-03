@@ -17,7 +17,7 @@ from typing import Any
 from .models import *
 from django import forms
 from django.views.generic.edit import CreateView
-from django.views.generic import ListView, DetailView #generic view that grabs all the object of that type and send it to a template for rendering
+from django.views.generic import ListView, DetailView 
 import random
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -31,7 +31,7 @@ from .models import *
 from django import forms
 from django.views.generic.edit import CreateView
 from .forms import *
-from django.views.generic import ListView, DetailView #generic view that grabs all the object of that type and send it to a template for rendering
+from django.views.generic import ListView, DetailView 
 import random
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 class ShowAllProfilesView(ListView):
@@ -95,7 +95,6 @@ class CreateProfileView(CreateView):
 class CreateStatusMessageView(CreateView):
         form_class = CreateStatusMessageForm
         template_name = "mini_fb/create_status_form.html"
-        ## show how the reverse function uses the urls.py to find the URL pattern
         def get_success_url(self) -> str:
             '''Return the URL to redirect to after successfully submitting form.'''
             profile = Profile.objects.get(user=self.request.user)
