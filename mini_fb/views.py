@@ -92,7 +92,7 @@ class CreateProfileView(CreateView):
         return super().form_valid(form)  
 
 
-class CreateStatusMessageView(CreateView):
+class CreateStatusMessageView(LoginRequiredMixin, CreateView):
         form_class = CreateStatusMessageForm
         template_name = "mini_fb/create_status_form.html"
         def get_success_url(self) -> str:
@@ -130,7 +130,7 @@ class CreateStatusMessageView(CreateView):
         def get_object(self):
             return Profile.objects.get(user=self.request.user)
 
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
     '''A view to update a profile'''
     model = Profile
     form_class = UpdateProfileForm
@@ -158,7 +158,7 @@ class DeleteStatusMessageView(DeleteView):
         context['status_message'] = status_message
         context['profile'] = status_message.profile
         return context
-class UpdateStatusMessageView(UpdateView):
+class UpdateStatusMessageView(LoginRequiredMixin, UpdateView):
     '''A view to update a status message'''
     model = StatusMessage
     form_class = UpdateStatusForm
@@ -175,7 +175,7 @@ class UpdateStatusMessageView(UpdateView):
         status_message = self.object 
         context['profile'] = status_message.profile
         return context
-class CreateFriendView(View):
+class CreateFriendView(LoginRequiredMixin, View):
     '''A view to create a friend'''
     def dispatch(self, request, *args, **kwargs):
         profile1 = Profile.objects.get(user=self.request.user)
@@ -184,14 +184,14 @@ class CreateFriendView(View):
         return redirect('profile', pk=profile1.pk)
     def get_object(self):
         return Profile.objects.get(user=self.request.user)
-class ShowFriendSuggestionsView(DetailView):
+class ShowFriendSuggestionsView(LoginRequiredMixin, DetailView):
     '''A view to show a friend suggestion'''
     model = Profile
     template_name = 'mini_fb/friend_suggestions.html'
     context_object_name = 'profile'
     def get_object(self):
         return Profile.objects.get(user=self.request.user)
-class ShowNewsFeedView(DetailView):
+class ShowNewsFeedView(LoginRequiredMixin, DetailView):
     '''A view to show a news feed'''
     model = Profile
     template_name = 'mini_fb/news_feed.html'

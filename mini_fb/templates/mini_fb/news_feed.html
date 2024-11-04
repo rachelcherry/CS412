@@ -2,12 +2,11 @@
 
 {% block content %}
 
- <div class="news-header">
 <h2 class="news-h2">News Feed for {{ profile.first_name }} {{profile.last_name}}</h2>
 <br>
 <a class="prof-return" href="{% url 'profile' profile.pk%}">Back to {{profile.first_name}}'s Profile</a>
 <br> 
-</div>   
+ 
 <div class="news">
 {% if profile.get_news_feed %}
 <ul>
