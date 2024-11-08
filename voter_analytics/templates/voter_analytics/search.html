@@ -1,0 +1,82 @@
+<!-- marathon_analytics/search.html -->
+<h2>Filter Voters</h2>
+<form action="{% url 'voters_list' %}">
+<table>
+    <tr>
+        <th>Party Affiliation</th>
+        <td>
+        <select name="party_affiliation">
+            <option value="">Select Party</option>
+            <option value="U">U</option>
+            <option value="D">D</option>
+            <option value="R">R</option>
+            <option value="CC">CC</option>
+            <option value="L">L</option>
+            <option value="T">T</option>
+            <option value="O">O</option>
+            <option value="G">G</option>
+            <option value="J">J</option>
+            <option value="Q">Q</option>
+            <option value="FF">FF</option>
+        </select>
+    </td>
+    </tr>
+    <tr>
+        <th>Minimum DOB</th>
+        <td>
+            <select name="min_dob">
+                <option value="">Select Year</option>
+
+                {% for year in years %}
+                    <option value="{{ year }}-01-01">{{ year }}</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th>Maximum DOB</th>
+        <td>
+            <select name="max_dob">
+                <option value="">Select Year</option>
+
+                {% for year in years %}
+                    <option value="{{ year }}-12-31">{{ year }}</option>
+                {% endfor %}
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th>Voter Score</th>
+        <td>
+            <select name="voter_score">
+                <option value="">Select Score</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+
+        <th>Elections Voted In</th>
+        <td>
+            <input type="checkbox" name="v21town" value="1"> Town Elections 2021
+            <input type="checkbox" name="v21primary" value="1"> Primary Elections 2021
+            <input type="checkbox" name="v22general" value="1"> General Elections 2022
+            <input type="checkbox" name="v23town" value="1"> Town Elections 2023
+        </td>
+
+
+    </tr>
+
+    <tr>
+        <td><input type="submit" value="Search for these voters"></td>
+
+        <td></td>
+    </tr>
+    
+</form>
+</table>

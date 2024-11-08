@@ -1,0 +1,65 @@
+<!-- templates/marathon_analytics/results.html -->
+{% extends 'voter_analytics/base.html' %}
+{% block content %}
+<div class="container">
+
+   
+    <div class="row">
+        <h1>Voter Information for {{r.first_name}} {{r.last_name}}</h1>
+        <table>
+            <tr>
+                <th>Date of Birth</th>
+                <th>Registration Date</th>
+                <th>Voted in 2020 Town Elections</th>
+                <th>Voted in 2021 Primary Elections</th>
+                <th>Voted in 2021 Town Elections</th>
+                <th>Voted in 2022 General Elections</th>
+                <th>Voted in 2023 Town Elections</th>
+                
+            </tr>
+    
+            <tr>
+                
+                <td>{{r.dob}}</td>
+                <td>{{r.registration_date}}</td>          
+                <td>{{r.v20state}}</td>
+                <td>{{r.v21primary}}</td>
+                <td>{{r.v21town}}</td>
+                <td>{{r.v22general}}</td>
+                <td>{{r.v23town}}</td>
+             
+            </tr>
+
+    
+        </table>
+        <a href="https://www.google.com/maps/search/?api=1&query={{ r.street_number }}+{{ r.street_name }}{% if r.apartment_number %}+Apt+{{ r.apartment_number }}{% endif %},+{{ r.zip_code }}" target="_blank">
+            View Voter's Address on Google Map
+        </a>
+        
+        </div>
+        <div class="row">
+            <a href="{% url 'graphs' %}">Graphs</a>
+        </div>
+        <div class="row">
+            {% if is_paginated %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li>
+                        <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+                 
+                    </li>
+                {% endif %}
+                    <li class="">
+                        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                    </li>
+                {% if page_obj.has_next %}
+                    <li>
+                        <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+                    </li>
+                {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,35 @@
+
+{% load static %}
+<html></html>
+    <head>
+        <title>Voter Analytics</title>
+        <link rel="stylesheet" href="{% static 'stylesheet.css' %}">
+    </head>
+    <body>
+        <header>
+            <h1>Voter Anaytics</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">View All Voters</a></li>
+                </ul>
+            </nav>
+        </header>
+
+<div class="container">
+    <h1>Showing Graphs for Voters</h1>
+    {% include 'voter_analytics/search_graphs.html' %}
+
+    <div class="row">
+        {{ graph_div|safe }}
+      
+    </div>
+
+    <div class="row">
+        {{ graph_div_splits|safe }}
+    </div>
+    <div class="row">
+        {{ graph_div_elect|safe }}
+    </div>
+
+
+</div>

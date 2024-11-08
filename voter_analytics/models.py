@@ -9,8 +9,8 @@ class Voter(models.Model):
     street_name = models.TextField()
     apt_number = models.TextField(null=True, blank=True)
     zip_code = models.IntegerField()
-    dob = models.CharField(max_length=10)
-    registration_date = models.CharField(max_length=10)
+    dob = models.DateField()
+    registration_date = models.DateField()
     party_affiliation = models.TextField()
     precinct_number = models.CharField(max_length=2)
     v20state = models.BooleanField()
@@ -35,6 +35,7 @@ def load_data():
         for line in f:
             fields = line.strip().split(',')
             try:
+                
                 result = Voter(
                     voter_id=fields[0],
                     last_name=fields[1],
@@ -42,7 +43,7 @@ def load_data():
                     street_number=fields[3],
                     street_name=fields[4],
                     apt_number=fields[5] if fields[5] else None,
-                    zip_code=int(fields[6]),
+                    zip_code=fields[6],
                     dob=fields[7],
                     registration_date=fields[8],
                     party_affiliation=fields[9],
@@ -56,6 +57,7 @@ def load_data():
                 )
                 result.save()
                 print(f'Created result: {result}')
+                
             except Exception as e:
                 print(f"Skipped: {fields} - Error: {e}")
     
