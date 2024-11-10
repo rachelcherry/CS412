@@ -1,5 +1,5 @@
 from django.db import models
-
+import os
 class Voter(models.Model):
     # identification
     voter_id = models.CharField(max_length=20)  
@@ -29,9 +29,9 @@ def load_data():
     # delete existing records to prevent duplicates:
     Voter.objects.all().delete()
     
-    filename = '/Users/rachelcherry/Desktop/newton_voters.csv'
+    filename = '/Users/rachelcherry/Desktop/412/newton_voters.csv'
     with open(filename) as f:
-        f.readline()  # discard headers
+        f.readline()
         for line in f:
             fields = line.strip().split(',')
             try:
@@ -46,7 +46,7 @@ def load_data():
                     zip_code=fields[6],
                     dob=fields[7],
                     registration_date=fields[8],
-                    party_affiliation=fields[9],
+                    party_affiliation=fields[9].strip(),
                     precinct_number=fields[10],
                     v20state=fields[11] == "TRUE",
                     v21town=fields[12] == "TRUE",

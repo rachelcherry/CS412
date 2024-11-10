@@ -6,11 +6,13 @@
         <link rel="stylesheet" href="{% static 'stylesheet.css' %}">
     </head>
     <body>
+        
         <header>
             <h1>Voter Analytics</h1>
             <nav>
                 <ul>
                     <li><a href="{% url 'home' %}">View All Voters</a></li>
+                    <li><a href="{% url 'graphs' %}">Graphs</a></li>
                 </ul>
             </nav>
         </header>
