@@ -2,67 +2,87 @@
 {% extends 'voter_analytics/base.html' %}
 {% block content %}
 <div class="container">
+    {% include 'voter_analytics/search.html' %}
 
-   
-    <div class="row">
-        {% include 'voter_analytics/search.html' %}
+    <div class="container">
         <div class="row">
-            <a href="{% url 'graphs' %}">Graphs</a>
-        </div>
-        <h1>Voters</h1>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Street Address</th>
-                <th>Date of Birth</th>
-                <th>Party Affiliation</th>
-                <th>Voter Score</th>
-                
-                
-            </tr>
-    
-            {% for r in voters %}
-            <tr>
-                
-                <td>
-                    <a href="{% url 'voter_detail' r.pk %}">
-                        {{ r.first_name }} {{ r.last_name }}
+            <h1>Voters</h1>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Street Address</th>
+                    <th>Date of Birth</th>
+                    <th>Party Affiliation</th>
+                    <th>Voter Score</th>
+
+
+                </tr>
+
+                {% for r in voters %}
+                <tr>
+
+                    <td>
+                        <a href="{% url 'voter_detail' r.pk %}">
+
+                            {{ r.first_name }} {{ r.last_name }}
+                        </a>
+                    
+                    </td>
+
+                    <td>
+                        <a href="{% url 'voter_detail' r.pk %}">
+
+                        {{ r.street_number }}, {{ r.street_name }} {% if r.apt_number %} {{ r.apt_number }} {% endif %}
+                        {{ r.zip_code }}
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="{% url 'voter_detail' r.pk %}">
+                        {{r.dob}}
                     </a>
                 </td>
-          
-                <td>{{ r.street_number }}, {{ r.street_name }} {% if r.apt_number %} {{ r.apt_number }} {% endif %} {{ r.zip_code }}</td>
-                <td>{{r.dob}}</td>
-                <td>{{r.party_affiliation}}</td>
-                
-                <td>{{ r.voter_score }}</td>
-                
-          
-          
-            </tr>
-            {% endfor %}
-    
-        </table>
+               
+                    <td> <a href="{% url 'voter_detail' r.pk %}">
+
+                    {{r.party_affiliation}}
+                    </a>
+                    </td>
+
+                    <td>
+                        <a href="{% url 'voter_detail' r.pk %}">
+                        {{ r.voter_score }}
+                    </a>
+                </td>
+
+
+              
+                </tr>
+                {% endfor %}
+
+            </table>
         </div>
         <div class="row">
             {% if is_paginated %}
             <ul class="pagination">
                 {% if page_obj.has_previous %}
-                    <li>
-                        <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
-                 
-                    </li>
+                <li>
+                    <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+
+                </li>
                 {% endif %}
-                    <li class="">
-                        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
-                    </li>
+                <li class="">
+                    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                </li>
                 {% if page_obj.has_next %}
-                    <li>
-                        <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
-                    </li>
+                <li>
+                    <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+                </li>
                 {% endif %}
-                </ul>
+            </ul>
             {% endif %}
         </div>
     </div>
-    
+</div>
+
 {% endblock %}

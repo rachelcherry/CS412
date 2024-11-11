@@ -1,15 +1,55 @@
-<!-- templates/marathon_analytics/results.html -->
+<!-- templates/voter_analytics/results.html -->
 {% extends 'voter_analytics/base.html' %}
 {% block content %}
-<div class="container">
+<h1>Voter Information for {{r.first_name}} {{r.last_name}}</h1>
 
+<div class="container">
+    <table>
+        <h2>Personal Details</h2>
+        <hr>
+<br>
+<tr>
+            <th>Date of Birth</th>
+            <th>Voter Score</th>
+            <th>Party Affiliation</th>
+            <th>Voter Registration Date</th>
+        </tr>
+        <tr>
+            
+            <td>{{r.dob}}</td>
+            <td>{{r.voter_score}}</td>
+            <td>{{r.party_affiliation}}</td>
+            <td>{{r.registration_date}}</td>
+        </tr>
+        
+  
+        </table>
+
+</div>
+<div class="container">
+    <h2>Address</h2>
+    <hr>
+    <br>
+    <table>
+    <tr>
+    <th>Address</th>
+    <th>View Their Address on Google Maps</th>
+</tr>
+<tr>
+    <td>{{r.street_number}} {{r.street_name}} {{r.apt_number}}, {{r.zip_code}}</td>
+    <td> <a class="google" href="https://www.google.com/maps/search/?api=1&query={{ r.street_number }}+{{ r.street_name }}{% if r.apartment_number %}+Apt+{{ r.apartment_number }}{% endif %}+{{ r.zip_code }}" target="_blank">
+        Click Here to View Voter's Address on Google Map
+    </a></td>
+</tr>
+</table>
+</div>
+<div class="container">
+<h2>Election Information</h2>
    
     <div class="row">
-        <h1>Voter Information for {{r.first_name}} {{r.last_name}}</h1>
         <table>
             <tr>
-                <th>Date of Birth</th>
-                <th>Registration Date</th>
+                
                 <th>Voted in 2020 Town Elections</th>
                 <th>Voted in 2021 Primary Elections</th>
                 <th>Voted in 2021 Town Elections</th>
@@ -19,9 +59,7 @@
             </tr>
     
             <tr>
-                
-                <td>{{r.dob}}</td>
-                <td>{{r.registration_date}}</td>          
+                      
                 <td>{{r.v20state}}</td>
                 <td>{{r.v21primary}}</td>
                 <td>{{r.v21town}}</td>
@@ -32,14 +70,10 @@
 
     
         </table>
-        <a href="https://www.google.com/maps/search/?api=1&query={{ r.street_number }}+{{ r.street_name }}{% if r.apartment_number %}+Apt+{{ r.apartment_number }}{% endif %},+{{ r.zip_code }}" target="_blank">
-            View Voter's Address on Google Map
-        </a>
+       
         
         </div>
-        <div class="row">
-            <a href="{% url 'graphs' %}">Graphs</a>
-        </div>
+  
         <div class="row">
             {% if is_paginated %}
             <ul class="pagination">
