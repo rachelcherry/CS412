@@ -32,7 +32,7 @@
                     <td>
                         <a href="{% url 'voter_detail' r.pk %}">
 
-                        {{ r.street_number }}, {{ r.street_name }} {% if r.apt_number %} {{ r.apt_number }} {% endif %}
+                        {{ r.street_number }} {{ r.street_name }} {% if r.apt_number %} Apt {{ r.apt_number }} {% endif %}
                         {{ r.zip_code }}
                         </a>
                     </td>

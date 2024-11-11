@@ -8,7 +8,7 @@ class Voter(models.Model):
     street_number = models.TextField()
     street_name = models.TextField()
     apt_number = models.TextField(null=True, blank=True)
-    zip_code = models.IntegerField()
+    zip_code = models.TextField()
     dob = models.DateField()
     registration_date = models.DateField()
     party_affiliation = models.TextField()

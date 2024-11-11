@@ -21,7 +21,7 @@ class VotersListView(ListView):
         if 'party_affiliation' in self.request.GET:
             party = self.request.GET['party_affiliation']
             if party:
-                qs = qs.filter(party_affiliation__icontains=party)
+                qs = qs.filter(party_affiliation=party)
         
         if 'min_dob' in self.request.GET:
             min_dob = self.request.GET['min_dob']
@@ -149,17 +149,17 @@ class GraphsListView(ListView):
         # graph_div = plotly.offline.plot({"data": [fig],}, auto_open=False, output_type="div")
         context['graph_div'] = graph_div
         x = ['R', 'D', 'U', 'CC', 'L', 'T', 'O', 'G', 'J', 'Q', 'FF']
-        d_voters = voters_queryset.filter(party_affiliation__icontains='D').count()
-        r_voters = voters_queryset.filter(party_affiliation__icontains='R').count()
-        u_voters = voters_queryset.filter(party_affiliation__icontains='U').count()
-        cc_voters = voters_queryset.filter(party_affiliation__icontains='CC').count()
-        l_voters = voters_queryset.filter(party_affiliation__icontains='L').count()
-        t_voters = voters_queryset.filter(party_affiliation__icontains='T').count()
-        o_voters = voters_queryset.filter(party_affiliation__icontains='O').count()
-        g_voters = voters_queryset.filter(party_affiliation__icontains='G').count()
-        j_voters = voters_queryset.filter(party_affiliation__icontains='J').count()
-        q_voters = voters_queryset.filter(party_affiliation__icontains='Q').count()
-        ff_voters = voters_queryset.filter(party_affiliation__icontains='FF').count()
+        d_voters = voters_queryset.filter(party_affiliation='D').count()
+        r_voters = voters_queryset.filter(party_affiliation='R').count()
+        u_voters = voters_queryset.filter(party_affiliation='U').count()
+        cc_voters = voters_queryset.filter(party_affiliation='CC').count()
+        l_voters = voters_queryset.filter(party_affiliation='L').count()
+        t_voters = voters_queryset.filter(party_affiliation='T').count()
+        o_voters = voters_queryset.filter(party_affiliation='O').count()
+        g_voters = voters_queryset.filter(party_affiliation='G').count()
+        j_voters = voters_queryset.filter(party_affiliation='J').count()
+        q_voters = voters_queryset.filter(party_affiliation='Q').count()
+        ff_voters = voters_queryset.filter(party_affiliation='FF').count()
         y = [r_voters, d_voters, u_voters, cc_voters, l_voters, t_voters, o_voters, g_voters, j_voters, q_voters, ff_voters]
         party_counts = [voters_queryset.filter(party_affiliation=party).count() for party in x]
         fig_2 = go.Pie(labels=x, values=y) 
