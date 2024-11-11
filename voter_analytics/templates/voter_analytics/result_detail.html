@@ -41,7 +41,7 @@
 </tr>
 <tr>
     <td>{{r.street_number}} {{r.street_name}} {{r.apt_number}}, {{r.zip_code}}</td>
-    <td> <a class="google" href="https://www.google.com/maps/search/?api=1&query={{ r.street_number }}+{{ r.street_name }}{% if r.apartment_number %}+Apt+{{ r.apartment_number }}{% endif %}+{{ r.zip_code }}" target="_blank">
+    <td> <a class="google" href="https://www.google.com/maps/?q={{ r.street_number }}+{{ r.street_name }}{% if r.apartment_number %}+Apt+{{ r.apartment_number }}{% endif %}+{{ r.zip_code }}" target="_blank">
         Click Here to View Voter's Address on Google Map
     </a></td>
 </tr>
