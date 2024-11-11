@@ -84,7 +84,7 @@ class GraphsListView(ListView):
         if 'party_affiliation' in self.request.GET:
             party = self.request.GET['party_affiliation']
             if party:
-                qs = qs.filter(party_affiliation__icontains=party)
+                qs = qs.filter(party_affiliation=party)
         
         if 'min_dob' in self.request.GET:
             min_dob = self.request.GET['min_dob']
@@ -141,9 +141,9 @@ class GraphsListView(ListView):
         fig = go.Histogram(
             x=x,
             nbinsx=200,
-            marker=dict(color='blue', opacity=0.7)
+            marker=dict(color='blue')
         )
-        title_text = f'Voter Distribution by Year of Birth'
+        title_text = f'Voter Distribution by Year of Birth (n={voters_queryset.count()})'
         
         graph_div = plotly.offline.plot({"data": [fig], "layout_title_text": title_text}, auto_open=False, output_type="div")
         # graph_div = plotly.offline.plot({"data": [fig],}, auto_open=False, output_type="div")
@@ -163,7 +163,7 @@ class GraphsListView(ListView):
         y = [r_voters, d_voters, u_voters, cc_voters, l_voters, t_voters, o_voters, g_voters, j_voters, q_voters, ff_voters]
         party_counts = [voters_queryset.filter(party_affiliation=party).count() for party in x]
         fig_2 = go.Pie(labels=x, values=y) 
-        title_text = f"Voter Party Affiliation"
+        title_text = f"Voter Party Affiliation (n={voters_queryset.count()})"
         graph_div_splits = plotly.offline.plot({"data": [fig_2], 
                                          "layout_title_text": title_text,
                                          }, 
@@ -180,9 +180,9 @@ class GraphsListView(ListView):
         fig_3 = go.Bar(
                 x=x,
                 y=y,
-                marker=dict(color='blue', opacity=0.7)
+                marker=dict(color='blue')
             )
-        title_text = f'Voter Count by Election'
+        title_text = f'Voter Count by Election (n={voters_queryset.count()})'
 
         graph_div_elect = plotly.offline.plot({"data": [fig_3],  "layout_title_text": title_text}, auto_open=False, output_type="div")
         context['graph_div_elect'] = graph_div_elect
