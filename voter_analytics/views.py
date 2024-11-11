@@ -83,7 +83,6 @@ class GraphsListView(ListView):
         qs = super().get_queryset()
         if 'party_affiliation' in self.request.GET:
             party = self.request.GET['party_affiliation']
-            print("party", party)
             if party:
                 qs = qs.filter(party_affiliation__icontains=party)
         

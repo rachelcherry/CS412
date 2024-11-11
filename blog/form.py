@@ -14,3 +14,4 @@ class CreateArticleForm(forms.ModelForm):
         '''Associate this form with a Model, specify which fields to create'''
         model = Article
         fields = ['author', 'title', 'text', 'image_file']
+        
