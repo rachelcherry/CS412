@@ -135,6 +135,7 @@ class GraphsListView(ListView):
         context = super().get_context_data(**kwargs)
         r = context['r']
         context['years'] = self.get_years() 
+        # get the query set 
         qs = self.get_queryset()
         all_years = qs.all().values('dob')
         x = [dob['dob'].year for dob in all_years]
@@ -149,6 +150,7 @@ class GraphsListView(ListView):
         # graph_div = plotly.offline.plot({"data": [fig],}, auto_open=False, output_type="div")
         context['graph_div'] = graph_div
         x = ['R', 'D', 'U', 'CC', 'L', 'T', 'O', 'G', 'J', 'Q', 'FF']
+        # get total amount of voters for each party 
         d_voters = qs.filter(party_affiliation='D').count()
         r_voters = qs.filter(party_affiliation='R').count()
         u_voters = qs.filter(party_affiliation='U').count()
@@ -161,7 +163,6 @@ class GraphsListView(ListView):
         q_voters = qs.filter(party_affiliation='Q').count()
         ff_voters = qs.filter(party_affiliation='FF').count()
         y = [r_voters, d_voters, u_voters, cc_voters, l_voters, t_voters, o_voters, g_voters, j_voters, q_voters, ff_voters]
-        party_counts = [qs.filter(party_affiliation=party).count() for party in x]
         fig_2 = go.Pie(labels=x, values=y) 
         title_text = f"Voter Party Affiliation (n={qs.count()})"
         graph_div_splits = plotly.offline.plot({"data": [fig_2], 
@@ -170,6 +171,7 @@ class GraphsListView(ListView):
                                          auto_open=False, 
                                          output_type="div")
         context['graph_div_splits'] = graph_div_splits
+        # get count for each election
         voters_20 = qs.filter(v20state=True).count()
         voters_21T = qs.filter(v21town=True).count()
         voters_21P = qs.filter(v21primary=True).count()
