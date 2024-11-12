@@ -9,7 +9,7 @@ from django.db.models import Min, Max
 
 # Create your views here.
 class VotersListView(ListView):
-    '''View to display list of voter results.'''
+    '''View to display list of voters'''
 
     template_name = 'voter_analytics/results.html'
     model = Voter
@@ -76,6 +76,7 @@ class VoterDetailView(DetailView):
     context_object_name = 'r'
 
 class GraphsListView(ListView):
+    '''view to list the graphs'''
     template_name = 'voter_analytics/graphs.html'
     model = Voter
     context_object_name = 'r'
@@ -121,6 +122,7 @@ class GraphsListView(ListView):
                 qs = qs.filter(v23town=v23T)
         return qs
     def get_years(self):
+        '''this function will return the list of years starting at the minimum year in the db to the maximum year'''
         years = []
         min_dob = Voter.objects.aggregate(Min('dob'))['dob__min']
         max_dob = Voter.objects.aggregate(Max('dob'))['dob__max']
@@ -129,52 +131,50 @@ class GraphsListView(ListView):
         return years
 
     def get_context_data(self, **kwargs) :
-        '''
-        Provide context variables for use in template
-        '''
+        '''context variables'''
         context = super().get_context_data(**kwargs)
         r = context['r']
         context['years'] = self.get_years() 
-        voters_queryset = self.get_queryset()
-        all_years = voters_queryset.all().values('dob')
+        qs = self.get_queryset()
+        all_years = qs.all().values('dob')
         x = [dob['dob'].year for dob in all_years]
         fig = go.Histogram(
             x=x,
             nbinsx=200,
             marker=dict(color='blue')
         )
-        title_text = f'Voter Distribution by Year of Birth (n={voters_queryset.count()})'
+        title_text = f'Voter Distribution by Year of Birth (n={qs.count()})'
         
         graph_div = plotly.offline.plot({"data": [fig], "layout_title_text": title_text}, auto_open=False, output_type="div")
         # graph_div = plotly.offline.plot({"data": [fig],}, auto_open=False, output_type="div")
         context['graph_div'] = graph_div
         x = ['R', 'D', 'U', 'CC', 'L', 'T', 'O', 'G', 'J', 'Q', 'FF']
-        d_voters = voters_queryset.filter(party_affiliation='D').count()
-        r_voters = voters_queryset.filter(party_affiliation='R').count()
-        u_voters = voters_queryset.filter(party_affiliation='U').count()
-        cc_voters = voters_queryset.filter(party_affiliation='CC').count()
-        l_voters = voters_queryset.filter(party_affiliation='L').count()
-        t_voters = voters_queryset.filter(party_affiliation='T').count()
-        o_voters = voters_queryset.filter(party_affiliation='O').count()
-        g_voters = voters_queryset.filter(party_affiliation='G').count()
-        j_voters = voters_queryset.filter(party_affiliation='J').count()
-        q_voters = voters_queryset.filter(party_affiliation='Q').count()
-        ff_voters = voters_queryset.filter(party_affiliation='FF').count()
+        d_voters = qs.filter(party_affiliation='D').count()
+        r_voters = qs.filter(party_affiliation='R').count()
+        u_voters = qs.filter(party_affiliation='U').count()
+        cc_voters = qs.filter(party_affiliation='CC').count()
+        l_voters = qs.filter(party_affiliation='L').count()
+        t_voters = qs.filter(party_affiliation='T').count()
+        o_voters = qs.filter(party_affiliation='O').count()
+        g_voters = qs.filter(party_affiliation='G').count()
+        j_voters = qs.filter(party_affiliation='J').count()
+        q_voters = qs.filter(party_affiliation='Q').count()
+        ff_voters = qs.filter(party_affiliation='FF').count()
         y = [r_voters, d_voters, u_voters, cc_voters, l_voters, t_voters, o_voters, g_voters, j_voters, q_voters, ff_voters]
-        party_counts = [voters_queryset.filter(party_affiliation=party).count() for party in x]
+        party_counts = [qs.filter(party_affiliation=party).count() for party in x]
         fig_2 = go.Pie(labels=x, values=y) 
-        title_text = f"Voter Party Affiliation (n={voters_queryset.count()})"
+        title_text = f"Voter Party Affiliation (n={qs.count()})"
         graph_div_splits = plotly.offline.plot({"data": [fig_2], 
                                          "layout_title_text": title_text,
                                          }, 
                                          auto_open=False, 
                                          output_type="div")
         context['graph_div_splits'] = graph_div_splits
-        voters_20 = voters_queryset.filter(v20state=True).count()
-        voters_21T = voters_queryset.filter(v21town=True).count()
-        voters_21P = voters_queryset.filter(v21primary=True).count()
-        voters_22 = voters_queryset.filter(v22general=True).count()
-        voters_23 = voters_queryset.filter(v23town=True).count()
+        voters_20 = qs.filter(v20state=True).count()
+        voters_21T = qs.filter(v21town=True).count()
+        voters_21P = qs.filter(v21primary=True).count()
+        voters_22 = qs.filter(v22general=True).count()
+        voters_23 = qs.filter(v23town=True).count()
         x = ['v20state', 'v21town', 'v21primary', 'v22general', 'v23town']
         y = [voters_20, voters_21T, voters_21P, voters_22, voters_23]
         fig_3 = go.Bar(
@@ -182,7 +182,7 @@ class GraphsListView(ListView):
                 y=y,
                 marker=dict(color='blue')
             )
-        title_text = f'Voter Count by Election (n={voters_queryset.count()})'
+        title_text = f'Voter Count by Election (n={qs.count()})'
 
         graph_div_elect = plotly.offline.plot({"data": [fig_3],  "layout_title_text": title_text}, auto_open=False, output_type="div")
         context['graph_div_elect'] = graph_div_elect

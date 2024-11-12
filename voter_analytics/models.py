@@ -1,7 +1,6 @@
 from django.db import models
 import os
 class Voter(models.Model):
-    # identification
     voter_id = models.CharField(max_length=20)  
     last_name = models.TextField()
     first_name = models.TextField()
