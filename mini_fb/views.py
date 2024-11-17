@@ -89,7 +89,9 @@ class CreateProfileView(CreateView):
             profile.user = user 
             profile.save()
             login(self.request, user) 
-        return super().form_valid(form)  
+            return super().form_valid(form)  
+        else:
+            return super().form_invalid(form)
 
 
 class CreateStatusMessageView(LoginRequiredMixin, CreateView):

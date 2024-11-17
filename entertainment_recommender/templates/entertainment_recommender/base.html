@@ -1,0 +1,42 @@
+<!--Base template for other templates-->
+<!-- Rachel Cherry -->
+<!-- rcherry@bu.edu -->
+{% load static %}
+<html>
+    <head>
+        <title>Netflix Recommender</title>
+        <!-- Linking to the CSS file in the static folder -->
+        <link rel="stylesheet" href="{% static 'styles_entertainment.css' %}">
+    </head>
+
+    <body>
+        <header>
+          
+  
+            <!--Creates a nav bar-->
+            <nav>
+                <h1>Netflix Recommender</h1>
+        
+             
+    
+                <ul class="pages">
+                    <li>
+                        <a href="{% url 'home' %}">View Entertainment</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'users' %}">View Profiles</a>
+                    </li>
+               
+    
+
+
+                </ul>
+                
+            </nav>
+        
+        </header>
+      
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>

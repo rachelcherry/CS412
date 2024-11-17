@@ -1,0 +1,74 @@
+<!-- Rachel Cherry -->
+<!-- rcherry@bu.edu -->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+<html>
+<body>
+<main class="grid-container"> <!--was <div>-->
+   
+<profile class="featured">
+    
+    <div>
+        
+    <img class="profile-pic-ind" src="{{profile.image_url}}" alt="{{profile.image_url}}" >
+    <h2>{{profile.first_name}} {{profile.last_name}}</h2>
+    <h3>Location: {{profile.address}}</h3>
+    <h3>Contact: {{profile.email}}</h3>
+
+</div>
+
+    <br>
+</div>
+<br>
+
+
+</profile> <!--was a div-->
+<br>
+<hr>
+<br>
+
+
+<div class="status">
+    <h2 class="status-h2">Recommendations</h2>
+    {% if profile.get_recommendation %}
+    {% for p in profile.get_recommendation %}
+        <div>
+      
+            <h2> {{p.entertainment}}</h2>
+            <p><strong>Message: {{p.thoughts}}</strong></p>
+
+            <p>Rating: {{p.rating}}</p>
+            <br>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No recommendations.</p>
+{% endif %}
+
+
+    </div>
+    <h1>Friends of {{profile.first_name}}</h1>
+    <div class="friend-style">
+{% if profile.get_friends %}
+    {% for friend in profile.get_friends %}
+        <div class="friends">
+                <a href="{% url 'person' friend.pk %}"> 
+            <img class="friend-img" src="{{friend.image_url}}">
+            </a>
+            <br>
+            <a class="friend-tags" href="{% url 'person' friend.pk %}"> 
+            {{friend.first_name}} {{friend.last_name}}
+            </a>
+            <br>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>{{profile.first_name}} has no friends yet!</p>
+{% endif %}
+</div>
+</main>
+</body>
+</html>
+{% endblock %}

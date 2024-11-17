@@ -1,0 +1,54 @@
+<!-- templates/marathon_analytics/results.html -->
+{% extends 'entertainment_recommender/base.html' %}
+{% block content %}
+<div class="container">
+
+    <div class="container">
+        <table>
+            <th>Title</th>
+            <th>Rating</th>
+            <th>Description</th>
+        {% for s in shows %}
+     
+            
+            <tr>
+                
+                <td>
+                    <a href="{% url 'entertainment' s.pk %}">
+        {{s.title}}
+    </a>
+    </td>
+    <td>
+        {{s.rating}}
+    </td>
+    <td>
+        {{s.description}}
+    </td>
+    </tr>
+   
+        {% endfor %}
+    </table>
+        <div class="row">
+            {% if is_paginated %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li>
+                    <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+
+                </li>
+                {% endif %}
+                <li class="">
+                    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                </li>
+                {% if page_obj.has_next %}
+                <li>
+                    <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+                </li>
+                {% endif %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'project/base.html' %}
+{% block content %}
+
+<div>
+    <h1>Information for {{ r.title }}</h1>
+</div>
+<div class="container">
+    <table>
+        <h2>Entertainment Details</h2>
+        <hr>
+        <br>
+        <tr>
+            <th>Title</th>
+            <th>Duration</th>
+            <th>Release Date</th>
+            <th>Description</th>
+            <th>Cast List</th>
+            <th>Director</th>
+            <th>Type</th>
+        </tr>
+        <tr>
+            <td>{{ r.title }}</td>
+            <td>{{ r.duration }}</td>
+            <td>{{ r.release_year }}</td>
+            <td>{{ r.description }}</td>
+            <td>{{ r.cast }}</td>
+            <td>{{ r.director }}</td>
+            <td>{{ r.type }}</td>
+        </tr>
+    </table>
+
+    <h2>What People Think About This Movie</h2>
+    <table>
+        <tr>
+            <th>Thoughts</th>
+            <th>Rating</th>
+            <th>Recommended</th>
+        </tr>
+        {% for recommendation in r.get_recommendation %}
+        <tr>
+            <td>{{ recommendation.thoughts }}</td>
+            <td>{{ recommendation.rating }}</td>
+            <td>{{ recommendation.recommend }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No recommendations yet.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

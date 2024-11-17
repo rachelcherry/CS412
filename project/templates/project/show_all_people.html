@@ -1,0 +1,22 @@
+{% extends 'project/base.html' %}
+
+{% block content %}
+<main class="grid-container">
+
+{% for p in profiles %}
+    <div class="profile">
+        <div class="profile_info">
+            <a href="{% url 'person' p.pk %}">
+                {% if p.image_url %}
+                    <img class="profile-pic" src="{{ p.image_url }}" alt="Profile picture of {{ p.first_name }}">
+                {% endif %}
+                <h2>{{ p.first_name }} {{ p.last_name }}</h2>
+            </a>
+            <h3>{{ p.email }}</h3>
+            <h3>{{ p.address }}</h3>
+        </div>
+    </div>
+{% endfor %}
+
+</main>
+{% endblock %}
