@@ -1,0 +1,42 @@
+<!--project/templates/project/results.html template-->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<!-- this file will show the results of a search query -->
+
+<!-- this will include the search document at the top of the page-->
+{% include 'project/search.html' %}
+
+<!--loop through all the results-->
+<div class="all-shows">
+    {% for s in results %}
+    <div class="show-card">
+        <h2 class="title-of-ent">
+            <!-- show the entertainment title, rating, and description for each result of the query-->
+            <a href="{% url 'entertainment' s.pk %}">{{ s.title }}</a>
+        </h2>
+        <p class="rating-for-ent"> Rating: {{ s.rating }}</p>
+        <p class="desc-of-ent">{{ s.description }}</p>
+    </div>
+    {% endfor %}
+</div>
+<!-- this will handle pagination-->
+<div class="pagination-out">
+    <!-- if the page is paginated-->
+    {% if is_paginated %}
+    <ul class="pagination">
+        <!-- if the page object has a previous value, create a previous button-->
+        {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+        {% endif %}
+        <!-- Show the page number and number of pages at the bottom-->
+        <li class="pagination-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</li>
+        <!-- if there are more pages to go then create a next button-->
+        {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

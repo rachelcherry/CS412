@@ -1,0 +1,30 @@
+<!--project/templates/project/update_profile_form.html template-->
+
+{% extends 'project/base.html' %}
+<!--This template will handle the updating of profiles for a given user-->
+{% block content %}
+        <h2>Update Profile for {{ person.first_name }} {{ person.last_name }}</h2>
+        <!-- This is the form for submitting changes to a profile-->
+        <form method="POST">
+            {% csrf_token %}
+            <!-- for each field in the form, show the field so the user can modify it using django built in update views-->
+                {% for field in form %}
+                    <div class="update-prof">
+                       {{ field.label }}:
+                            {{ field }}
+                    </div>
+                {% endfor %}
+            
+            <div class="up-prof">
+                <!-- Upon pressing cancel, the user should be redirected to their profile page-->
+                <a href="{% url 'person' person.pk %}" class="cancel-btn">
+                    <button type="button" class="btn-cancel">Cancel</button>
+                </a>
+                                    <!-- Upon pressing submit, the users changes will be saved-->
+
+                <input type="submit" value="Update Profile" class="btn-submit">
+            </div>
+        </form>
+    </section>
+</main>
+{% endblock %}

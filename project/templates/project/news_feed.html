@@ -1,0 +1,59 @@
+<!--project/templates/project/news_feed.html template-->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+<!-- This template handles the news feed / friend suggestions for a given user  -->
+<h2 class="news-h2">See What Your Friends Recommend!</h2>
+<br>
+<!--Link back to the users profile-->
+<a class="prof-return" href="{% url 'person' profile.pk%}">Back to {{profile.first_name}}'s Profile</a>
+<br>
+
+<!--Check if the user has a feed-->
+<div class="news">
+  {% if profile.get_news_feed %}
+    <ul class="news-feed">
+      <!-- if the user has a feed, loop through each recommendation within the feed-->
+      {% for recommendation in profile.get_news_feed %}
+        <li class="news-item">
+          <!-- Show the profile picture of each user -->
+          <div class="recommendation-header">
+            <!-- if the user has an image, show their image-->
+            {% if p.person.image_url %}
+            <img class="feed-pic" src="{{ recommendation.person.image_url }}">
+        {% endif %}
+        <!-- this section will show the recommended entertainment information-->
+            <div class="recommendation-details">
+              <h3 class="news-title">{{ recommendation.entertainment.title }}</h3>
+              <h4 class="news-author">By: {{ recommendation.person.first_name }} {{ recommendation.person.last_name }}</h4>
+            </div>
+          </div>
+
+          <!-- this will show the actual content of the reommendation that the user input -->
+          <div class="recommendation-body">
+            <h3 class="thoughts"><strong>{{ recommendation.thoughts }}</strong></h3>
+            <h4 class="rating"><strong>Rating: {{ recommendation.rating }}</strong></h4>
+          </div>
+
+          <!-- if a user has attached an image to their recommendation, then include these in the recommendation as well  -->
+          {% if recommendation.get_images %}
+            <div class="image-status">
+              {% for img in recommendation.get_images %}
+                <img src="{{ img.image_file.url }}" alt="{{ img.image_file.url }}" class="size-image">
+              {% endfor %}
+            </div>
+          {% endif %}
+          
+          <!-- this will create a divider between the various reccommendations-->
+          <hr class="news-divider">
+        </li>
+      {% endfor %}
+    </ul>
+    <!-- if the user has no friends, their friends do not have any recommendations, or they do not have any recommendations themselves, display message-->
+  {% else %}
+    <p>No feed available.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

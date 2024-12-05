@@ -1,0 +1,38 @@
+<!--this document will handle the search for a movie/show-->
+<div class="searching">
+    <!-- this form will handle submission of a modified view of the entertainment-->
+     <!-- the action will send it to search_list which is the list of modified entertainments-->
+    <form action="{% url 'searched_list' %}">
+        <!-- create a table with the search queries-->
+        <table>
+            <!--Create a text field to search for a movie or show title-->
+            <tr>
+                <th>Show or Movie Title</th>
+                <td><input type="text" name="title"></td>
+            </tr>
+            <!--Create a text field to search for a rating of a movie (PG-13, PG, etc.)-->
+            <tr>
+                <th>Rating of Entertainment</th>
+                <td><input type="text" name="rating"></td>
+            </tr>
+            <!--This will create a selection box for users to choose if they want to search for a movie or for a TV show-->
+            <tr>
+                <th>Type of Entertainment</th>
+                <td>
+                    <select name="type">
+                        <option value="">Select Type</option>
+                        <option value="Movie">Movie</option>
+                        <option value="TV Show">TV Show</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <!-- submission button for the search feature-->
+                <td colspan="2">
+                    <input type="submit" value="Search" class="search-button">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+

@@ -1,0 +1,37 @@
+{% extends 'project/base.html' %}
+{% block content %}
+<!-- this file handles the log in of users-->
+<h2 class="login-heading">Login</h2>
+
+<!-- this is the form for logging the user in that is provided by django  -->
+<form method="POST" action="{% url 'login_url' %}" class="custom-login-form">
+
+    {% csrf_token %}
+    
+    <div class="input-group">
+        {{ form.as_p }}
+    </div>
+
+    <!-- this section will handle if the get request has a next parameter and hides it if so-->
+    {% if request.GET.next %}
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
+        <!-- if not, then go back to all entertainment-->
+    {% else %}
+        <input type="hidden" name="next" value="{% url 'all_entertainment' %}">
+    {% endif %}
+<!-- submit button for logging in that will register the user and create the session-->
+    <div class="submit-group">
+        <input type="submit" value="Login" class="submit-btn">
+    </div>
+
+</form>
+<!-- if they do not have an account, give them the option to create a new profile to be able to use the site-->
+<div class="profile-prompt">
+    <p class="profile-question">Don't Have a Profile?</p>
+    <ul class="profile-links">
+        <!--link to the new_profile function so that users can create a new profile-->
+        <li><a href="{% url 'new_profile' %}" class="create-profile-btn">Create Profile</a></li>
+    </ul>
+</div>
+
+{% endblock %}

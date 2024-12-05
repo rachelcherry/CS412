@@ -1,0 +1,22 @@
+<!--project/templates/project/result_detail.html template-->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<!-- this file will show the result for an individual search query-->
+    <!-- the following will show a table with the inforamtion for a specific entertainment as a result of a query-->
+    <h1>Showing Result for {{r.title}}</h1>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Rating</th>
+            <th>Description</th>
+            
+        </tr>
+        
+        <tr>
+            <td>{{r.title}}</td>
+            <td>{{r.rating}}</td>
+            <td>{{r.description}}</td>
+        </tr>
+    </table>
+{% endblock %}

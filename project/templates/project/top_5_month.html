@@ -1,0 +1,59 @@
+<!--project/templates/project/top_5_month.html template-->
+
+{% extends 'project/base.html' %}
+<!-- this template will display the top 5 rated entertainments per month-->
+{% block content %}
+<main class="top-rated">
+
+    <h1 class="top-rated-h1">Top 5 Entertainment by Month</h1>
+<!-- loop through the months in the list of top 5 itemds -->
+    {% for month, things in top_5.items %}
+        <div class="month-section">
+            <h2 class="month-title">
+                <!-- determine what month it is so you can display the name of the month rather than the number-->
+                {% if month == 12 %}
+                    December
+                {% elif month == 11 %}
+                    November
+                {% elif month == 10 %}
+                    October
+                {% elif month == 9 %}
+                    September
+                {% elif month == 8 %}
+                    August
+                {% elif month == 7 %}
+                    July
+                {% elif month == 6 %}
+                    June
+                {% elif month == 5 %}
+                    May
+                {% elif month == 4 %}
+                    April
+                {% elif month == 3 %}
+                    March
+                {% elif month == 2 %}
+                    February
+                {% elif month == 1 %}
+                    January
+                {% endif %}
+            </h2>
+
+            <ul class="top-rated-list">
+                <!--loop through each entertainment and rating-->
+                {% for entertainment, avg_rating in things %}
+                <li class="top-rated-item">
+                    <!-- this is a built in function that will create a count for how many items we have in the loop and put the number in front of the value-->
+                    <div class="rank">{{ forloop.counter }}.</div>
+                        <div class="title-rating">
+                            <!-- show the entertainment and also the average rating -->
+                            <strong class="title">{{ entertainment }}</strong>
+                            <!-- use span so that it can be styled a different color -->
+                            <p class="rating">Rating: <span class="rating-value">{{ avg_rating }}</span></p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</main>
+{% endblock %}

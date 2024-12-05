@@ -1,0 +1,43 @@
+<!--project/templates/project/create_profile_form.html template-->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<!-- This is a template to create a new profile for the site where the user uses the form created in forms.py-->
+<h1 class="profile-create-heading">Create an Account to Add a New Profile</h1>
+<!--Create the form that uses a POST request to send the data to the database-->
+
+<!-- start form for creation -->
+<form method="POST" class="profile-form">
+    {% csrf_token %}
+    <!--This is the context variable that handles the built in django creation of users-->
+    <div class="form-section">
+        {{ user_creation }}
+    </div>
+
+    <h2 class="prof-head">Create a New Profile</h2>
+<!-- this loops through all of the fields in the form -->
+    <div class="create-form">
+        {% for field in form %}
+            <div class="field-lab">
+                {{ field.label }}:
+                <div class="field-val">
+                    {{ field }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+<!-- this will create the buttons for adding a new user and profile or pressing cancel -->
+
+    <div class="form-actions">
+        <a href="{% url 'all_entertainment' %}" class="cancel-btn">
+            <!-- upon being pressed this button will take the user back to the page with all the entertainment -->
+
+            <button type="button" class="btn-cancel">Cancel</button>
+        </a>
+        <!-- this will submit the form and register the user and profile-->
+
+        <input type="submit" value="Add Profile!" class="btn-submit">
+    </div>
+</form>
+
+{% endblock %}

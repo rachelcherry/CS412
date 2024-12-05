@@ -1,54 +1,49 @@
-<!-- templates/marathon_analytics/results.html -->
+<!--project/templates/project/show_all_entertainment.html template-->
+
 {% extends 'project/base.html' %}
+<!-- this page will show all of the entertainment -->
 {% block content %}
-<div class="container">
+<div class="all-ent">
+    <!-- if the user is authenticated (i.e. the user is logged in)-->
+    {% if request.user.is_authenticated %}
+    <!-- if the user is authenticated, display a welcome message-->
+    <p class="user-info">Welcome, {{ request.user }}! Let's Find You Something to Watch!</p>
+    {% else %}
+    <!-- if the user is not logged in, display the following message-->
+    <p class="user-info">No user is logged in</p>
+    {% endif %}
 
-    <div class="container">
-        <table>
-            <th>Title</th>
-            <th>Rating</th>
-            <th>Description</th>
+    <div class="all-shows">
+        <!-- loop through all the shows/movies one by one-->
         {% for s in shows %}
-     
-            
-            <tr>
-                
-                <td>
-                    <a href="{% url 'entertainment' s.pk %}">
-        {{s.title}}
-    </a>
-    </td>
-    <td>
-        {{s.rating}}
-    </td>
-    <td>
-        {{s.description}}
-    </td>
-    </tr>
-   
-        {% endfor %}
-    </table>
-        <div class="row">
-            {% if is_paginated %}
-            <ul class="pagination">
-                {% if page_obj.has_previous %}
-                <li>
-                    <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
-
-                </li>
-                {% endif %}
-                <li class="">
-                    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
-                </li>
-                {% if page_obj.has_next %}
-                <li>
-                    <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
-                </li>
-                {% endif %}
-            </ul>
-            {% endif %}
+        <div class="ind-ent">
+            <h2 class="title-of-ent">
+                <!-- link to the entertainment through the title-->
+                <a href="{% url 'entertainment' s.pk %}">{{ s.title }}</a>
+            </h2>
+<!-- show the rating and description for each form of entertainment-->
+            <p class="rating-for-ent"> Rating: {{ s.rating }}</p>
+            <p class="desc-of-ent">{{ s.description }}</p>
         </div>
+        {% endfor %}
     </div>
+<!-- this will handle pagination-->
+<div class="pagination-out">
+    <!-- if the page is paginated-->
+    {% if is_paginated %}
+    <ul class="pagination">
+        <!-- if the page object has a previous value, create a previous button-->
+        {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+        {% endif %}
+        <!-- Show the page number and number of pages at the bottom-->
+        <li class="pagination-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</li>
+        <!-- if there are more pages to go then create a next button-->
+        {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
+        {% endif %}
+    </ul>
+    {% endif %}
 </div>
-
+</div>
 {% endblock %}

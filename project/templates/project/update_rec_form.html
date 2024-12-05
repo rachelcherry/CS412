@@ -1,0 +1,36 @@
+<!--project/templates/project/update_rec_form.html template-->
+<!-- Rachel Cherry -->
+<!-- rcherry@bu.edu -->
+{% extends 'project/base.html' %}
+<!-- This template will handle updating recommendations of entertainment-->
+{% block content %}
+<html>
+<body>
+        <profile>
+            <!-- This is the form for submitting changes to a recommendation-->
+            <form method="POST">
+                {% csrf_token %}
+                <h2>Update Recommendation</h2>
+                <table>
+                    <!-- Loop through all of the form frields-->
+                    {% for field in form %}
+                    <div class="update-prof">
+                       {{ field.label }}:
+                            {{ field }}
+                    </div>
+                {% endfor %}
+                </table>
+                <div class="up-prof">
+                    <!-- Upon pressing cancel, the user should be redirected to their profile page-->
+                    <a href="{% url 'person' person.pk %}" class="cancel-btn">
+                        <button type="button" class="btn-cancel">Cancel</button>
+                    </a>
+                                        <!-- Upon pressing submit, the users changes will be saved-->
+    
+                    <input type="submit" value="Update Recommendation" class="btn-submit">
+                </div>
+            </form>
+        </profile>
+</body>
+</html>
+{% endblock %}

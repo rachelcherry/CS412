@@ -1,0 +1,26 @@
+<!--project/templates/project/top_10.html template-->
+
+{% extends 'project/base.html' %}
+<!-- This template displays the top 10 rated entertainment-->
+{% block content %}
+<main class="top-rated">
+    <h1 class="top-rated-h1">Top 10 Highest-Rated Entertainment</h1>
+
+    <ul class="top-rated-list">
+        <!-- for each entertainment and rating within the top 10 list-->
+        {% for entertainment, avg_rating in top_10 %}
+            <li class="top-rated-item">
+                <!-- this is a built in function that will create a count for how many items we have in the loop and put the number in front of the value-->
+
+                <div class="rank">{{ forloop.counter }}.</div>
+                <div class="title-rating">
+                     <!-- show the entertainment and also the average rating -->
+                     <strong class="title">{{ entertainment }}</strong>
+                     <!-- use span so that it can be styled a different color -->
+                     <p class="rating">Rating: <span class="rating-value">{{ avg_rating }}</span></p>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</main>
+{% endblock %}

@@ -11,13 +11,13 @@ class Person(models.Model):
     image_url = models.URLField(blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     def get_recommendation(self):
-        '''Return recommendations of this Profile.'''
+        '''Return recommendations of this Person.'''
         recs = Recommendation.objects.filter(person=self)
         return recs
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
     def get_friends(self):
-        '''Return friends of this Profile.'''
+        '''Return friends of this Person.'''
         which_friend = Friend.objects.filter(profile1=self) | Friend.objects.filter(profile2=self)
         allprofiles = []
         for currentfriend in which_friend:

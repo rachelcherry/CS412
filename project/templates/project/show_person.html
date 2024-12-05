@@ -1,74 +1,75 @@
-<!-- Rachel Cherry -->
-<!-- rcherry@bu.edu -->
+<!--project/templates/project/show_person.html template-->
 
 {% extends 'project/base.html' %}
-
+<!--this template will show information for a specific person (user)-->
 {% block content %}
 <html>
 <body>
-<main class="grid-container"> <!--was <div>-->
    
-<profile class="featured">
-    
-    <div>
-        
-    <img class="profile-pic-ind" src="{{profile.image_url}}" alt="{{profile.image_url}}" >
-    <h2>{{profile.first_name}} {{profile.last_name}}</h2>
-    <h3>Location: {{profile.address}}</h3>
-    <h3>Contact: {{profile.email}}</h3>
+<profile class="prof-ind">
+    <div class="profile-info">
+        <!-- show the profile picture, name, address, and email for the given user-->
+        <img class="picture-person" src="{{profile.image_url}}" alt="{{profile.image_url}}">
+        <h2>{{profile.first_name}} {{profile.last_name}}</h2>
+        <h3>Location: {{profile.address}}</h3>
+        <h3>Contact: {{profile.email}}</h3>
+    </div>
 
-</div>
-
+    <!-- below are the links that will allow a user to edit their profile -->
+    <div class="edit-prof">
+        <!-- if the user is trying to edit their own profile-->
+        {% if auth_for_profile %}
+<!-- this will edit their information-->
+        <a href="{% url 'update_prof' profile.pk %}">
+            <h3>Update Your Profile</h3>
+        </a>
+        <!-- this will show their friend suggestions and allow users to add friends-->
+        <a href="{% url 'new_friends' %}">
+            <h3>Friend Suggestions for {{profile.first_name}}</h3>
+        </a>
+        <!-- this will allow users to create new recommendations for entertainment-->
+        <a href="{% url 'create_rec' profile.pk %}">
+            <h3>Create New Recommendation</h3>
+        </a>
+        {% else %}
+        <!-- if the user is not logged into their own profile, display the following message-->
+        <h2>You Must Be Logged In To Modify {{profile.first_name}}'s Profile!</h2>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+        <!-- if the user is logged in, they can see a users recommendations (only if they are friends, which is handled in views)-->
+        <a href="{% url 'see_recs' profile.pk %}">
+            <h3>{{profile.first_name}}'s Recommendations</h3>
+        </a>
+        {% endif %}
+       
+    </div>
+    <br>
+    <hr>
     <br>
 </div>
-<br>
-
-
-</profile> <!--was a div-->
-<br>
-<hr>
-<br>
-
-
-<div class="status">
-    <h2 class="status-h2">Recommendations</h2>
-    {% if profile.get_recommendation %}
-    {% for p in profile.get_recommendation %}
-        <div>
-      
-            <h2> {{p.entertainment}}</h2>
-            <p><strong>Message: {{p.thoughts}}</strong></p>
-
-            <p>Rating: {{p.rating}}</p>
-            <br>
-        </div>
-    {% endfor %}
-{% else %}
-    <p>No recommendations.</p>
-{% endif %}
-
-
-    </div>
-    <h1>Friends of {{profile.first_name}}</h1>
+<!-- this will show the friends section for each user-->
+    <h1 class="friends-h1">Friends of {{profile.first_name}}</h1>
     <div class="friend-style">
-{% if profile.get_friends %}
-    {% for friend in profile.get_friends %}
-        <div class="friends">
-                <a href="{% url 'person' friend.pk %}"> 
-            <img class="friend-img" src="{{friend.image_url}}">
-            </a>
-            <br>
-            <a class="friend-tags" href="{% url 'person' friend.pk %}"> 
-            {{friend.first_name}} {{friend.last_name}}
-            </a>
-            <br>
-        </div>
-    {% endfor %}
-{% else %}
-    <p>{{profile.first_name}} has no friends yet!</p>
-{% endif %}
-</div>
-</main>
+        <!-- if the user has friends-->
+        {% if profile.get_friends %}
+        <!-- loop through all of the friends for a given user-->
+            {% for friend in profile.get_friends %}
+            <!-- display the friends image as well as their name  and link to the given friend's profile-->
+                <div class="friends">
+                    <a href="{% url 'person' friend.pk %}">
+                        <img class="friend-img" src="{{friend.image_url}}">
+                    </a>
+                    <br>
+                    <a class="friend-tags" href="{% url 'person' friend.pk %}">
+                        {{friend.first_name}} {{friend.last_name}}
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+        <!-- if the user does not have any friends, display the following message-->
+            <p class="no-friends">{{profile.first_name}} has no friends yet!</p>
+        {% endif %}
+
 </body>
 </html>
 {% endblock %}

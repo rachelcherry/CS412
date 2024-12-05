@@ -1,0 +1,37 @@
+<!-- Rachel Cherry -->
+<!-- rcherry@bu.edu -->
+<!--project/templates/project/delete_rec_form.html template-->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<html>
+<body>
+<!--This is a template for deleting a recommendation -->
+
+<profile>
+    <br>
+    <h2>Do you want to Delete this Recommendation?</h2>
+    <!--Show a confirmation page with the recommendation to ensure that the user wants to delete it-->
+    <p>{{ recommendation.thoughts }}</p>
+    <p>{{ recommendation.rating }}</p>
+    <p>{{ recommendation.recommend }}</p>
+<!-- this is the form for submitting the deletion that django handles via the built in deleteview in the views file-->
+    <div class="del-message">
+        <!-- this is the cancel button if they do not want to delete it and it will go back to the person's profile page-->
+        <form method="GET" action="{% url 'person' person.pk %}">
+            <button type="submit">Cancel</button>
+        </form>
+        <!--this will allow submission to delete the recommendation-->
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Delete Recommendation!">
+        </form>
+    </div>
+
+</profile>
+
+</body>
+</html>
+{% endblock %}

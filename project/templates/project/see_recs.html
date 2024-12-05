@@ -1,0 +1,61 @@
+<!--project/templates/project/see_recs.html template-->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+<!-- This template will show the recommendations for a given user-->
+    <h2 class="news-h2">Recommendations</h2>
+    <!-- link to go back to the users profile-->
+    <a class="profile-go-back" href="{% url 'person' person.pk %}">Back to {{ person.first_name }}'s Profile</a>
+<!-- if the user has recommendations-->
+    {% if recs %}
+        <div class="news">
+            <ul class="news-feed">
+                <!-- loop through the recommendations -->
+                {% for p in recs %}
+                    <li class="news-item">
+                        <!-- show the person's image -->
+                        <div class="recommendation-header">
+                            {% if p.person.image_url %}
+                                <img class="feed-pic" src="{{ p.person.image_url }}">
+                            {% endif %}
+                            <!-- show the information about the entertainment and the person's first and last name who created the recommendation-->
+                            <div class="recommendation-details">
+                                <h3 class="news-title">{{ p.entertainment }}</h3>
+                                <p class="news-author">By: {{ p.person.first_name }} {{ p.person.last_name }}</p>
+                            </div>
+                        </div>
+
+                        <!-- the actual content of the recommendation with the thoughts and rating -->
+                        <div class="recommendation-body">
+                            <p class="thoughts"><strong>Message: {{ p.thoughts }}</strong></p>
+                            <p class="rating">Rating: {{ p.rating }}</p>
+
+                            <!-- if there are images for a given recommendation, display them here-->
+                            {% if p.get_images %}
+                                <div class="image-status">
+                                    {% for img in p.get_images %}
+                                        <img src="{{ img.image_file.url }}" alt="Image" class="size-image">
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+<!-- this section will manage the updating and deleting of recommendations-->
+             <div class="up-del">
+                        <a class="atag-button" href="{% url 'delete_rec' p.pk %}">Delete</a>
+                        <a class="atag-button" href="{% url 'update_rec' p.pk %}">Update</a>
+                          
+                    </div>
+                    <!--use the divider between each recommendation-->
+                        <hr class="news-divider">
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- if the user has no recommendations, then display the following message-->
+    {% else %}
+        <p>No recommendations.</p>
+    {% endif %}
+
+
+{% endblock %}

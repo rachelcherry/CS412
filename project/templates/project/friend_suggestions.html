@@ -1,0 +1,46 @@
+<!--project/templates/project/friend_suggestions.html template-->
+
+{% extends 'project/base.html' %} {% block content %}
+<!-- this file handles the friend suggestions for users-->
+<h2 class="suggestions-heading">
+  Friend Suggestions for {{ profile.first_name }} {{ profile.last_name }}
+</h2>
+<br />
+<!--link to go back to the profile of the user-->
+<a class="profile-back-link" href="{% url 'person' profile.pk %}"
+  >Back to {{ profile.first_name }}'s Profile</a>
+<!--This is where the suggestions will actually be generated on the page-->
+<div class="suggestions-list">
+  <br />
+  <!--if the user has friends suggestions, loop through each one -->
+  {% if profile.get_friend_suggestions %} 
+  {% for suggestion in profile.get_friend_suggestions %}
+    <!--create cards for each person who can be suggested as a friend -->
+  <div class="suggestion-card">
+    <div class="suggestion-info">
+      <a href="{% url 'person' suggestion.pk %}">
+        <!--use the image of the friend who is being suggested -->
+        <img
+          class="suggestion-img"
+          src="{{ suggestion.image_url }}"/>
+      </a>
+      <!-- this is the rest of the infotation for the person including their first and last name-->
+      <div class="suggestion-name">
+        {{ suggestion.first_name }} {{ suggestion.last_name }}
+      </div>
+    </div>
+    <div class="suggestion-action">
+        <!-- this will allow a user to adda  friend via the link add_a_friend -->
+      <a class="add-friend-btn" href="{% url 'add_a_friend' suggestion.pk %}">
+        Add {{ suggestion.first_name }} as a Friend
+      </a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<!-- if the user has no friend suggestions (i.e. they are already friends with everyone in the system) display a message-->
+<p class="no-suggestions-text">
+  {{ profile.first_name }} has no friend suggestions.
+</p>
+{% endif %} {% endblock %}
