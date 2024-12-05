@@ -10,7 +10,7 @@ whitenoise = "*"
 pillow = "*"
 plotly = "*"
 beautifulsoup4 = "*"
-
+requests = "*"
 
 [dev-packages]
 
