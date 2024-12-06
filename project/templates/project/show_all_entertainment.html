@@ -22,7 +22,7 @@
                 <a href="{% url 'entertainment' s.pk %}">{{ s.title }}</a>
             </h2>
 <!-- show the rating and description for each form of entertainment-->
-            <p class="rating-for-ent"> Rating: {{ s.rating }}</p>
+<a class="ent-rate" href="{% url 'entertainment' s.pk %}"><p class="rating-for-ent"> Rating: {{ s.rating }}</p></a>
             <p class="desc-of-ent">{{ s.description }}</p>
         </div>
         {% endfor %}

@@ -4,12 +4,9 @@
 <!--This template will show an individual entertainment-->
 {% block content %}
 
-<div class="info">
-    <h1>Information for {{ r.title }}</h1>
-</div>
 <!-- this section will create a table for an entertainment-->
     <div class="ent-info">
-        <h1>Entertainment Details</h1>
+        <h1>{{r.title}} Details</h1>
         <hr>
         <table>
                 <tr>
@@ -32,15 +29,22 @@
                 </tr>
         </table>
 <!-- this section will show the recommendations from various anonymous users-->
+
+<!-- check if the entertainment has any recommendations and if we should display anything -->
+
+{% if r.get_recommendation %}
     <div class="recommendations">
         <h1>What People Think About This Movie</h1>
+        <!-- create a table with the information about the entertainment-->
+
         <table>
                 <tr>
                     <th>Thoughts</th>
-                    <th>Rating</th>
+                    <th>Rating (out of 5)</th>
                     <th>Recommended</th>
                 </tr>
-                {% if r.get_recommendation %}
+               <!-- loop through the recommendations for a given entertainment -->
+
                 {% for recommendation in r.get_recommendation %}
                 <tr>
                     <td>{{ recommendation.thoughts }}</td>
@@ -48,18 +52,15 @@
                     <td>{{ recommendation.recommend }}</td>
                 </tr>
                 {% endfor %}
-            {% else %}
-                <tr>
-                    <td colspan="3">No recommendations yet.</td>
-                </tr>
-            
-                {% endif %}
-            </tbody>
         </table>
-    </div>
+        {% endif %}
     
+    <!-- this section will display the web-scraped trailer from YouTube -->
     <h1>Watch The Trailer!</h1>
     <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 15px">
+
+        <!-- use iframe to embed the video inside of my application -->
+         <!-- these were copied from the youtube videos 'copy embedded link'-->
     <iframe 
     width="800" 
     height="500" 
@@ -68,5 +69,7 @@
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
     allowfullscreen>
 </iframe>
+
+</div>
 </div>
 {% endblock %}

@@ -22,11 +22,10 @@
                 </table>
                 <div class="up-prof">
                     <!-- Upon pressing cancel, the user should be redirected to their profile page-->
-                    <a href="{% url 'person' person.pk %}" class="cancel-btn">
+                    <a href="{% url 'see_recs' person.pk %}" class="cancel-btn">
                         <button type="button" class="btn-cancel">Cancel</button>
                     </a>
                                         <!-- Upon pressing submit, the users changes will be saved-->
-    
                     <input type="submit" value="Update Recommendation" class="btn-submit">
                 </div>
             </form>

@@ -7,7 +7,7 @@
 </h2>
 <br />
 <!--link to go back to the profile of the user-->
-<a class="profile-back-link" href="{% url 'person' profile.pk %}"
+<a class="prof-return" href="{% url 'person' profile.pk %}"
   >Back to {{ profile.first_name }}'s Profile</a>
 <!--This is where the suggestions will actually be generated on the page-->
 <div class="suggestions-list">
@@ -16,7 +16,7 @@
   {% if profile.get_friend_suggestions %} 
   {% for suggestion in profile.get_friend_suggestions %}
     <!--create cards for each person who can be suggested as a friend -->
-  <div class="suggestion-card">
+  <div class="layout-for-sug">
     <div class="suggestion-info">
       <a href="{% url 'person' suggestion.pk %}">
         <!--use the image of the friend who is being suggested -->

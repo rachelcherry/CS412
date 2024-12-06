@@ -6,7 +6,7 @@
 <!-- This template will show the recommendations for a given user-->
     <h2 class="news-h2">Recommendations</h2>
     <!-- link to go back to the users profile-->
-    <a class="profile-go-back" href="{% url 'person' person.pk %}">Back to {{ person.first_name }}'s Profile</a>
+    <a class="prof-return" href="{% url 'person' person.pk %}">Back to {{ person.first_name }}'s Profile</a>
 <!-- if the user has recommendations-->
     {% if recs %}
         <div class="news">
@@ -41,17 +41,21 @@
                             {% endif %}
                         </div>
 <!-- this section will manage the updating and deleting of recommendations-->
-             <div class="up-del">
-                        <a class="atag-button" href="{% url 'delete_rec' p.pk %}">Delete</a>
-                        <a class="atag-button" href="{% url 'update_rec' p.pk %}">Update</a>
+ <!-- if the user matches the one logged in, they are allowed to update and delete recommendations-->
+ {% if yes_person %}
+             <div class="up-rec">
+                        <a class="btn-cancel" href="{% url 'delete_rec' p.pk %}">Delete</a>
+                        <a class="btn-submit" href="{% url 'update_rec' p.pk %}">Update</a>
                           
                     </div>
+                    {% endif %}
                     <!--use the divider between each recommendation-->
                         <hr class="news-divider">
                     </li>
                 {% endfor %}
             </ul>
         </div>
+   
         <!-- if the user has no recommendations, then display the following message-->
     {% else %}
         <p>No recommendations.</p>

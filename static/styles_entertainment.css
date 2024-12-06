@@ -109,12 +109,17 @@ body {
 }
 /* styling for the rating for the entertainment */
 .rating-for-ent {
+  text-decoration: none;
   color: yellow;
   font-size: 16px;
   font-weight: bold;
+
 }
+/* styling for the a tag that surrounds the rating*/
 
-
+.ent-rate{
+  text-decoration: none;
+}
 /* styling for the h1s in the individual entertainment pages */
 .ent-info h1{
   color: #007bff;
@@ -193,12 +198,17 @@ hr {
   font-size: 16px;
   border-radius: 5px;
 }
+
+/* styles for the select inputs */
+
 .searching select {
   width: 100%;
   padding: 10px;
   font-size: 16px;
   border-radius: 5px;
 }
+
+/* styles for the submit button in the search section*/
 
 .searching input[type="submit"] {
   background-color: #007bff;
@@ -211,6 +221,7 @@ hr {
   
 }
 
+/* start of styles for pagination section */
 
 .pagination {
   display: flex;
@@ -219,15 +230,20 @@ hr {
   padding: 0;
 }
 
+/* styles for list items inside of the pagination */
+
 .pagination li {
   margin: 10px;
 }
+
+/* styles for the links in the pagination (next and previous) */
 
 .pagination a {
   text-decoration: none;
   color: red;
 }
 
+/* styles for the profile picture of a person */
 
 .picture-person {
   width: 300px;
@@ -236,6 +252,9 @@ hr {
   object-fit: cover;
   margin: 10px 0;
 }
+
+/* styles for the section where users can view their recommendations, update their profile, etc. */
+
 .edit-prof {
   background-color: #3a3a4f;
   padding: 20px;
@@ -243,6 +262,7 @@ hr {
   margin-top: 20px;
 }
 
+/* styles for the links inside the edit profile section on the profile page */
 .edit-prof a {
   text-decoration: none;
   color: #e50914;
@@ -251,7 +271,7 @@ hr {
   margin-bottom: 20px;
   display: block;
 }
-/* Profile Section */
+/* This styles the profile page for a given user */
 .prof-ind {
   background-color: #2c2c3a;
   border-radius: 8px;
@@ -259,34 +279,42 @@ hr {
   text-align: center;
   color: #fff;
 }
-
+/* this will style all the h2 headers on the profile page */
 .prof-ind h2 {
   font-size: 30px;
   color: #ffd700;
 }
 
+/* this will style all of the h3 headers on the profile page */
 .prof-ind h3 {
   font-size: 20px;
   margin-top: 10px;
   color: #fff;
 }
 
+/* this will style all of the a tags within the profile page (all of the links)*/
 .prof-ind a {
   text-decoration: none;
   color: #e50914;
   font-weight: bold;
 }
+/* start styles for user friends */
 
+/* styles for the friends of a user */
 .friend-style {
   display: flex;
   gap: 15px;
   justify-content: center;
   margin-top: 30px;
 }
+
+/* styles for the h1 headers for friends of a user */
 .friends-h1{
   text-align: center;
   color: black;
 }
+
+/* styles for the friends of a user */
 .friends {
   background-color: #2c2c3a;
   padding: 10px;
@@ -295,6 +323,7 @@ hr {
   text-align: center;
 }
 
+/* styles for the images of a user's friends */
 .friends img {
   width: 100px;
   height: 100px;
@@ -302,6 +331,7 @@ hr {
   object-fit: cover;
 }
 
+/*  style the name of each friend */
 .friend-tags {
   display: block;
   color: #ffd700;
@@ -309,7 +339,7 @@ hr {
   font-weight: bold;
 }
 
-/* Links to Actions */
+/* style for h3 headers within links  */
 a h3 {
   text-decoration: none;
   color: #e50914;
@@ -320,46 +350,32 @@ a h3 {
 
 
 
-/* No Friends Message */
+/* style for paragraphs inside of the friend section of a profile */
+
 .friend-style p {
   font-size: 22px;
   text-align: center;
   margin-top: 20px;
 }
 
-/* HR Styling */
+/* styling for horizontal lines throughout the application */
 hr {
   border: 0;
   border-top: 2px solid #2c2c3a;
   margin: 30px 0;
 }
 
-
-
-
-.profile-card {
-  background-color: #fff;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 300px; 
-  text-align: center;
-  margin: 10px; 
-}
-
-
-
-/* Profile Image Styling */
+/* styling for the profile picture of a particular user */
 .profile-pic {
   width: 300px;
   height: 300px;
   border-radius: 50%;
   background-size: cover;
   object-fit: cover;
-
   margin-top: 20px;
 }
 
-/* News Feed Section Styling */
+/* this will style the friend's reommendation page h2s */
 .news-h2 {
   font-size: 30px;
   color: #e50914;
@@ -367,7 +383,7 @@ hr {
   margin-bottom: 20px;
 }
 
-/* Link to Profile */
+/* this will style the back button for going back to the users profile done in multiple templates */
 .prof-return {
   display: inline-block;
   margin: 20px;
@@ -376,6 +392,9 @@ hr {
   text-decoration: none;
 }
 
+/* start the styles for the friend recommendation feed */
+
+/* this will style the section for friend's suggestions (the feed that contains all of them) */
 
 .news {
   background-color: #f8f9fa;
@@ -383,13 +402,12 @@ hr {
   border-radius: 8px;
 }
 
-/* List of News Items */
+/* will style the individual recommendations inside of the news feed*/
 .news-feed {
-  list-style-type: none;
   padding: 0;
 }
 
-/* Single News Item Styling */
+/* will style a specific recommendation inside of the reocmmendation feed */
 .news-item {
   background-color: #2c2c3a;
   padding: 20px;
@@ -398,13 +416,15 @@ hr {
   color: #fff;
 }
 
-/* Recommendation Header (Profile Picture and Details) */
+/* this will style each recommendation header which includes the name of the recommendation and the author */
 .recommendation-header {
   display: flex;
   align-items: center;
   gap: 15px;
   margin-bottom: 20px;
 }
+
+/* this will style the profile picture for the user in the recommendation feed*/
 
 .feed-pic {
   width: 50px;
@@ -413,9 +433,7 @@ hr {
   object-fit: cover;
 }
 
-.recommendation-details {
-  flex: 1;
-}
+/* this will style the the title of the entertainment */
 
 .news-title {
   font-size: 27px;
@@ -423,21 +441,26 @@ hr {
   margin: 0;
 }
 
+/* this will style the author of the reommendation's name */
+
 .news-author {
   font-size: 20px;
   color: #e50914;
   margin-top: 5px;
 }
 
-/* Recommendation Body */
+/* this will style the actual content of the recommendation */
 .recommendation-body {
   margin-bottom: 20px;
 }
+/* this will style the thoughts field of the recommendation */
 
 .thoughts {
   font-size: 20px;
   color: #ddd;
 }
+
+/* this will style the rating field of the recommendation */
 
 .rating {
   font-size: 20px;
@@ -445,11 +468,24 @@ hr {
   margin-top: 10px;
 }
 
+/* this will style the confirmation page for deleting a recommendation */
+
+.delete-content p {
+  font-size: 24px;      
+  text-align: center;       
+  font-weight: bold;       
+  margin-bottom: 15px;      
+}
+
+/* this will style the images that are attached to a recommendation */
+
 .image-status {
   display: flex;
   gap: 10px;
   margin-top: 15px;
 }
+
+/* this will style the size that the images attached to recommendations will be */
 
 .size-image {
   width: 100px;
@@ -458,13 +494,16 @@ hr {
   object-fit: cover;
 }
 
-/* Divider between Recommendations */
+/* This is the divider between recommendations in the feed as well as the users personal recommendations */
 .news-divider {
   border: 0;
   border-top: 2px solid #007bff;
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+/* This is going to style the form to create a recommendation */
+
 .recommendation-form {
   background-color: #f8f9fa;
   color: black;
@@ -474,7 +513,7 @@ hr {
   margin: 20px auto;
 }
 
-/* Form Heading */
+/* this will style any h2s inside of the recommendations */
 .status-h2 {
   font-size: 30px;
   color: #e50914;
@@ -482,7 +521,7 @@ hr {
   margin-bottom: 20px;
 }
 
-/* Label Styling */
+/* this will style the labels for the fields that the user is inputting into a certain form */
 .form-label {
   font-size: 20px;
   color: #333;
@@ -490,22 +529,28 @@ hr {
   display: block;
 }
 
+/* This will style the update buttons across the entire application */
+
 .update-prof {
   margin: 15px 0;
   display: flex;
   flex-direction: column;
 }
+
+/* this will style the div that surrounds the creation of a new recommendation */
+
 .create-rec {
   margin: 15px 0;
 }
+
+/* This will style the labels with the update-prof section of the various forms that use forms */
 
 .update-prof label {
   margin-bottom: 5px;
   font-weight: bold;
 }
 
-
-
+/* This will style the actual content and information inside of the form */
 
 .form-input {
   width: 100%;
@@ -517,7 +562,7 @@ hr {
 
 }
 
-/* Submit Button Styling */
+/* this will style all the submit buttons that are used when updating, deleting, and various other actions that require submitting */
 .submit-btn {
   width: 100%;
   padding: 15px;
@@ -528,24 +573,23 @@ hr {
   border-radius: 5px;
 }
 
+/* start profile page styling */ 
+
+/* This will style the layout for the profiles tab. It will form the profiles into grids */
+
 .layout-for-prof {
   display: grid;
   grid-template-columns: auto auto auto auto;  gap: 20px;
   padding: 20px;
 }
 
+/* this will style each individual profile on the all profiles page */
+
 .ind-prof {
   background-color: #2c2c3a;
   border-radius: 12px;
 }
-
-
-/* Profile Link Styling */
-.profile-link {
-  display: block;
-  text-decoration: none;
-  color: #fff;
-}
+/* this will style a users profile picture and create a red line at the bottom on the profile page*/
 
 .person-pic {
   width: 100%;
@@ -554,10 +598,14 @@ hr {
   border-bottom: 4px solid #e50914;
 }
 
+/* this will style the information about a person */
+
 .profile-info {
   padding: 20px;
   text-align: center;
 }
+
+/* this will style the person's name on the profiles page*/
 
 .person-name {
   font-size: 25px;
@@ -566,20 +614,29 @@ hr {
   margin: 10px 0;
 }
 
+/* this will style the person's email on the profiles page*/
+
 .person-email{
   font-size: 20px;
   color: #ddd;
   margin: 5px 0;
 } 
+
+/* this will style the person's location on the profiles page*/
 .person-address {
   font-size: 20px;
   color: #ddd;
   margin: 5px 0;
 }
+
+/* this will style the no friends message if they do not have any friends */
 .no-friends{
   color:black;
 }
 
+/* start of the special ratings section */
+
+/* this will style the top rated section for top 10 and top 5 per month */
 .top-rated {
   max-width: 800px;
   margin: 30px auto;
@@ -588,7 +645,7 @@ hr {
   border-radius: 12px;
 }
 
-/* Header Styling */
+/* this will style the h1s in the top 10 and top5 sections */
 .top-rated-h1 {
   text-align: center;
   font-size: 35px;
@@ -596,13 +653,13 @@ hr {
   margin-bottom: 20px;
 }
 
-/* Styling for the list */
+/* this will style the list of the top rated entertainments */
 .top-rated-list {
-  list-style: none;
   padding: 0;
   margin: 0;
 }
 
+/* this will style the individual entertainment item within the top 10 or top 5 lists */
 .top-rated-item {
   background-color: #333;
   padding: 15px;
@@ -613,9 +670,7 @@ hr {
   gap: 20px;
 
 }
-
-
-
+/* this will style the ranking of the entertainment within the list of top 10 (i.e. their position on the list) */
 .rank {
   font-size: 20px;
   font-weight: bold;
@@ -623,8 +678,7 @@ hr {
   width: 40px;
   text-align: center;
 }
-
-
+/* this will style the title of the entertainment in the top 10 list */
 .title {
   font-size: 25px;
   font-weight: bold;
@@ -632,31 +686,37 @@ hr {
   margin-bottom: 8px;
 }
 
-/* Rating styling */
+/* this will style the rating label for the top 10 and top 5 lists */
 .rating {
   font-size: 16px;
   color: #ddd;
 }
 
+/* this will style the actual average value of the rating that will be displayed in the top 10 or top 5 list */
+
 .rating-value {
   font-weight: bold;
   color: #007bff;
 }
+/* this will style the name of the month for the top 5 month list so that we can see which ratings fall under which month */
 .month-title {
   font-size: 30px;;
   color: white;
   text-align: center;
   margin-bottom: 10px;
 }
-/* Custom login form styling */
-.custom-login-form {
+/* start styles for login */
+
+/* this styles the login page */
+.log {
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f9f9f9;
-  border-radius: 8px;
 }
+
+/* this will style the "login" heading of the login page */
 
 .login-heading {
   text-align: center;
@@ -664,32 +724,43 @@ hr {
   color: yellow;
 }
 
-/* Input fields inside the form */
-.input-group {
+/* this will style the section where the actual content is for the login */
+.what-input {
   margin-bottom: 20px;
   color: white;
 }
+
+/* this will style the labels for username and password for logging in */
+
 label{
   color: black;
 }
 
-.input-group input[type="text"]{
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 6px;
-}
-.input-group input[type="password"]{
+/* this will style the text input fields */
+
+.what-input input[type="text"]{
   width: 100%;
   padding: 12px;
   font-size: 16px;
   border-radius: 6px;
 }
 
+/* this will style the password field that is given to us by the login feature */
+
+.what-input input[type="password"]{
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+}
+
+/* this will style the div that surrounds the log in button */
 
 .submit-group {
   margin-top: 10px;
 }
+
+/* this will actually style the contents of the login button */
 
 .submit-btn {
   width: 100%;
@@ -700,12 +771,13 @@ label{
   color: white;
   font-size: 20px;
 }
+/* this will style the portion of the login page where the user can sign up  */
 
-
-.profile-prompt {
+.ask-prof {
   text-align: center;
   margin-top: 20px;
 }
+/* this will style the question of the user has an account or not */
 
 .profile-question {
   font-size: 25px;
@@ -713,16 +785,18 @@ label{
   color: white;
 }
 
-
-.profile-links {
+/* this will style the links for creating a new user on the login page */
+.up-links {
   list-style: none;
   padding: 0;
 }
+/* this will style the links on the profile page that are inside a ul  */
 
 .profile-links li {
   margin: 10px 0;
 }
 
+/* this will style the create a new profile button that can be seen on the login page */
 .create-profile-btn {
   text-decoration: none;
   color: #007bff;
@@ -730,7 +804,9 @@ label{
   font-weight: bold;
 }
 
+/* start of styling for the creation of a new user*/ 
 
+/* this will style the form to create a new profile in the application */
 .profile-form {
   width: 100%;
   max-width: 500px;
@@ -740,7 +816,7 @@ label{
   color: #555;
 
 }
-
+/* this will style heading in the create a new user/profile section */
 .profile-create-heading {
   text-align: center;
   font-size: 30px;
@@ -748,6 +824,7 @@ label{
   margin-bottom: 20px;
 }
 
+/* this will style the page for creating a new user*/
 .prof-head {
   text-align: center;
   font-size: 22px;
@@ -755,17 +832,23 @@ label{
   margin-top: 20px;
 }
 
+/* this will just create space at the bottom of the form for creating a user */
 .form-section {
   margin-bottom: 20px;
 }
+/* this will just create space at the bottom of the form for creating a profile */
 
 .create-form {
   margin-bottom: 20px;
 }
 
+/* this will style the embedded youtube video inside of the entertainment informations section */
+
 iframe{
   align-items: center;
 }
+
+/* this will style the field labels for the forms */
 
 .field-lab {
   display: flex;
@@ -773,13 +856,17 @@ iframe{
   margin-bottom: 15px;
 }
 
+/* this will style the values that the users are writing in the forms */
+
 .field-val {
   color: black;
 }
+/* this will just create space at the bottom of the form for creating a recommendation */
 
 .form-group {
   margin-bottom: 15px;
 }
+/* this will style labels in a form  */
 
 .form-lab {
   display: block;
@@ -787,6 +874,8 @@ iframe{
   font-weight: bold;
   color: black;
 }
+
+/* this will style the input for a given form */
 
 .form-input {
   width: 100%;
@@ -796,6 +885,8 @@ iframe{
   border-radius: 6px;
 }
 
+/* this styles the submit and cancel button sections for most of the templates in my application */
+
 .up-prof {
   margin-top: 10px;
   display: flex;
@@ -804,6 +895,17 @@ iframe{
   width: 100%;
 }
 
+/* this controls the styling for the sections for deleting and updating a recommendation */
+.up-rec{
+  margin-top: 40px;
+  gap: 15px;
+  display: flex;
+  align-items: center; 
+  width: 100%;
+}
+
+/* this will style the cancel button for many of the templates in my application */
+
 .btn-cancel{
   padding: 10px 20px;
   font-size: 16px;
@@ -811,7 +913,10 @@ iframe{
   border-radius: 4px;
   background-color: #007bff;;
   color: white;
+  text-decoration: none;
 }
+/* this will style the submit for many of the templates in my application */
+
 .btn-submit {
   padding: 10px 20px;
   font-size: 16px;
@@ -819,19 +924,26 @@ iframe{
   border-radius: 4px;
   background-color: #007bff;;
   color: white;
+  text-decoration: none;
 }
+
+/* this will style the specific links inside the div for updating a profile*/
 
 .up-prof a {
   text-decoration: none;
 }
 
+/* start friend suggestions styling */
+
+/* this will style the heading of the friends suggestions */
   .suggestions-heading {
     font-size: 30px;
-    color: #4a4a4a;
+    color: red;
     text-align: center;
     margin-bottom: 20px;
     font-family: Arial, sans-serif;
   }
+/* this will style the link for a user to to back to their profile / another friend's profile*/
 
   .profile-back-link {
     display: inline-block;
@@ -839,22 +951,26 @@ iframe{
     color: #007bff;
     font-weight: bold;
   }
-
+/* this will style the list of friend suggestions for a given user so it is neat */
 
   .suggestions-list {
     display: flex;
     justify-content: center;
     gap: 20px;
     margin-top: 20px;
-  }
+    flex-wrap: wrap;
 
-  .suggestion-card {
+  }
+/* this will style the layout for the individual suggestions */
+
+  .layout-for-sug {
     border: 1px solid #ddd;
     padding: 15px;
     width: 200px;
     text-align: center;
     background-color: #fff;
   }
+/* this will style the image that is attached to the friend being suggested */
 
   .suggestion-img {
     width: 150px;
@@ -864,12 +980,15 @@ iframe{
     margin-bottom: 10px;
   }
 
+  /* this will style the name of the user who is being recommended as a friend */
+
   .suggestion-name {
     font-size: 16px;
     font-weight: bold;
     color: #333;
     margin-bottom: 10px;
   }
+/* this will style the button that allows the user to add a friend to their account */
 
   .add-friend-btn {
     display: inline-block;
@@ -880,6 +999,7 @@ iframe{
     font-weight: bold;
   }
 
+/* this will style the message that is presented if a user does not have any suggestions (i.e. they are already friends with everyone in the application) */
 
   .no-suggestions-text {
     font-size: 16px;
@@ -888,6 +1008,7 @@ iframe{
     margin-top: 20px;
   }
 
+/* this will style the links within the update and deletion section of my templates */
 
 .up-del a{
   text-decoration: none;
@@ -896,6 +1017,8 @@ iframe{
   font-weight: bold;
   gap: 15px;
 }
+/* this will style the button to back to a user's profile */
+
 .profile-go-back{
   text-decoration: none;
   color: #007bff;
@@ -904,12 +1027,14 @@ iframe{
   margin-bottom: 20px;
   display: inline-block;
 }
-.labels {
-  font-size: 18px;
-  color: white;
-  margin-bottom: 8px;
-  display: block;
+/* style the link to the entertainment for the top10 and top5 list */
+.ent-top10{
+  text-decoration: none;
 }
+
+/* start footer styling */
+
+/* this will style my footer at the bottom of my application  */
 footer {
   left: 0;
   right: 0;
@@ -920,10 +1045,16 @@ footer {
   text-align: center;
   padding: 10px;
 }
+
+/* style the log back in option when a user logs out */
+
 .log-back-in{
   text-decoration: none;
   color: black;
 }
+
+/* styles for the all entertainment page */
+
 .all_ent{
   max-width: 900px;
   margin: 20px auto;

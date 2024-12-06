@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 import time
-from django.http import Http404
-
 from django.db.models.query import QuerySet
 from typing import Any
 from django.shortcuts import redirect
@@ -47,7 +45,18 @@ class ShowProfilePageView(DetailView):
             # if the user is not authenticated (i.e. not logged in) set the value to None
             auth_for_profile = None
         # set the context variable for this boolean and return the context for use in the templates
-        context['auth_for_profile'] = auth_for_profile
+        context['auth_for_profile'] = auth_for_profile 
+        context['entertainment_list'] = Entertainment.objects.all() # gets all the entertainments
+        pers = Person.objects.get(pk=self.kwargs['pk']) # finds the person with this primary key
+        context['person'] = pers # set the context variable for this person
+        who = self.request.user.person # find the person who is logged in
+        if who == pers or who in pers.get_friends():
+            context['yes_friend'] = True
+            # if the user matches the current profule or they are friends with the individual logged in, then they have access to the recommendations of another user
+            
+        else:
+            # if they are not friends with the user or do not match the user logged in, they should not be able to see the recommendations button
+            context['yes_friend'] = False
         return context
 class ShowAllPeopleView(ListView):
     '''A view to show all Profiles'''
@@ -118,6 +127,14 @@ class CreateRecommendationView(LoginRequiredMixin, CreateView):
         ent_pk = self.request.POST.get('entertainment') # find the entertainment that was submitted via the POST request
         ent = Entertainment.objects.get(pk=ent_pk) # find the entertainment associated with the primary key of the entertainment in the POST request
         form.instance.entertainment = ent # set the form instance of entertainment
+        sm = form.save()
+        files = self.request.FILES.getlist('files')
+        print("files", files)
+        for i in range(len(files)): 
+                image_object = Image()
+                image_object.image_file = files[i]
+                image_object.recommendation = sm
+                image_object.save()
         return super().form_valid(form) # return the super class constructor 
 
     def get_success_url(self):
@@ -219,6 +236,15 @@ class Top10View(TemplateView):
         context = super().get_context_data(**kwargs) # call the super class constructor 
         context['top_10'] = best # set the context variable to be the results from the top_10 function
         return context # return the context variables for use in the template
+class Top10View(TemplateView):
+    '''view to show the top 10 rated entertainments'''
+    template_name = 'project/top_10.html'  # connect to the template
+    def get_context_data(self, **kwargs):
+        '''return context variables for use in the templates '''
+        best = top_10() # call the top_10 function in the models to generate the top 10 list 
+        context = super().get_context_data(**kwargs) # call the super class constructor 
+        context['top_10'] = best # set the context variable to be the results from the top_10 function
+        return context # return the context variables for use in the template
 class Top5MonthView(TemplateView):
     '''view to show the top 5 rated entertainments per month'''
     template_name = 'project/top_5_month.html'  # connect to the template
@@ -264,14 +290,14 @@ class SeeRecsView(ListView):
         pers = Person.objects.get(pk=self.kwargs['pk']) # finds the person with this primary key
         context['person'] = pers # set the context variable for this person
         who = self.request.user.person # find the person who is logged in
-        if who == pers or who in pers.get_friends():
+        if who == pers:
+            context['yes_person'] = True
             # if the user matches the current profule or they are friends with the individual logged in, then they have access to the recommendations of another user
-            return context
+            
         else:
-            # if they are not friends with the user or do not match the user logged in, they see an error message since they must be friends to see recommendations
-            # raise Htttp404 error since the user is not allowed
-            raise Http404("Not allowed to view recommendations when you are not friends. Please go back.")
-        
+            # if they are not friends with the user or do not match the user logged in, they should not be able to see the recommendations button
+            context['yes_person'] = False
+        return context
 class UpdateProfView(LoginRequiredMixin, UpdateView):
     '''A view to update a profile'''
     model = Person # connect to Person model

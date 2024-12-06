@@ -1,14 +1,16 @@
+<!--project/templates/project/login.html template-->
+
 {% extends 'project/base.html' %}
 {% block content %}
 <!-- this file handles the log in of users-->
 <h2 class="login-heading">Login</h2>
 
 <!-- this is the form for logging the user in that is provided by django  -->
-<form method="POST" action="{% url 'login_url' %}" class="custom-login-form">
+<form method="POST" action="{% url 'login_url' %}" class="log">
 
     {% csrf_token %}
     
-    <div class="input-group">
+    <div class="what-input">
         {{ form.as_p }}
     </div>
 
@@ -26,9 +28,9 @@
 
 </form>
 <!-- if they do not have an account, give them the option to create a new profile to be able to use the site-->
-<div class="profile-prompt">
+<div class="ask-prof">
     <p class="profile-question">Don't Have a Profile?</p>
-    <ul class="profile-links">
+    <ul class="up-links">
         <!--link to the new_profile function so that users can create a new profile-->
         <li><a href="{% url 'new_profile' %}" class="create-profile-btn">Create Profile</a></li>
     </ul>

@@ -15,7 +15,11 @@
                 <div class="rank">{{ forloop.counter }}.</div>
                 <div class="title-rating">
                      <!-- show the entertainment and also the average rating -->
+                     <a href="{% url 'entertainment' entertainment.pk %}" class="ent-top10">
+
                      <strong class="title">{{ entertainment }}</strong>
+                     </a>
+                    </a>
                      <!-- use span so that it can be styled a different color -->
                      <p class="rating">Rating: <span class="rating-value">{{ avg_rating }}</span></p>
                 </div>

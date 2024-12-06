@@ -92,17 +92,17 @@ class Entertainment(models.Model):
         '''return to string for an entertainment '''
         return f"{self.title}"
     def get_trailer(self):
+        if '&' in self.title:  
+            self.title = self.title.replace('&', 'and') 
         search_query = self.title + " trailer"
         query = search_query.replace(' ', '+')
         google_url = f"https://www.google.com/search?q={query}"
         print(google_url)
         page = requests.get(google_url)
         soup = BeautifulSoup(page.content, "html.parser")
-
         links = soup.findAll('a')
-
+        #print(links)
         for link in links:
-
             attr_list = link.get_attribute_list('href')
             if "youtube.com/watch" in attr_list[0]:
                 video_url = attr_list[0].split('&')[0]
@@ -268,18 +268,15 @@ def top_5():
     return top_5 # return the months and their top 5 entertainments
 
 
-# def load_trailers():
-#     for entertainment in Entertainment.objects.all()[:1]:
-#         trailer_url = entertainment.get_trailer()
-#         entertainment.trailer = trailer_url
-#         entertainment.save()
-#         print(trailer_url)
+import time
 
-
-def embed_video():
-    for entertainment in Entertainment.objects.all()[:1]:
-        trailer_url = entertainment.trailer
+def load_trailers():
+    count = 0  # Track the number of requests
+    for entertainment in Entertainment.objects.all()[990:1000]:
+        trailer_url = entertainment.get_trailer()
+        # print(trailer_url)
         embed_url = trailer_url.replace("watch?v=", "embed/") 
+        # print(embed_url)
         entertainment.trailer = embed_url
         entertainment.save()
         print(trailer_url)

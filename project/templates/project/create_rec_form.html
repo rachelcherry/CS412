@@ -7,7 +7,7 @@
 <div class="info-main">
     <h2 class="status-h2">Create a Recommendation</h2>
 <!-- this is a form for creating recommendations-->
-    <form method="post" class="recommendation-form">
+    <form method="POST" enctype="multipart/form-data" class="recommendation-form">
         {% csrf_token %}
         
         <!-- this will loop through all the entertainments and allow their title to be an option for a user to choose to recommend for -->
@@ -30,6 +30,12 @@
             </div>
         </tr>
     {% endfor %}
+    <tr>
+        <th>Choose Files:</th>
+     <td class="files-style">
+          <input type="file" name="files" multiple />
+        </td>
+    </tr>
     <div class="up-prof">
         <a href="{% url 'person' person.pk %}">
             <!-- upon being pressed this button will take the user back to the page with all the entertainment -->

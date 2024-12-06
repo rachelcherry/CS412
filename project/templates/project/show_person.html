@@ -37,9 +37,11 @@
         {% endif %}
         {% if request.user.is_authenticated %}
         <!-- if the user is logged in, they can see a users recommendations (only if they are friends, which is handled in views)-->
+        {% if yes_friend %}
         <a href="{% url 'see_recs' profile.pk %}">
             <h3>{{profile.first_name}}'s Recommendations</h3>
         </a>
+        {% endif %}
         {% endif %}
        
     </div>
