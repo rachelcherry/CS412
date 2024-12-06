@@ -26,7 +26,8 @@
         {% endif %}
         <!-- this section will show the recommended entertainment information-->
             <div class="recommendation-details">
-              <h3 class="news-title">{{ recommendation.entertainment.title }}</h3>
+              <a class="rec-val" href="{% url 'entertainment' recommendation.entertainment.pk %}">
+                {{ recommendation.entertainment.title }}</a></h3>
               <h4 class="news-author">By: {{ recommendation.person.first_name }} {{ recommendation.person.last_name }}</h4>
             </div>
           </div>

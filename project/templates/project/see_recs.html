@@ -21,7 +21,7 @@
                             {% endif %}
                             <!-- show the information about the entertainment and the person's first and last name who created the recommendation-->
                             <div class="recommendation-details">
-                                <h3 class="news-title">{{ p.entertainment }}</h3>
+                                <h3 class="news-title"><a class="ent-link" href="{% url 'entertainment' p.entertainment.pk %}">{{ p.entertainment }}</a></h3>
                                 <p class="news-author">By: {{ p.person.first_name }} {{ p.person.last_name }}</p>
                             </div>
                         </div>

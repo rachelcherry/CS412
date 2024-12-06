@@ -895,12 +895,24 @@ input[type="text" i] {
 iframe{
   align-items: center;
 }
+
+/* styles the title in the friends recommendation */
+.rec-val{
+  text-decoration: none;
+  color: yellow;
+  font-size: 26px;
+  font-weight: bold;
+}
 /* styles for the embedded video */
 .embed-vid{
   display: flex; 
   justify-content: center; 
   align-items: center; 
   margin-bottom: 15px
+}
+.ent-link{
+  text-decoration: none;
+  color: yellow;
 }
 
 /* this will style the field labels for the forms */

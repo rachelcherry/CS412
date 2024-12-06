@@ -193,7 +193,7 @@ class ResultsListView(ListView):
     template_name = 'project/results.html' # connect to the template
     model = Entertainment # connect to the Entertainment model
     context_object_name = "results" # context variable for use in template
-    paginate_by = 50 # show 50 entertainments per page and use pagination 
+    paginate_by = 100 # show 100 entertainments per page and use pagination 
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         '''returns context variables for use in templates'''
