@@ -18,49 +18,71 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #181818;
-  padding: 10px 20px;
+  background-color: #141414; 
+  padding: 15px 30px;
 }
 
-/*styles the h1 tags inside of the net tag*/
-
+/* style the netflix synbol to be like the netflix color and font */
 .net h1 {
-  font-size: 24px;
-  color: #e50914;
+  font-size: 28px;
+  color: rgba(255, 0, 0, 0.724); 
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  font-weight: bold;
 }
 
-/* styles for the links that are in the navigation bar*/
+/* style the links inside of the nav properly spacing and sizing each */
 .nav-links {
-  list-style: none;
   display: flex;
-  gap: 15px;
-}
-/* styles for the list items in the nav bar*/
-
-.nav-links li {
-  display: inline-block;
+  gap: 20px; 
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-/* styles for the a tags within the navigation bar*/
-
+/* style the actual links (the a tags within the nav bar */
 .nav-links a {
   text-decoration: none;
   color: #fff;
   font-size: 16px;
+  font-weight: 500;
+  padding: 5px 10px;
+  display: block;
+}
+/* this will add a hover effect to the nav bar links so that when the user hovers, it shows a red underline beneath the link*/
+
+.nav-links li a:hover {
+  color: rgba(255, 0, 0, 0.724);
+  border-bottom: 2px solid rgba(255, 0, 0, 0.724);
+}
+
+/* this will style the login button in the nav bar */
+.login {
+  color: white;
+  font-weight: bold;
+  background-color: rgba(255, 0, 0, 0.724);
+}
+
+/* this will style the lin */
+
+.nav-links li form button {
+  background-color: rgba(255, 0, 0, 0.724);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
 }
 
 
 
 /* start styles for the logout form */
-
-
 .logout-form {
   display: inline;
 }
 
 /* style for logout button */
 .logout-form button {
-  background-color: #e50914;
+  background-color: rgba(255, 0, 0, 0.724);
   color: #fff;
   border: none;
   padding: 5px 10px;
@@ -70,7 +92,7 @@ body {
 /* start of styles for login button/page */
 .login{
  
-    background-color: red;
+    background-color: rgba(255, 0, 0, 0.724);
     color: white;
     border: none;
     padding: 5px 10px;
@@ -103,7 +125,7 @@ body {
 /* styling for the title of the entertainment */
 .title-of-ent a {
   text-decoration: none;
-  color: #e50914;
+  color: rgba(255, 0, 0, 0.724);
   font-size: 25px;
   font-weight: bold;
 }
@@ -256,7 +278,7 @@ hr {
 
 .pagination a {
   text-decoration: none;
-  color: red;
+  color: rgba(255, 0, 0, 0.724);
 }
 
 /* styles for the profile picture of a person */
@@ -281,7 +303,7 @@ hr {
 /* styles for the links inside the edit profile section on the profile page */
 .edit-prof a {
   text-decoration: none;
-  color: #e50914;
+  color: rgba(255, 0, 0, 0.724);
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 20px;
@@ -311,7 +333,7 @@ hr {
 /* this will style all of the a tags within the profile page (all of the links)*/
 .prof-ind a {
   text-decoration: none;
-  color: #e50914;
+  color: rgba(255, 0, 0, 0.724);
   font-weight: bold;
 }
 /* start styles for user friends */
@@ -358,7 +380,7 @@ hr {
 /* style for h3 headers within links  */
 a h3 {
   text-decoration: none;
-  color: #e50914;
+  color: rgba(255, 0, 0, 0.724);
   font-size: 22px;
   font-weight: bold;
   margin-top: 30px;
@@ -394,7 +416,7 @@ hr {
 /* this will style the friend's reommendation page h2s */
 .news-h2 {
   font-size: 30px;
-  color: #e50914;
+  color: rgba(255, 0, 0, 0.724);
   text-align: center;
   margin-bottom: 20px;
 }
@@ -461,7 +483,7 @@ hr {
 
 .news-author {
   font-size: 20px;
-  color: #e50914;
+  color: rgba(255, 0, 0, 0.724);
   margin-top: 5px;
 }
 
@@ -532,7 +554,7 @@ hr {
 /* this will style any h2s inside of the recommendations */
 .status-h2 {
   font-size: 30px;
-  color: #e50914;
+  color: rgba(255, 0, 0, 0.724);
   text-align: center;
   margin-bottom: 20px;
 }
@@ -611,7 +633,7 @@ hr {
   width: 100%;
   height: 400px;  
   object-fit: cover; 
-  border-bottom: 4px solid #e50914;
+  border-bottom: 4px solid rgba(255, 0, 0, 0.724);
 }
 
 /* this will style the information about a person */
@@ -665,7 +687,7 @@ hr {
 .top-rated-h1 {
   text-align: center;
   font-size: 35px;
-  color: red;
+  color: rgba(255, 0, 0, 0.724);
   margin-bottom: 20px;
 }
 
@@ -690,7 +712,7 @@ hr {
 .rank {
   font-size: 20px;
   font-weight: bold;
-  color: #e50914;
+  color: rgba(255, 0, 0, 0.724);
   width: 40px;
   text-align: center;
 }
@@ -773,6 +795,7 @@ label{
 /* this will style the div that surrounds the log in button */
 
 .submit-group {
+  background-color: rgba(255, 0, 0, 0.724);
   margin-top: 10px;
 }
 
@@ -781,7 +804,7 @@ label{
 .submit-btn {
   width: 100%;
   padding: 14px;
-  background-color: red;
+  background-color: rgba(255, 0, 0, 0.724);
   border: none;
   border-radius: 6px;
   color: white;
@@ -868,7 +891,7 @@ input[type="text" i] {
 .profile-create-heading {
   text-align: center;
   font-size: 30px;
-  color: red;
+  color: rgba(255, 0, 0, 0.724);
   margin-bottom: 20px;
 }
 
@@ -1005,7 +1028,7 @@ iframe{
 /* this will style the heading of the friends suggestions */
   .suggestions-heading {
     font-size: 30px;
-    color: red;
+    color: rgba(255, 0, 0, 0.724);
     text-align: center;
     margin-bottom: 20px;
     font-family: Arial, sans-serif;
