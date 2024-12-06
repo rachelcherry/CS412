@@ -91,6 +91,9 @@ class Entertainment(models.Model):
     def __str__(self):
         '''return to string for an entertainment '''
         return f"{self.title}"
+    def get_rotten(self):
+        '''function to return the title with underscores for use in url'''
+        return self.title.replace(' ', '_')
     def get_trailer(self):
         if '&' in self.title:  
             self.title = self.title.replace('&', 'and') 

@@ -9,7 +9,9 @@
 <profile class="prof-ind">
     <div class="profile-info">
         <!-- show the profile picture, name, address, and email for the given user-->
-        <img class="picture-person" src="{{profile.image_url}}" alt="{{profile.image_url}}">
+         {% if profile.image_url %}
+        <img class="picture-person" src="{{profile.image_url}}">
+        {% endif %}
         <h2>{{profile.first_name}} {{profile.last_name}}</h2>
         <h3>Location: {{profile.address}}</h3>
         <h3>Contact: {{profile.email}}</h3>

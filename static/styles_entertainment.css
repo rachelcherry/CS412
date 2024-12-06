@@ -135,6 +135,22 @@ body {
   margin-bottom: 10px;
   text-align: center;
 }
+.recommendations h3 {
+  color: yellow;
+  
+  margin-bottom: 10px;
+  text-align: center;
+}
+/* styles for the link to the rotten tomatoes reviews */
+.rotten {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
 
 /* start styling on tables */
 
@@ -796,6 +812,10 @@ label{
   margin: 10px 0;
 }
 
+.profile-link{
+  text-decoration: none;
+}
+
 /* this will style the create a new profile button that can be seen on the login page */
 .create-profile-btn {
   text-decoration: none;
@@ -815,6 +835,34 @@ label{
   background-color: #f9f9f9;
   color: #555;
 
+}
+textarea#id_email {
+  height: 30px;
+  width: 400px;
+}
+textarea#id_address {
+  height: 30px;
+  width: 400px;
+}
+textarea#id_last_name {
+  height: 30px;
+  width: 400px;
+}
+textarea#id_first_name {
+  height: 30px;
+  width: 400px;
+}
+input#id_first_name {
+  height: 30px;
+  width: 400px;
+}
+input[type="url" i] {
+  height: 30px;
+  width: 400px;
+}
+input[type="text" i] {
+  height: 30px;
+  width: 400px;
 }
 /* this will style heading in the create a new user/profile section */
 .profile-create-heading {
@@ -846,6 +894,13 @@ label{
 
 iframe{
   align-items: center;
+}
+/* styles for the embedded video */
+.embed-vid{
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  margin-bottom: 15px
 }
 
 /* this will style the field labels for the forms */
@@ -1036,10 +1091,6 @@ iframe{
 
 /* this will style my footer at the bottom of my application  */
 footer {
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding-top: 15px;
   background-color: #666;
   color: white;
   text-align: center;

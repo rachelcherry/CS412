@@ -8,18 +8,36 @@
     {% for p in profiles %}
         <div class="ind-prof">
             <!--link to the person's profile through their photo, name, and other information-->
+            <!-- only allow users who are logged in to be able to link to other user's profiles (don't link to their profiles)-->
+            {% if user.is_authenticated %}
             <a href="{% url 'person' p.pk %}" class="profile-link">
                 <!-- this will contain all of the information for a profile-->
                 <div class="profile-info">
                     {% if p.image_url %}
                         <img class="person-pic" src="{{ p.image_url }}">
                     {% endif %}
+                </a>
+                {% else %}
+                <div class="profile-info">
+                    {% if p.image_url %}
+                        <img class="person-pic" src="{{ p.image_url }}">
+                    {% endif %}
+
+            {% endif %}
                     <!--include the personal information about the user (name, email, address)-->
+
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'person' p.pk %}" class="profile-link">
                     <h2 class="person-name">{{ p.first_name }} {{ p.last_name }}</h2>
+                </a>
+                {% else %}
+                <h2 class="person-name">{{ p.first_name }} {{ p.last_name }}</h2>
+                {% endif %}
+            
                     <p class="person-email">{{ p.email }}</p>
                     <p class="person-address">{{ p.address }}</p>
                 </div>
-            </a>
+            
         </div>
     {% endfor %}
     </div>
