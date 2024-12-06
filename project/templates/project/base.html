@@ -28,7 +28,7 @@
           {% if request.user.is_authenticated %} {% if user.person %}
           <li><a href="{% url 'person' user.person.pk %}">My Profile</a></li>
           <li>
-            <a href="{% url 'rec_feed' %}">See What Your Friends Reccommend</a>
+            <a href="{% url 'rec_feed' %}">Friend Reccommendations</a>
           </li>
           <li>
             <!-- form for logging the user out that should only be showed if the user is logged in -->
