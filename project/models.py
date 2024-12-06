@@ -7,6 +7,7 @@ import random
 import datetime
 from bs4 import BeautifulSoup
 import requests
+from django.db.models.functions import Round
 # Create your models here.
 
 # Rachel Cherry
@@ -225,7 +226,7 @@ def top_10():
         # get the recommendations for the current entertainment
         recommendations = Recommendation.objects.filter(entertainment=entertainment)
         # take the average of the rating for each of the entertainment objects
-        avg_rating = recommendations.aggregate(Avg('rating'))['rating__avg']
+        avg_rating = round(recommendations.aggregate(Avg('rating'))['rating__avg'], 2)
         # add these ratings and their associated entertainment to a list called top_10
         top_10.append((entertainment, avg_rating))
     # now, we can sort by the rating (which is the second postion of the array) so that they are in order
@@ -244,7 +245,8 @@ def top_5():
         # get all the recommendations for this entertainment
         recommendations = Recommendation.objects.filter(entertainment=entertainment)
         # find the average rating for the recommendations
-        avg_rating = recommendations.aggregate(Avg('rating'))['rating__avg']
+        avg_rating = round(recommendations.aggregate(Avg('rating'))['rating__avg'], 2)
+        print(avg_rating)
         # loop through the recommendations
         for rec in recommendations:
             # find the month associated with the timestamp of the recommendation
