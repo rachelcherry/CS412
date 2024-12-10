@@ -5,6 +5,7 @@ from django.db.models import Avg
 from django.urls import reverse
 import random
 import datetime
+import time
 from bs4 import BeautifulSoup
 import requests
 from django.db.models.functions import Round
@@ -13,16 +14,25 @@ from django.db.models.functions import Round
 # Rachel Cherry
 # rcherry@bu.edu
 # project/models.py
+# Date created: November 12, 2024
 # this file handles all of the models for the application
 class Person(models.Model):
     '''model to define a person/profile in the application'''
-    first_name = models.TextField(blank=False) # first name of the person; required field
-    last_name = models.TextField(blank=False)  # last name of the person; required field
-    address = models.TextField(blank=False)  # address of the person; required field
-    dob = models.DateField() # date of birth of person
-    email = models.TextField(blank=False) # email of the person which is a required field
-    image_url = models.URLField(blank=True) # image of a person which is an optional field
-    user = models.OneToOneField(User, on_delete=models.CASCADE) # created a one to one relationship with the built in django model 
+    # first name of the person; required field
+    first_name = models.TextField(blank=False) 
+     # last name of the person; required field
+    last_name = models.TextField(blank=False) 
+    # address of the person; required field
+    address = models.TextField(blank=False)  
+    # date of birth of person
+    dob = models.DateField() 
+    # email of the person which is a required field
+    email = models.TextField(blank=False) 
+    # image of a person which is an optional field
+    image_url = models.URLField(blank=True) 
+     # created a one to one relationship with the built in django model 
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
     def get_recommendation(self):
         '''Return recommendations of this Person.'''
         # filter recommendations to find the recommendations that match the person
@@ -38,58 +48,91 @@ class Person(models.Model):
         return reverse('person', kwargs={'pk': self.pk})
     def get_friends(self):
         '''Return friends of this Person.'''
-        which_friend = Friend.objects.filter(profile1=self) | Friend.objects.filter(profile2=self)  # finds whether the current person is profile1 or profile2 from the Friend model
-        allprofiles = [] # create a list of all the friends of this person
-        for currentfriend in which_friend: # loop through the various friends
-            if currentfriend.profile1 == self: # if the friend is the person (themselves), add the other friend (profile2)
+        # finds whether the current person is profile1 or profile2 from the Friend model
+        which_friend = Friend.objects.filter(profile1=self) | Friend.objects.filter(profile2=self)  
+        # create a list of all the friends of this person
+        allprofiles = [] 
+        # loop through the various friends
+        for currentfriend in which_friend:
+            # if the friend is the person (themselves), add the other friend (profile2) 
+            if currentfriend.profile1 == self: 
                 allprofiles.append(currentfriend.profile2)
             else:
-                allprofiles.append(currentfriend.profile1) # otherwise add profile1
-        return allprofiles # return the list of all the person's friends
+                 # otherwise add profile1
+                allprofiles.append(currentfriend.profile1)
+         # return the list of all the person's friends
+        return allprofiles
     def get_friend_suggestions(self):
         '''get friend suggestions to this Profile.'''
-        friendships = [friend.pk for friend in self.get_friends()] #using list comprehension for each friend in the list of frieneds generated in the get_friends function
-        friendships.append(self.pk) # add themselves to the list of friends as well since a person should not get a suggestion to add themselves as a friend
-        what_friends = Person.objects.exclude(pk__in=friendships) # exclude friends that are already in friendships
-        return list(what_friends) # return the list of friends in a list
+        #using list comprehension for each friend in the list of frieneds generated in the get_friends function
+        friendships = [friend.pk for friend in self.get_friends()] 
+        # add themselves to the list of friends as well since a person should not get a suggestion to add themselves as a friend
+        friendships.append(self.pk) 
+        # exclude friends that are already in friendships
+        what_friends = Person.objects.exclude(pk__in=friendships) 
+        # return the list of friends in a list
+        return list(what_friends) 
     def get_news_feed(self):
         '''get recommendation feed for this Person'''
-        prof_friends = self.get_friends() # find the friends of the person
-        friends_feed = Recommendation.objects.filter(person__in=prof_friends) # find the recommendations created by any of the person's friends
-        return list(friends_feed) # return the list of the recommendations 
+        # find the friends of the person
+        prof_friends = self.get_friends() 
+        # find the recommendations created by any of the person's friends
+        friends_feed = Recommendation.objects.filter(person__in=prof_friends) 
+        # return the list of the recommendations 
+        return list(friends_feed) 
     def add_friend(self, other):
         '''add friends to this Person'''
-        existing_friend = self.get_friends() # get the list of friends for the person
-        if self == other: # if self and other are the same, disallow 
+        # get the list of friends for the person
+        existing_friend = self.get_friends() 
+        # if self and other are the same, disallow 
+        if self == other: 
             print("not allowed to be friends with yourself")
-        elif other in existing_friend: # if they are already friends with the usre, do not suggest them as an addition
+        elif other in existing_friend: 
+            # if they are already friends with the usre, do not suggest them as an addition
             print("not good")
         else:
-            f = Friend(profile1=self, profile2=other) # add a friend model for the person and their new friend
-            f.save() # save it to the database
+            # add a friend model for the person and their new friend
+            f = Friend(profile1=self, profile2=other) 
+            # save it to the database
+            f.save() 
             print("success")
 
 
 
 class Entertainment(models.Model):
     '''model to define an entertainment'''
-    show_id = models.CharField(max_length=20)  # id of the entertainment that can be max 20 length 
-    title = models.TextField() # title of entertainment 
-    cast = models.TextField() # cast for the entertainment
-    country = models.TextField() # country where the entertainment was made
-    date_added = models.TextField() # date when the movie/show was added to Netflix
-    release_year = models.IntegerField() # year the show / movie was released 
-    rating = models.CharField(max_length=6) # rating of the movie/show such as PG-13, PG, etc.
-    director = models.TextField(blank=True, null=True) # director where only movies have director so it is not a required field
-    type = models.TextField() # type of the entertainment
-    duration = models.TextField() # duration of the show/movie on Netflix
-    listed_in = models.TextField() # where the entertainment is listed
-    description = models.TextField() # description of the movie/show 
-    trailer = models.URLField(blank=True, null=True) # trailer for the entertainment from YouTube
+     # id of the entertainment that can be max 20 length 
+    show_id = models.CharField(max_length=20) 
+     # title of entertainment 
+    title = models.TextField()
+     # cast for the entertainment
+    cast = models.TextField()
+    # country where the entertainment was made
+    country = models.TextField() 
+     # date when the movie/show was added to Netflix
+    date_added = models.TextField()
+    # year the show / movie was released 
+    release_year = models.IntegerField() 
+    # rating of the movie/show such as PG-13, PG, etc.
+    rating = models.CharField(max_length=6) 
+     # director where only movies have director so it is not a required field
+    director = models.TextField(blank=True, null=True)
+    # type of the entertainment
+    type = models.TextField() 
+     # duration of the show/movie on Netflix
+    duration = models.TextField()
+    # where the entertainment is listed
+    listed_in = models.TextField() 
+    # description of the movie/show 
+    description = models.TextField() 
+     # trailer for the entertainment from YouTube
+    trailer = models.URLField(blank=True, null=True)
     def get_recommendation(self):
         '''Return recommendations of of this entertainment'''
-        recs = Recommendation.objects.filter(entertainment=self).order_by('timestamp') # all the recommendations for this entertainment ordered by when they are created
-        return recs # return all the recommendations
+        # all the recommendations for this entertainment ordered by when they are created
+        recs = Recommendation.objects.filter(entertainment=self).order_by('timestamp') 
+        # return all the recommendations
+        return recs
     def __str__(self):
         '''return to string for an entertainment '''
         return f"{self.title}"
@@ -100,25 +143,40 @@ class Entertainment(models.Model):
         self.title = self.title.replace('!', '') # replace all !
         self.title = self.title.replace('?', '') # replace all ?
         self.title = self.title.replace('-', '') # replace all dashes
-        return self.title.replace(' ', '_') # replace spaces with underscores to be in the format of the rotten tomatoes url
+        # replace spaces with underscores to be in the format of the rotten tomatoes url
+        return self.title.replace(' ', '_') 
     def get_trailer(self):
         '''function to use web scraping to get the trailer from a google search'''
-        if '&' in self.title:  # google searches cannot handle ampersands so replace them
+         # google searches cannot handle ampersands so replace them
+        if '&' in self.title: 
             self.title = self.title.replace('&', 'and') 
-        search_query = self.title + " trailer" # search for the movie name and trailer 
-        query = search_query.replace(' ', '+') # replace spaces with plus sign
-        google_url = f"https://www.google.com/search?q={query}" # this is the url where the scraping should take place
-        page = requests.get(google_url) # get the specific page needed
-        soup = BeautifulSoup(page.content, "html.parser") # use beautiful soup for web scraping
-        links = soup.findAll('a') # find the link tags
+        # search for the movie name and trailer 
+        search_query = self.title + " trailer" 
+         # replace spaces with plus sign
+        query = search_query.replace(' ', '+')
+        # this is the url where the scraping should take place
+        google_url = f"https://www.google.com/search?q={query}" 
+         # get the specific page needed
+        page = requests.get(google_url)
+        # use beautiful soup for web scraping
+        soup = BeautifulSoup(page.content, "html.parser") 
+        # find the link tags
+        links = soup.findAll('a')
         #print(links)
-        for link in links: # loop through all of the a tags
-            attr_list = link.get_attribute_list('href') # find the actual links
-            if "youtube.com/watch" in attr_list[0]: # see if any of them match the watch links 
-                video_url = attr_list[0].split('&')[0] # split on the ampersands to get the proper url
-                video_url = video_url.split('q=')[1] # split again on q= to get the part of the url necessary for embedding
-                video_url = video_url.replace('%3F', '?') # replace acii with special characters
-                video_url = video_url.replace('%3D', '=') # replace ascii with special characters 
+        # loop through all of the a tags
+        for link in links: 
+            # find the actual links
+            attr_list = link.get_attribute_list('href') 
+            # see if any of them match the watch links 
+            if "youtube.com/watch" in attr_list[0]: 
+                # split on the ampersands to get the proper url
+                video_url = attr_list[0].split('&')[0] 
+                # split again on q= to get the part of the url necessary for embedding
+                video_url = video_url.split('q=')[1] 
+                # replace acii with special characters
+                video_url = video_url.replace('%3F', '?') 
+                # replace ascii with special characters 
+                video_url = video_url.replace('%3D', '=') 
                 return video_url # return the scraped url 
 
  
@@ -169,47 +227,65 @@ def load_data():
 
 class Recommendation(models.Model):
     '''model to define a recommendation'''
-    person = models.ForeignKey(Person, on_delete=models.CASCADE) # foreign key to the person model 
-    entertainment = models.ForeignKey(Entertainment, on_delete=models.CASCADE) # foreign key to the entertainment model
-    thoughts = models.TextField(blank=True) # thoughts about the movie/show
-    rating = models.IntegerField() # an integer rating of the movie/show
-    recommend = models.BooleanField() # would the user recommend this to others or now 
-    timestamp = models.DateTimeField(auto_now = True) # timestsamp for the creation of the recommendation
+    # foreign key to the person model 
+    person = models.ForeignKey(Person, on_delete=models.CASCADE) 
+     # foreign key to the entertainment model
+    entertainment = models.ForeignKey(Entertainment, on_delete=models.CASCADE)
+     # thoughts about the movie/show
+    thoughts = models.TextField(blank=True)
+     # an integer rating of the movie/show
+    rating = models.IntegerField()
+    # would the user recommend this to others or now 
+    recommend = models.BooleanField() 
+     # timestsamp for the creation of the recommendation
+    timestamp = models.DateTimeField(auto_now = True)
     def __str__(self):
         '''return to-string representation'''
         return f"{self.thoughts} by {self.person} and for {self.entertainment} at {self.timestamp}"
     def get_images(self):
         '''returns images for a given recommendation'''
-        rec_images = Image.objects.filter(recommendation=self) # find the images that match the recommendation
-        return rec_images # return the images 
+        # find the images that match the recommendation
+        rec_images = Image.objects.filter(recommendation=self) 
+        # return the images 
+        return rec_images 
 class Friend(models.Model):
     '''model to define a friend'''
-    anniversary = models.DateTimeField(auto_now=True) # anniversary of the friendship
-    profile1 = models.ForeignKey(Person, related_name="profile1", on_delete=models.CASCADE) # foreign key to person
-    profile2 = models.ForeignKey(Person, related_name="profile2", on_delete=models.CASCADE) # foreign key to person
+    # anniversary of the friendship
+    anniversary = models.DateTimeField(auto_now=True) 
+    # foreign key to person
+    profile1 = models.ForeignKey(Person, related_name="profile1", on_delete=models.CASCADE) 
+     # foreign key to person
+    profile2 = models.ForeignKey(Person, related_name="profile2", on_delete=models.CASCADE)
     def __str__(self):
         '''return to-string representation of a friendship'''
         return f"{self.profile1} & {self.profile2}"
    
 class Image(models.Model):
     '''model to define images'''
-    image_file = models.ImageField(blank=True) # imagefield for uploading images associated with recommendations
-    recommendation = models.ForeignKey(Recommendation, on_delete=models.CASCADE) # foreign key to recommendation
-    timestamp = models.DateTimeField(auto_now=True) # timestamp for the creation of the image 
+    # imagefield for uploading images associated with recommendations
+    image_file = models.ImageField(blank=True) 
+     # foreign key to recommendation
+    recommendation = models.ForeignKey(Recommendation, on_delete=models.CASCADE)
+    # timestamp for the creation of the image 
+    timestamp = models.DateTimeField(auto_now=True) 
 
 def gen_rec():
     '''function to auto-create 3 recommendations for the first 100 movies/shows '''
 
     # this function is intended to make it easier to do the top 10 and top 5 list. Without this, I would have to manually input the recommendations
 
-    Recommendation.objects.all().delete() # delete existing records to prevent duplicated 
-
-    entertainments = Entertainment.objects.all()[:100] # get the first 100 movies/tv shows
-    persons = Person.objects.all() # obtain all the people so we can attach one to each of the recommendations
-
-    for entertainment in entertainments: # loop through all of the 100 entertainments
-        for i in range(3): # create 3 recommendations per entertainment 
-            person = random.choice(persons) # choose a random profile to assign the person attribute to
+    # delete existing records to prevent duplicated 
+    Recommendation.objects.all().delete() 
+    # get the first 100 movies/tv shows
+    entertainments = Entertainment.objects.all()[:100] 
+    # obtain all the people so we can attach one to each of the recommendations
+    persons = Person.objects.all() 
+    # loop through all of the 100 entertainments
+    for entertainment in entertainments: 
+        # create 3 recommendations per entertainment 
+        for i in range(3): 
+             # choose a random profile to assign the person attribute to
+            person = random.choice(persons)
             # create a new Recommendation model with the person, entertainment, the same message, a random rating, and the current timestamp
             recommendation = Recommendation(
                 person=person,
@@ -220,7 +296,8 @@ def gen_rec():
                 timestamp=datetime.datetime.now()
                
             )
-            recommendation.save() # save all of these recommendations to the database 
+             # save all of these recommendations to the database 
+            recommendation.save()
     print("Done")
 
 def top_10():
@@ -274,12 +351,15 @@ def top_5():
                 groups[month].append((entertainment, avg_rating))
     # loop through and sort the values within each month
     for month, vals in groups.items():
-        sorted_list = sorted(vals, key=lambda top_5: top_5[1], reverse=True) # reverse is True because we want the list in order of the highest rating to the lowest rating
-        top_5[month] = sorted_list[:5]  # only take the top 5 from each month
-    return top_5 # return the months and their top 5 entertainments
+        # reverse is True because we want the list in order of the highest rating to the lowest rating
+        sorted_list = sorted(vals, key=lambda top_5: top_5[1], reverse=True) 
+         # only take the top 5 from each month
+        top_5[month] = sorted_list[:5] 
+    # return the months and their top 5 entertainments
+    return top_5 
 
 
-import time
+
 
 def load_trailers():
     # loop through 10 entertainments at a time (right now until 1000)

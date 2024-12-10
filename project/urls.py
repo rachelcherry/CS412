@@ -4,6 +4,7 @@ from django.contrib.auth import views as auth_views ## NEW
 
 # Rachel Cherry 
 # rcherry@bu.edu
+# Date created: November 12, 2024
 # project/urls.py
 # this file handles all url mappings for the application
 
