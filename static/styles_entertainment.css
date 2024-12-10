@@ -29,6 +29,11 @@ body {
   color: #e50914;
 }
 
+/* style the link to the netflix button */
+.net-link{
+  text-decoration: none;
+}
+
 /* styles for the links that are in the navigation bar*/
 .nav-links {
   list-style: none;
