@@ -22,7 +22,7 @@ class ShowAllEntertainmentView(ListView):
     template_name = 'project/show_all_entertainment.html' # connect to the template
     context_object_name = 'shows' # context variable to use in the template
     paginate_by = 100 # show 100 entertainments per page and use pagination
-class ShowProfilePageView(DetailView):
+class ShowProfilePageView(LoginRequiredMixin, DetailView):
     '''A view to show a Profile'''
     model = Person # connect it to the Person model
     template_name = 'project/show_person.html' # connect to the template 
@@ -49,14 +49,15 @@ class ShowProfilePageView(DetailView):
         context['entertainment_list'] = Entertainment.objects.all() # gets all the entertainments
         pers = Person.objects.get(pk=self.kwargs['pk']) # finds the person with this primary key
         context['person'] = pers # set the context variable for this person
-        who = self.request.user.person # find the person who is logged in
-        if who == pers or who in pers.get_friends():
-            context['yes_friend'] = True
-            # if the user matches the current profule or they are friends with the individual logged in, then they have access to the recommendations of another user
-            
-        else:
-            # if they are not friends with the user or do not match the user logged in, they should not be able to see the recommendations button
-            context['yes_friend'] = False
+        if self.request.user.is_authenticated:
+            who = self.request.user.person # find the person who is logged in
+            if who == pers or who in pers.get_friends():
+                context['yes_friend'] = True
+                # if the user matches the current profule or they are friends with the individual logged in, then they have access to the recommendations of another user
+                
+            else:
+                # if they are not friends with the user or do not match the user logged in, they should not be able to see the recommendations button
+                context['yes_friend'] = False
         return context
 class ShowAllPeopleView(ListView):
     '''A view to show all Profiles'''
@@ -155,7 +156,7 @@ class UpdateRecommendationView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         '''Return the URL to redirect to after successfully submitting the form.'''
-        return reverse('person', kwargs={'pk': self.object.person.pk})
+        return reverse('see_recs', kwargs={'pk': self.object.person.pk})
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         '''returns the context variables for use in templates'''
         context = super().get_context_data(**kwargs) # call the super class constructor
@@ -171,7 +172,7 @@ class DeleteRecommendationView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         '''Return the URL to redirect to after successfully submitting form.'''
-        return reverse('person', kwargs={'pk': self.object.person.pk})
+        return reverse('see_recs', kwargs={'pk': self.object.person.pk})
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         '''returns the context variables for use in the templates'''

@@ -87,7 +87,7 @@ class Entertainment(models.Model):
     trailer = models.URLField(blank=True, null=True) # trailer for the entertainment from YouTube
     def get_recommendation(self):
         '''Return recommendations of of this entertainment'''
-        recs = Recommendation.objects.filter(entertainment=self) # all the recommendations for this entertainment
+        recs = Recommendation.objects.filter(entertainment=self).order_by('timestamp') # all the recommendations for this entertainment ordered by when they are created
         return recs # return all the recommendations
     def __str__(self):
         '''return to string for an entertainment '''
