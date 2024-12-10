@@ -140,7 +140,7 @@ class CreateRecommendationView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         '''Return the URL to redirect to after successfully submitting the form.'''
-        return reverse('person', kwargs={'pk': self.object.person.pk})
+        return reverse('see_recs', kwargs={'pk': self.object.person.pk})
 
 class RecommendationDetailView(DetailView):
     model = Recommendation # connect to Recommendation model
