@@ -5,6 +5,7 @@ from django.contrib.auth import views as auth_views ## NEW
 # Rachel Cherry 
 # rcherry@bu.edu
 # project/urls.py
+# this file handles all url mappings for the application
 
 urlpatterns = [
     # url for the home page

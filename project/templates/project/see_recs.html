@@ -1,9 +1,11 @@
 <!--project/templates/project/see_recs.html template-->
+<!-- Rachel Cherry -->
+<!-- rcherry@bu.edu -->
+ <!-- This template will show the recommendations for a given user-->
 
 {% extends 'project/base.html' %}
 
 {% block content %}
-<!-- This template will show the recommendations for a given user-->
     <h2 class="news-h2">Recommendations</h2>
     <!-- link to go back to the users profile-->
     <a class="prof-return" href="{% url 'person' person.pk %}">Back to {{ person.first_name }}'s Profile</a>

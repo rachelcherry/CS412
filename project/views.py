@@ -16,6 +16,12 @@ from django.urls import reverse
 from .forms import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
+
+# Rachel Cherry 
+# rcherry@bu.edu
+# project/urls.py
+# this file handles all views for the application
+
 class ShowAllEntertainmentView(ListView):
     '''A view to show all peoeple'''
     model = Entertainment # connect it to the Entertainment model

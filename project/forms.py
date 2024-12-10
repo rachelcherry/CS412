@@ -1,6 +1,7 @@
 # Rachel Cherry
 # rcherry@bu.edu
 # project/forms.py
+# this file handles all of the forms within the application 
 
 from django import forms
 from .models import Person, Recommendation

@@ -13,6 +13,7 @@ from django.db.models.functions import Round
 # Rachel Cherry
 # rcherry@bu.edu
 # project/models.py
+# this file handles all of the models for the application
 class Person(models.Model):
     '''model to define a person/profile in the application'''
     first_name = models.TextField(blank=False) # first name of the person; required field
