@@ -93,31 +93,32 @@ class Entertainment(models.Model):
         '''return to string for an entertainment '''
         return f"{self.title}"
     def get_rotten(self):
-        '''function to return the title with underscores for use in url'''
-        self.title = self.title.replace(':', '')
-        self.title = self.title.replace('!', '')
-        self.title = self.title.replace('?', '')
-        self.title = self.title.replace('-', '')
-        return self.title.replace(' ', '_')
+        '''function to return the title with underscores for use in rotten tomato url'''
+        # perform series of replacements so that the url can properly be forms
+        self.title = self.title.replace(':', '') # replace all colons
+        self.title = self.title.replace('!', '') # replace all !
+        self.title = self.title.replace('?', '') # replace all ?
+        self.title = self.title.replace('-', '') # replace all dashes
+        return self.title.replace(' ', '_') # replace spaces with underscores to be in the format of the rotten tomatoes url
     def get_trailer(self):
-        if '&' in self.title:  
+        '''function to use web scraping to get the trailer from a google search'''
+        if '&' in self.title:  # google searches cannot handle ampersands so replace them
             self.title = self.title.replace('&', 'and') 
-        search_query = self.title + " trailer"
-        query = search_query.replace(' ', '+')
-        google_url = f"https://www.google.com/search?q={query}"
-        print(google_url)
-        page = requests.get(google_url)
-        soup = BeautifulSoup(page.content, "html.parser")
-        links = soup.findAll('a')
+        search_query = self.title + " trailer" # search for the movie name and trailer 
+        query = search_query.replace(' ', '+') # replace spaces with plus sign
+        google_url = f"https://www.google.com/search?q={query}" # this is the url where the scraping should take place
+        page = requests.get(google_url) # get the specific page needed
+        soup = BeautifulSoup(page.content, "html.parser") # use beautiful soup for web scraping
+        links = soup.findAll('a') # find the link tags
         #print(links)
-        for link in links:
-            attr_list = link.get_attribute_list('href')
-            if "youtube.com/watch" in attr_list[0]:
-                video_url = attr_list[0].split('&')[0]
-                video_url = video_url.split('q=')[1]
-                video_url = video_url.replace('%3F', '?')
-                video_url = video_url.replace('%3D', '=')
-                return video_url
+        for link in links: # loop through all of the a tags
+            attr_list = link.get_attribute_list('href') # find the actual links
+            if "youtube.com/watch" in attr_list[0]: # see if any of them match the watch links 
+                video_url = attr_list[0].split('&')[0] # split on the ampersands to get the proper url
+                video_url = video_url.split('q=')[1] # split again on q= to get the part of the url necessary for embedding
+                video_url = video_url.replace('%3F', '?') # replace acii with special characters
+                video_url = video_url.replace('%3D', '=') # replace ascii with special characters 
+                return video_url # return the scraped url 
 
  
 
@@ -280,12 +281,14 @@ def top_5():
 import time
 
 def load_trailers():
-    count = 0  # Track the number of requests
+    # loop through 10 entertainments at a time (right now until 1000)
     for entertainment in Entertainment.objects.all()[990:1000]:
         trailer_url = entertainment.get_trailer()
         # print(trailer_url)
+        # switch the url to the structure needed for embedding
         embed_url = trailer_url.replace("watch?v=", "embed/") 
         # print(embed_url)
+        # set the trailer attribute to be the embedded url 
         entertainment.trailer = embed_url
+        # save the entertainment with the new url 
         entertainment.save()
-        print(trailer_url)
