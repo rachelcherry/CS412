@@ -1,22 +1,91 @@
 <!--project/templates/project/result_detail.html template-->
+<!-- This template handles the news feed / friend suggestions for a given user  -->
+
+<!--project/templates/project/show_entertainment.html template-->
 
 {% extends 'project/base.html' %}
+<!--This template will show an individual entertainment-->
 {% block content %}
-<!-- this file will show the result for an individual search query-->
-    <!-- the following will show a table with the inforamtion for a specific entertainment as a result of a query-->
-    <h1>Showing Result for {{r.title}}</h1>
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Rating</th>
-            <th>Description</th>
-            
-        </tr>
-        
-        <tr>
-            <td>{{r.title}}</td>
-            <td>{{r.rating}}</td>
-            <td>{{r.description}}</td>
-        </tr>
-    </table>
+<a class="prof-return" href="{% url 'searched_list' %}">Back to Search for an Entertainment</a>
+<br>
+<!-- this section will create a table for an entertainment-->
+    <div class="ent-info">
+        <h1>{{r.title}} Details</h1>
+        <hr>
+        <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Duration</th>
+                    <th>Release Date</th>
+                    <th>Description</th>
+                    <th>Cast List</th>
+                    <th>Director</th>
+                    <th>Type</th>
+                </tr>
+                <tr>
+                    <td>{{ r.title }}</td>
+                    <td>{{ r.duration }}</td>
+                    <td>{{ r.release_year }}</td>
+                    <td>{{ r.description }}</td>
+                    <td>{{ r.cast }}</td>
+                    <td>{{ r.director }}</td>
+                    <td>{{ r.type }}</td>
+                </tr>
+        </table>
+<!-- this section will show the recommendations from various anonymous users-->
+
+<!-- check if the entertainment has any recommendations (by calling the get_recommendation function in models) and if we should display anything -->
+<hr>
+{% if r.get_recommendation %}
+    <div class="recommendations">
+        <h1>What People Think About This Entertainment</h1>
+        <!-- create a table with the information about the entertainment-->
+
+        <table>
+                <tr>
+                    <th>Thoughts</th>
+                    <th>Rating (out of 5)</th>
+                    <th>Recommended</th>
+                </tr>
+               <!-- loop through the recommendations for a given entertainment by calling the get_recommendation function in models -->
+
+                {% for recommendation in r.get_recommendation %}
+                <tr>
+                    <td>{{ recommendation.thoughts }}</td>
+                    <td>{{ recommendation.rating }}</td>
+                    <td>{{ recommendation.recommend }}</td>
+                </tr>
+                {% endfor %}
+        </table>
+        {% endif %}
+        <hr>
+
+    <!-- this section will display the web-scraped trailer from YouTube -->
+    <h1>Watch The Trailer!</h1>
+    <div class="embed-vid">
+
+        <!-- use iframe to embed the video inside of my application -->
+         <!-- these were copied from the youtube videos 'copy embedded link'-->
+    <iframe 
+    width="800" 
+    height="500" 
+    src="{{r.trailer}}" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+</iframe>
+</div>
+    <!-- this will show more reviews via rotten tomatoes-->
+<h1>Want More Reviews?</h1>
+    <!-- if it is a tv show put tv in front of the link from the get_rotten function from models-->
+{% if r.type == 'TV Show' %}
+<a class="rotten" href="https://www.rottentomatoes.com/tv/{{ r.get_rotten }}">Click Here to View Rotten Tomatoes Reviews!</a>
+{% endif %}
+    <!-- if it is a movie put m in front of the link from the get_rotten function from models-->
+
+{% if r.type == 'Movie' %}
+<a class="rotten" href="https://www.rottentomatoes.com/m/{{ r.get_rotten }}">Click Here to View Rotten Tomatoes Reviews!</a>
+{% endif %}
+<hr>
+</div>
 {% endblock %}

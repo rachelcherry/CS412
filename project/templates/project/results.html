@@ -13,7 +13,7 @@
     <div class="show-card">
         <h2 class="title-of-ent">
             <!-- show the entertainment title, rating, and description for each result of the query-->
-            <a href="{% url 'entertainment' s.pk %}">{{ s.title }}</a>
+            <a href="{% url 'ent_detail' s.pk %}">{{ s.title }}</a>
         </h2>
         <p class="rating-for-ent"> Rating: {{ s.rating }}</p>
         <p class="desc-of-ent">{{ s.description }}</p>

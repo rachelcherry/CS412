@@ -19,15 +19,23 @@
     <!-- start nav links -->
 
         <ul class="nav-links">
+                  <!-- This is will link to the list view of all entertainments-->
           <li><a href="{% url 'all_entertainment' %}">All Entertainment</a></li>
+                  <!-- this will link to all of the profiles -->
           <li><a href="{% url 'users' %}">Profiles</a></li>
+                  <!-- this will link to the top 10 rated entertainment -->
           <li><a href="{% url 'top_10' %}">Top 10</a></li>
+                  <!-- this will link to the top 5 highest rated entertianments per month -->
           <li><a href="{% url 'top_5' %}">Monthly Top 5</a></li>
           <li><a href="{% url 'searched_list' %}">Search Entertainment</a></li>
           <!-- only show the profile and feed if they are logged in and their login credentials match that profile-->
           {% if request.user.is_authenticated %} {% if user.person %}
+                  <!-- this will link to the user's profile -->
+
           <li><a href="{% url 'person' user.person.pk %}">My Profile</a></li>
           <li>
+                    <!-- This will link to the friend recommendations -->
+
             <a href="{% url 'rec_feed' %}">Friend Reccommendations</a>
           </li>
           <li>

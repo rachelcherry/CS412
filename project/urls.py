@@ -43,13 +43,7 @@ urlpatterns = [
     path('profile/<int:pk>/see_rec/', views.SeeRecsView.as_view(), name='see_recs'),
     # url for updating a profile
     path('profile/<int:pk>/update', views.UpdateProfView.as_view(), name='update_prof'),
-
-
-
-
-
-
-
+    path('entertainment/results/<int:pk>', views.EntDetailView.as_view(), name='ent_detail'),
 
 
 ]

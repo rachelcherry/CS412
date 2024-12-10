@@ -317,3 +317,8 @@ class UpdateProfView(LoginRequiredMixin, UpdateView):
         context['entertainment_list'] = Entertainment.objects.all() # gets all entertainment objects
         context['person'] = Person.objects.get(pk=self.kwargs['pk']) #gets the person/profile for the Person object whose pk is specified
         return context # return these variables for use in templates
+class EntDetailView(DetailView):
+    '''View to show detail page for one result of the search query.'''
+    model = Entertainment # connect to the Entertainment model
+    template_name = 'project/result_detail.html' # connect to the template
+    context_object_name = 'r' # create a context variable for use in the template
