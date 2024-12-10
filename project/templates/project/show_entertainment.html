@@ -31,11 +31,11 @@
         </table>
 <!-- this section will show the recommendations from various anonymous users-->
 
-<!-- check if the entertainment has any recommendations and if we should display anything -->
+<!-- check if the entertainment has any recommendations (by calling the get_recommendation function in models) and if we should display anything -->
 <hr>
 {% if r.get_recommendation %}
     <div class="recommendations">
-        <h1>What People Think About This Movie</h1>
+        <h1>What People Think About This Entertainment</h1>
         <!-- create a table with the information about the entertainment-->
 
         <table>
@@ -44,7 +44,7 @@
                     <th>Rating (out of 5)</th>
                     <th>Recommended</th>
                 </tr>
-               <!-- loop through the recommendations for a given entertainment -->
+               <!-- loop through the recommendations for a given entertainment by calling the get_recommendation function in models -->
 
                 {% for recommendation in r.get_recommendation %}
                 <tr>
@@ -75,11 +75,11 @@
 </div>
     <!-- this will show more reviews via rotten tomatoes-->
 <h1>Want More Reviews?</h1>
-    <!-- if it is a tv show put tv in front of the link from the get_rotten function-->
+    <!-- if it is a tv show put tv in front of the link from the get_rotten function from models-->
 {% if r.type == 'TV Show' %}
 <a class="rotten" href="https://www.rottentomatoes.com/tv/{{ r.get_rotten }}">Click Here to View Rotten Tomatoes Reviews!</a>
 {% endif %}
-    <!-- if it is a movie put m in front of the link from the get_rotten function-->
+    <!-- if it is a movie put m in front of the link from the get_rotten function from models-->
 
 {% if r.type == 'Movie' %}
 <a class="rotten" href="https://www.rottentomatoes.com/m/{{ r.get_rotten }}">Click Here to View Rotten Tomatoes Reviews!</a>
