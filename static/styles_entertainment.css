@@ -853,6 +853,9 @@ label{
   color: #555;
 
 }
+
+/* styles for form inputs taken from chrome developer tools */ 
+
 textarea#id_email {
   height: 30px;
   width: 400px;
